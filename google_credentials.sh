@@ -1,0 +1,1 @@
+export GOOGLE_APPLICATION_CREDENTIALS="/Users/jackychau/GitHub/treats-hackathon/treats-service-account.json"
