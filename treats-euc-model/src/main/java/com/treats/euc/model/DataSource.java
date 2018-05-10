@@ -12,12 +12,15 @@ public class DataSource implements Serializable {
 	private String dbTable;
 	private String dbField;
 	
-	DataSource(){
+	public DataSource(){
 		id = UUID.randomUUID();
 	}
 	
 	public UUID getId() {
 		return id;
+	}
+	public String getIdString() {
+		return id.toString();
 	}
 	public void setId(UUID id) {
 		this.id = id;
