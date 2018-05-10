@@ -13,8 +13,8 @@
 <!--  for iOS full screen -->
 <meta name="apple-mobile-web-app-capable" content="yes">
 
-<link rel="stylesheet" href="https://rawgit.com/patternfly/patternfly/master-dist/dist/css/patternfly.min.css">
-<link rel="stylesheet" href="https://rawgit.com/patternfly/patternfly/master-dist/dist/css/patternfly-additions.min.css">
+<link rel="stylesheet" href="../css/patternfly.min.css">
+<link rel="stylesheet" href="../css/patternfly-additions.min.css">
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script	src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.12.2/js/bootstrap-select.min.js"></script>
@@ -29,6 +29,7 @@
 				<div
 					class="col-sm-8 col-sm-offset-2 col-md-6 col-md-offset-3 col-lg-6 col-lg-offset-3">
 					<header class="login-pf-page-header">
+						<br/><br/>
 						<p> ** Hackathon DEMO ** <br/>
 						TREATS EUC Replacement</p>
 					</header>
