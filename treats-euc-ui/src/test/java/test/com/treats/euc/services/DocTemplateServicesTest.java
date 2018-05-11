@@ -64,7 +64,7 @@ public class DocTemplateServicesTest {
 		dt1.setDocTemplate("template details");
 		dt1.setDataSource(listDataSource);
 
-		docTemplateServices.addDocTemplate(dt1);
+//		docTemplateServices.addDocTemplate(dt1);
 
 	}
 
