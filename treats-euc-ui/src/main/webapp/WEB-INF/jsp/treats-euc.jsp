@@ -113,153 +113,70 @@
   
   <!-- List of workflows -->
   <div class="container-fluid">
-<div id="pf-list-standard" class="list-group list-view-pf list-view-pf-view">
+<div id="pf-list-standard" class="list-group list-view-pf list-view-pf-view"></div>
+<script>
+var xmlhttp = new XMLHttpRequest();
 
-	<!-- List 1 -->
-  <div class="list-group-item">
-   
-    <div class="list-view-pf-actions">
-      <button class="btn btn-default">Execute</button>
-      <button class="btn btn-default">Modify</button>
-      <div class="dropdown pull-right dropdown-kebab-pf">
- 
-  
-</div>
+xmlhttp.onreadystatechange = function() {
+ if (this.readyState == 4 && this.status == 200) {
+     var myArr = JSON.parse(this.responseText);
+     myFunction(myArr);
+  }
+};
 
-    </div>
-    <div class="list-view-pf-main-info">
-      <div class="list-view-pf-left">
-        <span class="fa fa-plane list-view-pf-icon-sm"></span>
-      </div>
-      <div class="list-view-pf-body">
-        <div class="list-view-pf-description">
-          <div class="list-group-item-heading">
-            Workflow 1
-          </div>
-          <div class="list-group-item-text">
-            This Workflow generates TREATS data in PDF
-          </div>
-        </div>
-        <div class="list-view-pf-additional-info">
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-screen"></span>
-             TREATS
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-cluster"></span>
-            Template01
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-container-node"></span>
-            PDF
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-image"></span>
-            Daily
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  
-<!-- List 2 -->
-  <div class="list-group-item">
-  
-    <div class="list-view-pf-actions">
-      <button class="btn btn-default">Execute</button>
-      <button class="btn btn-default">Modify</button>
-      
-      <div class="dropdown pull-right dropdown-kebab-pf">
-  	 
-    </div>
+xmlhttp.open("GET", "/treats-euc/eucflow/getalleucflows", true);
+xmlhttp.send();
 
-    </div>
-    <div class="list-view-pf-main-info">
-      <div class="list-view-pf-left">
-        <span class="fa fa-plane list-view-pf-icon-sm"></span>
-      </div>
-      <div class="list-view-pf-body">
-        <div class="list-view-pf-description">
-          <div class="list-group-item-heading">
-            Workflow 2
-          </div>
-          <div class="list-group-item-text">
-            This Workflow generates TREATS data in EXCEL
-          </div>
-        </div>
-        <div class="list-view-pf-additional-info">
-           <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-screen"></span>
-             TREATS
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-cluster"></span>
-            Template02
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-container-node"></span>
-            EXCEL
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-image"></span>
-            Weekly
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>  
-  
-  <!-- List 3 -->
-  <div class="list-group-item">
-    
-    <div class="list-view-pf-actions">
-      <button class="btn btn-default">Execute</button>
-      <button class="btn btn-default">Modify</button>
-      <div class="dropdown pull-right dropdown-kebab-pf">
-  
-</div>
-
-    </div>
-    <div class="list-view-pf-main-info">
-      <div class="list-view-pf-left">
-        <span class="fa fa-plane list-view-pf-icon-sm"></span>
-      </div>
-      <div class="list-view-pf-body">
-        <div class="list-view-pf-description">
-          <div class="list-group-item-heading">
-            Workflow 3
-          </div>
-          <div class="list-group-item-text">
-            This Workflow generates TREATS data in EMAIL
-          </div>
-        </div>
-        <div class="list-view-pf-additional-info">
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-screen"></span>
-             TREATS
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-cluster"></span>
-            Template03
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-container-node"></span>
-            EMAIL
-          </div>
-          <div class="list-view-pf-additional-info-item">
-            <span class="pficon pficon-image"></span>
-            Monthly
-          </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>  
-  
- </div>
-</div>
-
-
+function myFunction(arr) {
+  var out = "";
+  var i;
+  for(i = 0; i < arr.length; i++) {
+    out += '<div class="list-group-item">';
+    out += '<div class="list-view-pf-actions">';
+	out += '<button class="btn btn-default">Execute</button>';
+	out += '<button class="btn btn-default">Modify</button>';
+	out += '<div class="dropdown pull-right dropdown-kebab-pf">';
+	out += '</div>';
+	out += '</div>';
+    out += '<div class="list-view-pf-main-info">';
+    out += '<div class="list-view-pf-left">';
+    out += '<span class="fa fa-plane list-view-pf-icon-sm"></span>';
+    out += '</div>';
+    out += '<div class="list-view-pf-body">';
+    out += '<div class="list-view-pf-description">';
+    out += '<div class="list-group-item-heading">';
+	out += 'Workflow_Name' + '';
+	out += '</div>';
+    out += '<div class="list-group-item-text">';
+    out += arr[i].description + '';
+    out += '</div>';
+    out += '</div>';
+    out += '<div class="list-view-pf-additional-info">';
+    out += '<div class="list-view-pf-additional-info-item">';
+    out += '<span class="pficon pficon-screen"></span>';
+    out += 'Source_System' + '';
+    out += '</div>';
+    out += '<div class="list-view-pf-additional-info-item">';
+    out += '<span class="pficon pficon-cluster"></span>';
+    out += 'Template_name' + '';
+    out += '</div>';
+    out += '<div class="list-view-pf-additional-info-item">';
+    out += '<span class="pficon pficon-container-node"></span>';
+    out += arr[i].output + '';
+    out += '</div>';
+    out += '<div class="list-view-pf-additional-info-item">';
+    out += '<span class="pficon pficon-image"></span>';
+    out += arr[i].eucSchedule + '';
+    out += '</div>';
+    out += '</div>';
+    out += '</div>';
+    out += '</div>';
+    out += '</div>';
+  }
+  document.getElementById("pf-list-standard").innerHTML = out;
+}
+</script>
+	
   <script>
   $(document).ready(function () {
 	
