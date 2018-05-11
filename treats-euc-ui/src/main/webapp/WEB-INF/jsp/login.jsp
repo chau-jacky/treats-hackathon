@@ -48,9 +48,9 @@
 								<c:url var="loginUrl" value="/login" />
 								<form action="${loginUrl}" method="post">
 									<div class="form-group">
-										<label class="sr-only" for="exampleInputEmail1">Email
-											address</label> <input type="email" class="form-control  input-lg"
-											id="userId" name="userId" placeholder="Email address">
+										<label class="sr-only" for="exampleInputID1">Email
+											address</label> <input type="text" class="form-control  input-lg"
+											id="userId" name="userId" placeholder="User ID">
 									</div>
 									<div class="form-group">
 										<label class="sr-only" for="exampleInputPassword1">Password
