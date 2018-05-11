@@ -1,6 +1,7 @@
 package com.treats.euc.services;
 
 import java.util.Iterator;
+import java.util.UUID;
 
 import com.google.cloud.Timestamp;
 import com.google.cloud.datastore.Datastore;
@@ -37,17 +38,26 @@ public class DocTemplateServices {
 			FullEntity dataSourceEntity = FullEntity.newBuilder(dataSourceKey)
 					.set("sourceSystem", StringValue.newBuilder(dataSource.getSourceSystem()).build())
 					.set("dbTable", StringValue.newBuilder(dataSource.getDbTable()).build())
-					.set("dbField", StringValue.newBuilder(dataSource.getDbField()).build())
-					.build();
+					.set("dbField", StringValue.newBuilder(dataSource.getDbField()).build()).build();
 			dataSourceList.addValue(dataSourceEntity);
 		}
 
 		Entity docTemplate = Entity.newBuilder(docKey)
 				.set("description", StringValue.newBuilder(documentTemplate.getDescription()).build())
-				.set("template",StringValue.newBuilder(documentTemplate.getDocTemplate()).setExcludeFromIndexes(true).build())
-				.set("datasource", dataSourceList.build())
-				.set("created", Timestamp.now()).build();
+				.set("template",
+						StringValue.newBuilder(documentTemplate.getDocTemplate()).setExcludeFromIndexes(true).build())
+				.set("datasource", dataSourceList.build()).set("created", Timestamp.now()).build();
 		datastore.put(docTemplate);
 	}
+<<<<<<< HEAD
 	*/
+=======
+
+	private Entity getDocTemplate(UUID uuid) {
+		Key dataSourceKey = datastore.newKeyFactory().setKind(dataSoureKind).newKey(uuid.toString());
+		Entity docTemplate = datastore.get(dataSourceKey);
+		return docTemplate;
+	}
+	
+>>>>>>> 1ae85d9a4a86e4da1c72bbbb2dae39159924f521
 }

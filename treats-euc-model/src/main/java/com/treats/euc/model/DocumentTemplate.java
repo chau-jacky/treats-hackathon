@@ -16,7 +16,6 @@ public class DocumentTemplate implements Serializable {
 	public DocumentTemplate() {
 		id = UUID.randomUUID();
 	}
-	
 	public UUID getId() {
 		return id;
 	}

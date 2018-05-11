@@ -86,6 +86,7 @@ public class HelloWorldPDF {
         document.close();
         
         if (outputMethod == "E") {
+        	System.out.println("Sending email...");
         	sendEmailWithPdf();
         }
         
