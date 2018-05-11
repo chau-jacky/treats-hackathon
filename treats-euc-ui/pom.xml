@@ -119,11 +119,24 @@
 		</dependency>
 
 
-<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.core/jackson-core -->
-	<dependency>
-		<groupId>com.fasterxml.jackson.core</groupId>
-		<artifactId>jackson-core</artifactId>
-	</dependency>
+		<dependency>
+			<groupId>com.fasterxml.jackson.core</groupId>
+			<artifactId>jackson-core</artifactId>
+		</dependency>
+	
+		<dependency>
+			<groupId>com.google.truth</groupId>
+			<artifactId>truth</artifactId>
+			<version>0.39</version>
+			<scope>test</scope>
+		</dependency>
+
+		<dependency>
+		    <groupId>com.google.cloud</groupId>
+		    <artifactId>google-cloud-bigquery</artifactId>
+		    <version>1.29.0</version>
+		</dependency>
+
 
 	    <dependency>
 	    	<groupId>com.treats</groupId>
