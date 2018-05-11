@@ -8,23 +8,29 @@ import com.treats.euc.services.DocTemplateServicesMemory;
 
 import java.util.ArrayList;
 
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @RestController
-@RequestMapping("/treats-euc-ui/doctemplate")
+@RequestMapping("/treats-euc/doctemplate")
 public class DocTemplateController {
 	
 	private static DocTemplateServicesInterface docTemplateService;
 	
 	DocTemplateController(){
-		//docTemplateService = new DocTemplateServicesMemory();
+		docTemplateService = new DocTemplateServicesMemory();
 	}
     
-    @RequestMapping("/getalltemplates")
+    @RequestMapping("/getalldoctemplates")
     public ArrayList<DocumentTemplate> getAllTemplates() {
-    	
-    	return null;
-        //return "testing";
+    	return docTemplateService.getListDocumentTemplate();
     }
+    
+    @RequestMapping("/getdoctemplate/{id}")
+    public DocumentTemplate getTemplatesById(@PathVariable String id) {
+    	return docTemplateService.getDocumentTemplate(id);
+    }
+    
+    
     
 }

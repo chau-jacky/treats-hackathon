@@ -6,12 +6,5 @@
 	<artifactId>treats-euc-model</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 
-	<dependencies>
-		<dependency>
-			<groupId>com.google.cloud</groupId>
-			<artifactId>google-cloud-datastore</artifactId>
-			<version>1.22.0</version>
-		</dependency>
-	</dependencies>
 
 </project>

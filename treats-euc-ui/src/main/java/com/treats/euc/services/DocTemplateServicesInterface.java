@@ -27,4 +27,5 @@ public interface DocTemplateServicesInterface {
 	
 	public void addDocTemplate(DocumentTemplate docTemplate);
 	
+	public void deleteDocTemplate(String id);
 }
