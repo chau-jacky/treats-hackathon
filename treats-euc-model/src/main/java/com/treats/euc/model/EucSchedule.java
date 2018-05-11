@@ -7,7 +7,7 @@ public class EucSchedule {
 	private LocalTime exectueTime;
 	
 	private String executeFrequency;
-	private String executeDateOfWeek;
+	private String executeDayOfWeek;
 	
 	
 }
