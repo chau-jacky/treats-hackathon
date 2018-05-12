@@ -23,7 +23,7 @@ public class DocTemplateController {
     public String someMethod(@RequestParam("template") String templateDetails) {
     	DocumentTemplate docTemplate = new DocumentTemplate();
     	docTemplate.setDescription("New Doc Template");
-    	docTemplate.setDocTemplate(templateDetails);
+    	docTemplate.setDocTemplate(templateDetails.replace("<br>","<br/>"));
     	
     	docTemplateService.addDocTemplate(docTemplate);
     	
