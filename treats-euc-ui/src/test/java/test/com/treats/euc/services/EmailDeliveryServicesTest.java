@@ -1,6 +1,7 @@
 package test.com.treats.euc.services;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -9,14 +10,18 @@ import javax.activation.MimetypesFileTypeMap;
 import javax.mail.MessagingException;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.tika.metadata.Metadata;
 import org.junit.Test;
 
+import com.itextpdf.text.Document;
+import com.itextpdf.text.DocumentException;
+import com.treats.euc.pdf.PdfGenerator;
 import com.treats.euc.services.EmailDeliveryServices;
 
 public class EmailDeliveryServicesTest {
 
 	@Test
-	public void testEmailSend() throws MessagingException, IOException {
+	public void testEmailSend() throws MessagingException, IOException, DocumentException {
 		/* 
 		EmailDeliveryServices sender = new EmailDeliveryServices();
 		sender.setSender("treats.hackathon@gmail.com", "hackathon2018");
@@ -42,8 +47,16 @@ public class EmailDeliveryServicesTest {
 		sender.addAttachmentFromFileObject(fileInputStream, mimeType, fileDescription);
 		sender.send();
 		*/
-		String filePath = "/Users/simonchau/Downloads/LTN20180511497_C.pdf";
+		//String filePath = "/Users/simonchau/Downloads/LTN20180511497_C.pdf";
+    	PdfGenerator pdf = new PdfGenerator();
+    	// Metadata metadataTest = new Metadata();
+    	
+    	// pdf.setOutputMethod("L");	//Save to Local
+    	// pdf.setFullFileName("C:\\temp\\testing8.pdf");
+      	pdf.setPdfContent("<html><body> This is my Project </body></html>");
+    	
+     	ByteArrayOutputStream baos = pdf.generatePdf();
 		EmailDeliveryServices sender = new EmailDeliveryServices();
-		sender.sendEmailWithPdfAndDefaultSetup(filePath);
+		sender.sendEmailWithPdfAndDefaultSetup(baos);
 	}
 }
