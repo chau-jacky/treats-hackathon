@@ -43,7 +43,12 @@
   <body>
     <div class="container">
 <h2>Complete Wizard</h2>
+
+<a href="#" class="test" data-target="#complete">Launch wizard</a>
+
 <button class="btn btn-default wizard-pf-open wizard-pf-complete" data-target="#complete">Launch wizard</button>
+
+
 <div class="modal" id="complete" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg wizard-pf">
     <div class="modal-content">
@@ -481,9 +486,7 @@
  			          	<BR>
                   <P ALIGN=Left><B>Email Address:</B>
  			        		<input id="Email_Address" class="form-control"></input>
- 			        		<BR><BR><BR><BR><BR>
-                  <P ALIGN=Left><B>Workflow Name:</B>
- 			        		<input id="Workflow_Name" class="form-control"></input>
+ 			        		
             </div>
             <!--StanleyE-->
             
@@ -604,8 +607,9 @@
             
             <!--StanleyO-->
             <div class="wizard-pf-contents hidden">
-            	<H1><B>Summary</B></H1>
-                       	
+            	<H1><B>Summary</B></H1>          
+                <P ALIGN=Left><B>Workflow Name:</B>
+ 			    <input id="Workflow_Name" class="form-control"></input>      	
           
             </div>
             <!--StanleyE-->
@@ -639,20 +643,27 @@
 
   $(document).ready(function() {
     //initialize wizard
-    var completeWizard = new wizard(".btn.wizard-pf-complete");
+    var completeWizard = new wizard(".test");
+    
+    var completeWizard1 = new wizard(".btn.wizard-pf-complete");
   });
 
   var wizard = function(id) {
     var self = this, modal, tabs, tabCount, tabLast, currentGroup, currentTab, contents;
     self.id = id;
+    
+	   window.alert(self.id);
 
-    $(self.id).click(function() {
-        self.init(this)
+	$(self.id).click(function() {
+ 	   window.alert("testing2");
+	    self.init(this)
     });
 
     this.init = function(button){
+    	   window.alert("testing3");
       // get id of open modal
       self.modal = $(button).data("target");
+      window.alert(self.modal);
 
       self.resetToInitialState();
 
