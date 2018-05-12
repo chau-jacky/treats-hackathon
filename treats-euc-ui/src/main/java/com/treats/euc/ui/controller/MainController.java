@@ -19,6 +19,11 @@ public class MainController {
 		return "treats-euc";
 	}
 
+	@RequestMapping(value = "/treats-euc/template-edit", method = RequestMethod.GET)
+	public String templateEdit(Map<String, Object> model) {
+		return "template-edit";
+	}
+	
 	@RequestMapping(value = "/treats-euc-admin", method = RequestMethod.GET)
 	public String adminMainScreen(Map<String, Object> model) {
 		return "treats-euc-admin";
