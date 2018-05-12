@@ -17,6 +17,7 @@ public class EmailDeliveryServicesTest {
 
 	@Test
 	public void testEmailSend() throws MessagingException, IOException {
+		/* 
 		EmailDeliveryServices sender = new EmailDeliveryServices();
 		sender.setSender("treats.hackathon@gmail.com", "hackathon2018");
 		sender.setSenderName("TREATS Hackathon Team");
@@ -40,5 +41,9 @@ public class EmailDeliveryServicesTest {
 	    //PDDocument document = PDDocument.load(file); 
 		sender.addAttachmentFromFileObject(fileInputStream, mimeType, fileDescription);
 		sender.send();
+		*/
+		String filePath = "/Users/simonchau/Downloads/LTN20180511497_C.pdf";
+		EmailDeliveryServices sender = new EmailDeliveryServices();
+		sender.sendEmailWithPdfAndDefaultSetup(filePath);
 	}
 }

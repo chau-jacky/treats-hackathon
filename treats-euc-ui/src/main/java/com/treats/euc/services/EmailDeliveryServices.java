@@ -1,6 +1,7 @@
 package com.treats.euc.services;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
@@ -22,6 +23,8 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
+
+import org.apache.commons.io.FileUtils;
 
 public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 
@@ -45,7 +48,6 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 		this.multipart = new MimeMultipart();
 	}
 
-	
 	/* Retrieve the mail server connection details */ 
 	private Properties getMailServerProperties() {
 		Properties properties = System.getProperties();
@@ -145,6 +147,35 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 		transport.sendMessage(message, message.getAllRecipients());
 
 		transport.close();
+	}
+	
+	public void sendEmailWithPdfAndDefaultSetup(String filePath) throws MessagingException, IOException {
+		this.setSender("treats.hackathon@gmail.com", "hackathon2018");
+		this.setSenderName("LION - 獅子交易服務");
+		this.addRecipient("treats.hackathon@gmail.com");
+		this.setSubject("LION - Trading Services eStatement - 14May2018 獅子交易服務電子結單");
+		ArrayList<String> emailBodyText = new ArrayList<String>();
+		emailBodyText.add("Dear Customer, \n\n");
+		emailBodyText.add("Thank you for using LION trading services. ");
+		emailBodyText.add("The lastest eStatement containing information on your recent transaction with us ");
+		emailBodyText.add("has been attached in this email. \n\n ");
+		emailBodyText.add("Please check the statement and report to us if there is any error or discrepancy. \n\n");
+		emailBodyText.add("For more information: \n");
+		emailBodyText.add("Should you have any question or require further information, ");
+		emailBodyText.add("please contact our customer service hotline at (852) 2345 5678 ");
+		emailBodyText.add("(press 1,6,0 for Cantonese, 2,6,0 for Englsh and 3,6,0 for Mandarin). \n\n");
+		emailBodyText.add("*** Please do not reply to this email *** \n\n");
+		this.setBody(emailBodyText);
+		File file = new File(filePath);
+		String mimeType = "application/pdf";
+		String fileDescription = "14May2018 eStatement";
+		ByteArrayInputStream fileInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
+		this.addAttachmentFromFileObject(fileInputStream, mimeType, fileDescription);
+		this.send();
+	}
+	
+	public void sendEmailWithExcelAndDefaultSetup() {
+		
 	}
 
 }
