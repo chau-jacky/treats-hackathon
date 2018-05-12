@@ -20,6 +20,7 @@ import com.treats.euc.model.DocumentTemplate;
 
 public class DocTemplateServices {
 
+	
 	private static String docTemplateKind = "DocTemplate";
 	private static String dataSoureKind = "DataSource";
 
@@ -29,7 +30,7 @@ public class DocTemplateServices {
 
 	public void addDocTemplate(DocumentTemplate documentTemplate) {
 		Key docKey = datastore.newKeyFactory().setKind(docTemplateKind).newKey(documentTemplate.getIdString());
-
+   
 		ListValue.Builder dataSourceList = ListValue.newBuilder();
 		for (Iterator<DataSource> iterator = documentTemplate.getDataSource().iterator(); iterator.hasNext();) {
 			DataSource dataSource = (DataSource) iterator.next();
@@ -48,11 +49,23 @@ public class DocTemplateServices {
 				.set("datasource", dataSourceList.build()).set("created", Timestamp.now()).build();
 		datastore.put(docTemplate);
 	}
+<<<<<<< HEAD
+<<<<<<< HEAD
+	*/
+=======
 
+>>>>>>> d945d39e10045b61fb6f373d7c6ab40a05c6b891
+
+/*
 	private Entity getDocTemplate(UUID uuid) {
 		Key dataSourceKey = datastore.newKeyFactory().setKind(dataSoureKind).newKey(uuid.toString());
 		Entity docTemplate = datastore.get(dataSourceKey);
 		return docTemplate;
 	}
-	
+
+<<<<<<< HEAD
+>>>>>>> 1ae85d9a4a86e4da1c72bbbb2dae39159924f521
+*/	
+=======
+>>>>>>> d945d39e10045b61fb6f373d7c6ab40a05c6b891
 }

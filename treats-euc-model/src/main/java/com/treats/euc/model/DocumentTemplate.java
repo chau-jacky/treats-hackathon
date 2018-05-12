@@ -3,7 +3,6 @@ package com.treats.euc.model;
 import java.io.Serializable;
 import java.util.List;
 import java.util.UUID;
-import com.google.cloud.datastore.Entity;
 
 public class DocumentTemplate implements Serializable {
 	
@@ -17,11 +16,6 @@ public class DocumentTemplate implements Serializable {
 	public DocumentTemplate() {
 		id = UUID.randomUUID();
 	}
-	public DocumentTemplate(Entity docTemplate) {
-		id = UUID.fromString(docTemplate.getKey().getName());
-		description = docTemplate.getString("description");
-	}
-	
 	public UUID getId() {
 		return id;
 	}
