@@ -1,12 +1,8 @@
 package com.treats.euc.services;
 
-import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
@@ -14,7 +10,6 @@ import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
-import javax.activation.MimetypesFileTypeMap;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -27,12 +22,6 @@ import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
-
-import org.apache.commons.io.FileUtils;
-
-import com.itextpdf.text.Document;
-import com.itextpdf.text.Paragraph;
-import com.itextpdf.text.pdf.PdfWriter;
 
 public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 
@@ -120,18 +109,21 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 	}
 
 	/* Add the Email Recipient */
+	@Override
 	public void addRecipient(String recipient) throws AddressException, MessagingException {
 		message.addRecipient(Message.RecipientType.TO, new InternetAddress(recipient));
 	}
 	
-	/* Add the Email Attachment */
+	/* Add the File Attachment from local path */
+	@Override
 	public void addAttachment(String filePath) throws MessagingException {
 		BodyPart messageBodyPart = getFileBodyPart(filePath);
 		multipart.addBodyPart(messageBodyPart);
 		message.setContent(multipart);
 	}
 	
-	/* Add the Email Attachment */
+	/* Add the File Attachment from file object */
+	@Override
 	public void addAttachmentFromFileObject(ByteArrayInputStream attachmentFileInputStream, String mimetype, String fileDescription) throws MessagingException, IOException {
         // byte[] bytes = file.toByteArray();
 		DataSource dataSource = new ByteArrayDataSource(attachmentFileInputStream, mimetype);
@@ -146,6 +138,7 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 	}
 	
 	/* Transmit the Email */
+	@Override
 	public void send() throws MessagingException {
 		Transport transport = session.getTransport(protocol);
 		transport.connect(username, password);
