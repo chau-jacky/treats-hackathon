@@ -50,6 +50,7 @@ public class DocTemplateServices {
 		datastore.put(docTemplate);
 	}
 
+
 /*
 	private Entity getDocTemplate(UUID uuid) {
 		Key dataSourceKey = datastore.newKeyFactory().setKind(dataSoureKind).newKey(uuid.toString());

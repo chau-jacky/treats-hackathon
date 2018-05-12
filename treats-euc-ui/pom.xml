@@ -168,19 +168,35 @@
 			<version>5.5.13</version>
 		</dependency>
 
-	    <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
+		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-core -->
 		<dependency>
-		    <groupId>org.apache.tika</groupId>
-		    <artifactId>tika-core</artifactId>
-		    <version>1.18</version>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-core</artifactId>
+			<version>1.18</version>
 		</dependency>
-	    
-	    <!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
+
+		<!-- https://mvnrepository.com/artifact/org.apache.tika/tika-parsers -->
 		<dependency>
-		    <groupId>org.apache.tika</groupId>
-		    <artifactId>tika-parsers</artifactId>
-		    <version>1.18</version>
+			<groupId>org.apache.tika</groupId>
+			<artifactId>tika-parsers</artifactId>
+			<version>1.18</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.itextpdf.tool/xmlworker -->
+		<dependency>
+			<groupId>com.itextpdf.tool</groupId>
+			<artifactId>xmlworker</artifactId>
+			<version>5.5.13</version>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-simple -->
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-simple</artifactId>
+			<version>1.8.0-alpha2</version>
+			<scope>test</scope>
+		</dependency>
+
 
 	</dependencies>
 

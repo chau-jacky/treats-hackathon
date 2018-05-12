@@ -32,11 +32,12 @@ public class PdfTest {
     	Metadata metadataTest = new Metadata();
     	
     	pdf.setOutputMethod("L");	//Save to Local
-    	pdf.setFullFileName("C:\\temp\\testing6.pdf");
-      	pdf.setPdfContent("This is a testing PDF Statement");
+    	pdf.setFullFileName("C:\\temp\\testing8.pdf");
+//      	pdf.setPdfContent("This is a testing PDF Statement");
+      	pdf.setPdfContent("<html><body> This is my Project </body></html>");
     	
-      	metadataTest = pdf.generatePdfMetadata();
+//      	metadataTest = pdf.generatePdfMetadata();
       	
- //     	pdf.generatePdf();
+     	pdf.generatePdf();
 	}
 }
