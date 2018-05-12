@@ -51,13 +51,14 @@ public class DocTemplateServices {
 	}
 <<<<<<< HEAD
 	*/
-=======
 
+/*
 	private Entity getDocTemplate(UUID uuid) {
 		Key dataSourceKey = datastore.newKeyFactory().setKind(dataSoureKind).newKey(uuid.toString());
 		Entity docTemplate = datastore.get(dataSourceKey);
 		return docTemplate;
 	}
-	
+
 >>>>>>> 1ae85d9a4a86e4da1c72bbbb2dae39159924f521
+*/	
 }
