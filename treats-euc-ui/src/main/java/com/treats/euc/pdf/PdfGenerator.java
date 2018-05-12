@@ -1,29 +1,27 @@
 package com.treats.euc.pdf;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+//import java.io.File;
+//import java.io.FileInputStream;
+//import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Date;
 import java.io.InputStream;
 import java.io.ByteArrayInputStream;
-import java.io.OutputStream;
+//import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
 
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.pdf.PDFParser;
-import org.apache.tika.sax.BodyContentHandler;
-import org.junit.Test;
-import org.xml.sax.SAXException;
+//import org.apache.tika.exception.TikaException;
+//import org.apache.tika.metadata.Metadata;
+//import org.apache.tika.parser.ParseContext;
+//import org.apache.tika.parser.pdf.PDFParser;
+//import org.apache.tika.sax.BodyContentHandler;
+//import org.xml.sax.SAXException;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.PageSize;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.BaseColor;
+//import com.itextpdf.text.BaseColor;
 import com.itextpdf.text.Chapter;
 import com.itextpdf.text.Font;
 import com.itextpdf.text.Section;
@@ -35,7 +33,7 @@ public class PdfGenerator {
 
 	private static final Boolean False = null;
 	private static Font catFont = new Font(Font.FontFamily.HELVETICA, 28, Font.BOLD);
-	private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.NORMAL, BaseColor.RED);
+/*	private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.NORMAL, BaseColor.RED);
 	private static Font greemFont = new Font(Font.FontFamily.HELVETICA, 28, Font.NORMAL, BaseColor.GREEN);
 
 	private static Font time_Font = new Font(Font.FontFamily.HELVETICA, 12, Font.ITALIC);
@@ -44,14 +42,14 @@ public class PdfGenerator {
 
 	private static Font normal_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
 	private static Font normal_Red_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
-	private static Font normal_Bold_Red_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);
+	private static Font normal_Bold_Red_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);*/
 
-	private static String outputMethod;
-	private static String fullFileName;
-	private static String pdfContent;
-	private static String pdfHeader;
-	private static String pdfFooter;
-	private static Boolean isEncryted = False;
+	private String outputMethod;
+	private String fullFileName;
+	private String pdfContent;
+	private String pdfHeader;
+	private String pdfFooter;
+	private Boolean isEncryted = False;
 
 	public static final String headerImage = "src/main/resources/img/hackathon_img.jpg";
 	public static final String barcodeImage = "src/main/resources/img/Barcode.jpg";
@@ -59,52 +57,52 @@ public class PdfGenerator {
 	static Chapter catPart;
 	static Section subCatPart;
 
-	public static String getOutputMethod() {
+	public String getOutputMethod() {
 		return outputMethod;
 	}
 
-	public static void setOutputMethod(String outputMethod) {
-		PdfGenerator.outputMethod = outputMethod;
+	public void setOutputMethod(String outputMethod) {
+		this.outputMethod = outputMethod;
 	}
 
-	public static String getPdfContent() {
-		return pdfContent;
-	}
-
-	public static void setPdfContent(String pdfContent) {
-		PdfGenerator.pdfContent = pdfContent;
-	}
-
-	public static String getFullFileName() {
+	public String getFullFileName() {
 		return fullFileName;
 	}
 
-	public static void setFullFileName(String fullFileName) {
-		PdfGenerator.fullFileName = fullFileName;
+	public void setFullFileName(String fullFileName) {
+		this.fullFileName = fullFileName;
 	}
 
-	public static String getPdfHeader() {
+	public String getPdfContent() {
+		return pdfContent;
+	}
+
+	public void setPdfContent(String pdfContent) {
+		this.pdfContent = pdfContent;
+	}
+
+	public String getPdfHeader() {
 		return pdfHeader;
 	}
 
-	public static void setPdfHeader(String pdfHeader) {
-		PdfGenerator.pdfHeader = pdfHeader;
+	public void setPdfHeader(String pdfHeader) {
+		this.pdfHeader = pdfHeader;
 	}
 
-	public static String getPdfFooter() {
+	public String getPdfFooter() {
 		return pdfFooter;
 	}
 
-	public static void setPdfFooter(String pdfFooter) {
-		PdfGenerator.pdfFooter = pdfFooter;
+	public void setPdfFooter(String pdfFooter) {
+		this.pdfFooter = pdfFooter;
 	}
 
-	public static Boolean getIsEncryted() {
+	public Boolean getIsEncryted() {
 		return isEncryted;
 	}
 
-	public static void setIsEncryted(Boolean isEncryted) {
-		PdfGenerator.isEncryted = isEncryted;
+	public void setIsEncryted(Boolean isEncryted) {
+		this.isEncryted = isEncryted;
 	}
 
 	/**
@@ -115,7 +113,7 @@ public class PdfGenerator {
 	 * @throws DocumentException
 	 * @throws IOException
 	 */
-	public Document generatePdf() throws DocumentException, IOException {
+	public ByteArrayOutputStream generatePdf() throws DocumentException, IOException {
 
 		System.out.println("Generating report...");
 
@@ -155,7 +153,7 @@ public class PdfGenerator {
 
 		System.out.println("Report generation completed!");
 		
-		return doc;
+		return baos;
 	}
 
 /*	public Metadata generatePdfMetadata() throws IOException, TikaException, SAXException, DocumentException {
@@ -185,13 +183,9 @@ public class PdfGenerator {
 		return metadata;
 	}*/
 
-	private void sendEmailWithPdf() {
-		/* Trigger email sending */
-	}
-
 	static void addEmptyLIne(Document doc, int number) throws DocumentException {
 		for (int i = 0; i < number; i++) {
-			doc.add(new Paragraph(" ", chaptor_Pass_Font));
+			doc.add(new Paragraph(" ", catFont));
 		}
 	}
 
