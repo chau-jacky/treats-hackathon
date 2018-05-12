@@ -12,6 +12,8 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 	private ArrayList<EucFlow> listEucFlow;
 	
 	public EucFlowServicesMemory(){
+		listEucFlow = new ArrayList<EucFlow>();
+		
 		EucFlow eucFlow = new EucFlow();
 		eucFlow.setDescription("EUC Workflow 001");
 		eucFlow.setDocumentTemplateID(UUID.randomUUID());
@@ -21,7 +23,33 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		LocalTime executeTime = LocalTime.of(11, 58, 59);
 		eucSchedule.setExectueTime(executeTime);
 		eucSchedule.setExecuteFrequency("Once a Week");
-		eucSchedule.setExecuteDayOfWeek("Friday");
+		eucSchedule.setExecuteDayOfWeek("Friday");		
+		listEucFlow.add(eucFlow);
+		
+		EucFlow eucFlow2 = new EucFlow();
+		eucFlow2.setDescription("EUC Workflow 002");
+		eucFlow2.setDocumentTemplateID(UUID.randomUUID());
+		eucFlow2.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
+		eucFlow2.setOutput("EMAIL");
+		EucSchedule eucSchedule2 = new EucSchedule();
+		LocalTime executeTime2 = LocalTime.of(11, 58, 59);
+		eucSchedule2.setExectueTime(executeTime2);
+		eucSchedule2.setExecuteFrequency("Once a Week");
+		eucSchedule2.setExecuteDayOfWeek("Friday");
+		listEucFlow.add(eucFlow2);
+		
+		EucFlow eucFlow3 = new EucFlow();
+		eucFlow3.setDescription("EUC Workflow 003");
+		eucFlow3.setDocumentTemplateID(UUID.randomUUID());
+		eucFlow3.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
+		eucFlow3.setOutput("EMAIL");
+		EucSchedule eucSchedule3 = new EucSchedule();
+		LocalTime executeTime3 = LocalTime.of(11, 58, 59);
+		eucSchedule3.setExectueTime(executeTime3);
+		eucSchedule3.setExecuteFrequency("Once a Week");
+		eucSchedule3.setExecuteDayOfWeek("Friday");
+		listEucFlow.add(eucFlow3);
+
 	}
 	
 	@Override
