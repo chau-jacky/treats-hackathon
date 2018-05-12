@@ -1,5 +1,7 @@
 package com.treats.euc.services;
 
+import java.io.ByteArrayInputStream;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
@@ -18,8 +20,10 @@ public interface EmailDeliveryServicesInterface {
 	public void setBody(ArrayList<String> linesOfEmailContent) throws MessagingException;
 	/* Add the Email Recipient */
 	public void addRecipient(String recipient) throws AddressException, MessagingException;
-	/* Add the Email Attachment */
+	/* Add the File Attachment from local path */
 	public void addAttachment(String filePath) throws MessagingException;
+	/* Add the File Attachment from file object */
+	public void addAttachmentFromFileObject(ByteArrayInputStream attachmentFileInputStream, String mimetype, String fileDescription) throws MessagingException, IOException;
 	/* Transmit the Email */
 	public void send() throws MessagingException;
 	
