@@ -49,12 +49,6 @@ public class DocTemplateServices {
 				.set("datasource", dataSourceList.build()).set("created", Timestamp.now()).build();
 		datastore.put(docTemplate);
 	}
-<<<<<<< HEAD
-<<<<<<< HEAD
-	*/
-=======
-
->>>>>>> d945d39e10045b61fb6f373d7c6ab40a05c6b891
 
 /*
 	private Entity getDocTemplate(UUID uuid) {
@@ -63,9 +57,5 @@ public class DocTemplateServices {
 		return docTemplate;
 	}
 
-<<<<<<< HEAD
->>>>>>> 1ae85d9a4a86e4da1c72bbbb2dae39159924f521
 */	
-=======
->>>>>>> d945d39e10045b61fb6f373d7c6ab40a05c6b891
 }
