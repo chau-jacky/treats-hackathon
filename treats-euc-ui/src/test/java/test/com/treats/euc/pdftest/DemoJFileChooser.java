@@ -14,7 +14,7 @@ public class DemoJFileChooser extends JPanel implements ActionListener {
 	JFileChooser chooser;
 	String choosertitle;
 
-	@Test
+	
 	public void DemoJFileChooser() {
 		go = new JButton("Do it");
 		go.addActionListener(this);
@@ -44,7 +44,21 @@ public class DemoJFileChooser extends JPanel implements ActionListener {
 	public Dimension getPreferredSize() {
 		return new Dimension(200, 200);
 	}
-
+	
+	@Test
+	public void JFileTest() {
+		JFrame frame = new JFrame("");
+		DemoJFileChooser panel = new DemoJFileChooser();
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				System.exit(0);
+			}
+		});
+		frame.getContentPane().add(panel, "Center");
+		frame.setSize(panel.getPreferredSize());
+		frame.setVisible(true);
+	}
+	
 	public static void main(String s[]) {
 		JFrame frame = new JFrame("");
 		DemoJFileChooser panel = new DemoJFileChooser();
