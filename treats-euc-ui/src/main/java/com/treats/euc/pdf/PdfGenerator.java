@@ -4,6 +4,11 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.Date;
+import java.io.InputStream;
+import java.io.ByteArrayInputStream;
+import java.io.OutputStream;
+import java.io.ByteArrayOutputStream;
 
 import org.apache.tika.exception.TikaException;
 import org.apache.tika.metadata.Metadata;
@@ -12,8 +17,6 @@ import org.apache.tika.parser.pdf.PDFParser;
 import org.apache.tika.sax.BodyContentHandler;
 import org.junit.Test;
 import org.xml.sax.SAXException;
-
-import java.util.Date;
 
 import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
@@ -26,6 +29,7 @@ import com.itextpdf.text.Font;
 import com.itextpdf.text.Section;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
+import com.itextpdf.tool.xml.XMLWorkerHelper;
 
 public class PdfGenerator {
 
@@ -49,8 +53,8 @@ public class PdfGenerator {
 	private static String pdfFooter;
 	private static Boolean isEncryted = False;
 
-	public static final String headerImage = "C:\\temp\\hackathon_img.jpg";
-	public static final String barcodeImage = "C:\\temp\\Barcode.jpg";
+	public static final String headerImage = "src/main/resources/img/hackathon_img.jpg";
+	public static final String barcodeImage = "src/main/resources/img/Barcode.jpg";
 
 	static Chapter catPart;
 	static Section subCatPart;
@@ -111,54 +115,50 @@ public class PdfGenerator {
 	 * @throws DocumentException
 	 * @throws IOException
 	 */
-	public void generatePdf() throws DocumentException, IOException {
+	public Document generatePdf() throws DocumentException, IOException {
 
 		System.out.println("Generating report...");
 
 		Document doc = new Document(PageSize.A4);
-
-		PdfWriter.getInstance(doc, new FileOutputStream(fullFileName));
+//		OutputStream file = new FileOutputStream(new File(fullFileName));
+//		PdfWriter writer = PdfWriter.getInstance(doc, file);
+		InputStream is = new ByteArrayInputStream(pdfContent.getBytes());
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PdfWriter writer = PdfWriter.getInstance(doc, baos);
+		
 		Paragraph p = new Paragraph("Monthly Statement", catFont);
 		p.setAlignment(Element.ALIGN_CENTER);
 
 		doc.open();
+		
 		// Create and add an Image
 		Image img = Image.getInstance(headerImage);
-
-		// PageSize.A4.getWidth() - img.getScaledWidth(),PageSize.A4.getHeight() -
-		// img.getScaledHeight());
-		// (PageSize.POSTCARD.getWidth() - img.getScaledWidth()) / 2,
-		// (PageSize.POSTCARD.getHeight() - img.getScaledHeight()) / 2);
-		// img.setAbsolutePosition(0,0);
 		img.scaleToFit(PageSize.A4.getWidth(), img.getScaledHeight());
 		img.setAbsolutePosition(0, PageSize.A4.getHeight() - img.getScaledHeight());
 		doc.add(img);
 
 		addEmptyLIne(doc, 3);
-		doc.add(p);
+		//doc.add(p);
 
-		addEmptyLIne(doc, 1);
-		p = new Paragraph(pdfContent, chaptor_Pass_Font);
-		doc.add(p);
-
+		//addEmptyLIne(doc, 1);
+		//p = new Paragraph(pdfContent, chaptor_Pass_Font);
+		//doc.add(p);
+		XMLWorkerHelper.getInstance().parseXHtml(writer, doc, is);
+		
 		img = Image.getInstance(barcodeImage);
 		img.scaleToFit(200, 500);
 		img.setAbsolutePosition(PageSize.A4.getWidth() - PageSize.A4.getWidth() / 3, 0);
 		doc.add(img);
 
 		doc.close();
-
-		if (outputMethod == "E") {
-			System.out.println("Sending email...");
-			sendEmailWithPdf();
-		}
+//		file.close();
 
 		System.out.println("Report generation completed!");
-
-		// return doc;
+		
+		return doc;
 	}
 
-	public Metadata generatePdfMetadata() throws IOException, TikaException, SAXException, DocumentException {
+/*	public Metadata generatePdfMetadata() throws IOException, TikaException, SAXException, DocumentException {
 		Metadata metadata = new Metadata();
 
 		generatePdf();
@@ -183,7 +183,7 @@ public class PdfGenerator {
 		}
 
 		return metadata;
-	}
+	}*/
 
 	private void sendEmailWithPdf() {
 		/* Trigger email sending */
@@ -195,5 +195,7 @@ public class PdfGenerator {
 		}
 	}
 
+	
+	
 	
 }
