@@ -49,4 +49,14 @@ public class DocTemplateServices {
 				.set("datasource", dataSourceList.build()).set("created", Timestamp.now()).build();
 		datastore.put(docTemplate);
 	}
+
+
+/*
+	private Entity getDocTemplate(UUID uuid) {
+		Key dataSourceKey = datastore.newKeyFactory().setKind(dataSoureKind).newKey(uuid.toString());
+		Entity docTemplate = datastore.get(dataSourceKey);
+		return docTemplate;
+	}
+
+*/	
 }
