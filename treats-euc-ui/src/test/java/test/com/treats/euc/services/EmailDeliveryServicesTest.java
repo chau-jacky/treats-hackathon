@@ -1,13 +1,14 @@
 package test.com.treats.euc.services;
 
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
+import javax.activation.MimetypesFileTypeMap;
 import javax.mail.MessagingException;
 
-import org.apache.pdfbox.pdmodel.PDDocument;
+import org.apache.commons.io.FileUtils;
 import org.junit.Test;
 
 import com.treats.euc.services.EmailDeliveryServices;
@@ -28,10 +29,16 @@ public class EmailDeliveryServicesTest {
 		emailBodyText.add("The MimeUtility class provided in this package can be used to to achieve this. ");
 		//sender.setBody("Java Email Testing Example...");
 		sender.setBody(emailBodyText);
-		sender.addAttachment("/Users/simonchau/Downloads/LTN20180511497_C.pdf");
-		//File file = new File("/Users/simonchau/Downloads/LTN20180511497_C.pdf"); 
+		//sender.addAttachment("/Users/simonchau/Downloads/LTN20180511497_C.pdf");
+		File file = new File("/Users/simonchau/Downloads/LTN20180511497_C.pdf");
+		//MimetypesFileTypeMap mimeTypesMap = new MimetypesFileTypeMap();
+		// String mimeType = mimeTypesMap.getContentType(file);
+		String mimeType = "application/pdf";
+		String fileDescription = "Testing Document";
+		// System.out.println("mime type: "+ mimeType);
+		ByteArrayInputStream fileInputStream = new ByteArrayInputStream(FileUtils.readFileToByteArray(file));
 	    //PDDocument document = PDDocument.load(file); 
-
+		sender.addAttachmentFromFileObject(fileInputStream, mimeType, fileDescription);
 		sender.send();
 	}
 }

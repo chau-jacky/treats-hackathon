@@ -1,8 +1,12 @@
 package com.treats.euc.services;
 
+import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.URLConnection;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.Properties;
@@ -10,6 +14,7 @@ import java.util.Properties;
 import javax.activation.DataHandler;
 import javax.activation.DataSource;
 import javax.activation.FileDataSource;
+import javax.activation.MimetypesFileTypeMap;
 import javax.mail.BodyPart;
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -23,10 +28,11 @@ import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
 import javax.mail.util.ByteArrayDataSource;
 
+import org.apache.commons.io.FileUtils;
+
 import com.itextpdf.text.Document;
 import com.itextpdf.text.Paragraph;
 import com.itextpdf.text.pdf.PdfWriter;
-import com.itextpdf.text.pdf.codec.Base64.OutputStream;
 
 public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 
@@ -126,10 +132,11 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 	}
 	
 	/* Add the Email Attachment */
-	/* 
-	public void addAttachmentFromFileObject(ByteArrayInputStream file, String mimeType, String fileDescription) throws MessagingException {
+	public void addAttachmentFromFileObject(ByteArrayInputStream attachmentFileInputStream, String mimetype, String fileDescription) throws MessagingException, IOException {
         // byte[] bytes = file.toByteArray();
-		DataSource dataSource = new ByteArrayDataSource(bytes, "application/pdf");
+		DataSource dataSource = new ByteArrayDataSource(attachmentFileInputStream, mimetype);
+		//String mimetype = URLConnection.guessContentTypeFromStream(new BufferedInputStream(attachmentFileInputStream));
+		
         MimeBodyPart fileBodyPart = new MimeBodyPart();
         fileBodyPart.setDataHandler(new DataHandler(dataSource));
         fileBodyPart.setFileName(fileDescription);
@@ -137,7 +144,6 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 		multipart.addBodyPart(fileBodyPart);
 		message.setContent(multipart);
 	}
-	*/
 	
 	/* Transmit the Email */
 	public void send() throws MessagingException {
