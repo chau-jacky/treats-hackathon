@@ -2,10 +2,10 @@ package test.com.treats.euc.services;
 
 
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+
 import java.io.IOException;
-import java.io.File;
-import java.io.FileInputStream;
+import java.io.ByteArrayOutputStream;
+
 
 import java.util.ArrayList;
 
@@ -13,16 +13,11 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
-import org.junit.Test;
-import org.xml.sax.SAXException;
-import org.apache.tika.exception.TikaException;
-import org.apache.tika.metadata.Metadata;
-import org.apache.tika.parser.ParseContext;
-import org.apache.tika.parser.microsoft.OfficeParser;
-import org.apache.tika.parser.microsoft.ooxml.OOXMLParser;
-import org.apache.tika.sax.BodyContentHandler;
 
-public class ExcelOutputTest {
+
+
+
+public class ExceltoByte {
 
 	public ArrayList<Object[]> getTableData(){
         ArrayList<Object[]> tableDataList = null;
@@ -46,7 +41,8 @@ public class ExcelOutputTest {
     }
 	
 	public void doExport(ArrayList<Object[]> dataList){
-        if(dataList != null && !dataList.isEmpty()){
+        /*if(dataList != null && !dataList.isEmpty()){*/
+        	System.out.println("Exporting...");
             HSSFWorkbook workBook = new HSSFWorkbook();
             HSSFSheet sheet = workBook.createSheet();
             
@@ -63,32 +59,42 @@ public class ExcelOutputTest {
             /*}*/
              
             
-            String file = "D:/Hackathon/test.xlsx";
+            /*String file = "D:/Hackathon/test.xls";*/
             try{
-                FileOutputStream fos = new FileOutputStream(file);
+                /*FileOutputStream fos = new FileOutputStream(file);
                 workBook.write(fos);
-                fos.flush();
+                fos.flush();*/
+            	System.out.println("Converting Excel to Byte...");
+                ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                workBook.write(baos);
+                byte[] xls = baos.toByteArray();
+                System.out.println("Printing Byte...");
+                System.out.println(xls);
                 workBook.close();
+                
+                
               
                 
-            }catch(FileNotFoundException e){
+            /*}catch(FileNotFoundException e){
                 e.printStackTrace();
-                System.out.println("Invalid directory or file not found");
+                System.out.println("Invalid directory or file not found");*/
             }catch(IOException e){
                 e.printStackTrace();
                 System.out.println("Error occurred while writting excel file to directory");
             }
-        }
+        /*}*/
     }
     
 	
 	
-	public static void main(final String[] args) throws IOException, TikaException, SAXException {
-    	ExcelOutputTest excelOutputTest = new ExcelOutputTest();
-        ArrayList<Object[]> dataList = excelOutputTest.getTableData();
+	public static void main(final String[] args) throws IOException {
+		ExceltoByte exceltoByte = new ExceltoByte();
+        ArrayList<Object[]> dataList = exceltoByte.getTableData();
         if(dataList != null && dataList.size() > 0){
-        	excelOutputTest.doExport(dataList);
-        	System.out.println("Excel is generated");
+        	System.out.println("Printing dataList:");
+        	System.out.println(dataList);
+        	exceltoByte.doExport(dataList);
+        	System.out.println("Byte is generated from Excel");
         	//detecting the file type
 		    /*  BodyContentHandler handler = new BodyContentHandler();
 		      
