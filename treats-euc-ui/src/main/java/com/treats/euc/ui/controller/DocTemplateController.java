@@ -1,17 +1,15 @@
 package com.treats.euc.ui.controller;
 
-import org.springframework.web.bind.annotation.RestController;
-
 import com.treats.euc.model.DocumentTemplate;
 import com.treats.euc.services.DocTemplateServicesInterface;
 import com.treats.euc.services.DocTemplateServicesMemory;
 
-import java.util.ArrayList;
-
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
-@RestController
+@Controller
 @RequestMapping("/treats-euc/doctemplate")
 public class DocTemplateController {
 	
@@ -20,17 +18,17 @@ public class DocTemplateController {
 	DocTemplateController(){
 		docTemplateService = new DocTemplateServicesMemory();
 	}
-    
-    @RequestMapping("/getalldoctemplates")
-    public ArrayList<DocumentTemplate> getAllTemplates() {
-    	return docTemplateService.getListDocumentTemplate();
+        
+    @RequestMapping(value = "/create", method = RequestMethod.POST)
+    public String someMethod(@RequestParam("template") String templateDetails) {
+    	DocumentTemplate docTemplate = new DocumentTemplate();
+    	docTemplate.setDescription("New Doc Template");
+    	docTemplate.setDocTemplate(templateDetails);
+    	
+    	docTemplateService.addDocTemplate(docTemplate);
+    	
+		return "treats-euc";
     }
-    
-    @RequestMapping("/getdoctemplate/{id}")
-    public DocumentTemplate getTemplatesById(@PathVariable String id) {
-    	return docTemplateService.getDocumentTemplate(id);
-    }
-    
     
     
 }

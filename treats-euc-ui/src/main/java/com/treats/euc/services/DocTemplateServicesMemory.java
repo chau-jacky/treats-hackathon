@@ -21,7 +21,7 @@ import com.treats.euc.model.DocumentTemplate;
 
 public class DocTemplateServicesMemory implements DocTemplateServicesInterface {
 
-	private ArrayList<DocumentTemplate> listDocumentTemplate;
+	private static ArrayList<DocumentTemplate> listDocumentTemplate;
 	
 	public DocTemplateServicesMemory(){
 		

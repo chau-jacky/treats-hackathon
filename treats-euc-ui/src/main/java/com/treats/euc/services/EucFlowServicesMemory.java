@@ -9,7 +9,7 @@ import com.treats.euc.model.EucSchedule;
 
 public class EucFlowServicesMemory implements EucFlowServicesInterface {
 
-	private ArrayList<EucFlow> listEucFlow;
+	private static ArrayList<EucFlow> listEucFlow;
 	
 	public EucFlowServicesMemory(){
 		listEucFlow = new ArrayList<EucFlow>();
@@ -17,7 +17,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		EucFlow eucFlow = new EucFlow();
 		eucFlow.setDescription("EUC Workflow 001");
 		eucFlow.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
+		eucFlow.setSql("SELECT TradeID, TradeType, Country, GroupMember, BranchNumber, TradeDate FROM [techfest-hackathon-4:hk_treats.trade_info] LIMIT 1000");
 		eucFlow.setOutput("EMAIL");
 		EucSchedule eucSchedule = new EucSchedule();
 		LocalTime executeTime = LocalTime.of(11, 58, 59);
