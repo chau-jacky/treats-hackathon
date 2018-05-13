@@ -108,7 +108,7 @@ public class ExcelGenerator {
 	
 
 
-	public void excelEmailSend(ArrayList<ArrayList<String>> tableArray) throws Exception{
+	public void excelEmailSend(ArrayList<ArrayList<String>> tableArray, String destination) throws Exception{
 		
 		HSSFWorkbook workBook = this.arrayToWorkBook(tableArray);
 		
@@ -120,7 +120,7 @@ public class ExcelGenerator {
                         
             System.out.println("Sending Excel by email...");
             EmailDeliveryServices sender = new EmailDeliveryServices();
-    		sender.sendEmailWithExcelAndDefaultSetup(baos);	
+    		sender.sendEmailWithExcelAndDefaultSetup(baos,destination);	
     		System.out.println("Email sent!");
     		
     		workBook.close();
@@ -143,7 +143,7 @@ public class ExcelGenerator {
 		
 		excelGenerator.excelDownload(excelGenerator.genTableData());
 		
-		excelGenerator.excelEmailSend(excelGenerator.genTableData());
+		/*excelGenerator.excelEmailSend(excelGenerator.genTableData(),destination);*/
 		
         
     }
