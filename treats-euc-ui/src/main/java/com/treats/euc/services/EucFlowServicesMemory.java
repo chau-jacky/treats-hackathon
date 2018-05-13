@@ -20,6 +20,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 			eucFlow5.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
 			eucFlow5.setOutputFormat("PDF");
 			eucFlow5.setOutputMedium("EMAIL");
+			eucFlow5.setEmailAddress("chau.jacky@gmail.com");
 			EucSchedule eucSchedule5 = new EucSchedule();
 			LocalTime executeTime5 = LocalTime.of(11, 58, 59);
 			eucSchedule5.setExectueTime(executeTime5);
