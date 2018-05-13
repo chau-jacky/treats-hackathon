@@ -1,4 +1,3 @@
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <!--[if IE 9]><html lang="en-us" class="ie9"><![endif]-->
 <!--[if gt IE 9]><!-->
@@ -215,8 +214,10 @@
 			 if (this.readyState == 4 && this.status == 200) {
 				 var templateArr = JSON.parse(this.responseText);
 				 //html2text(templateArr.docTemplate);
-				 var templateText = jQuery(templateArr.docTemplate).text();
-				  $('#summernote').summernote('insertText', templateText);
+				 //var templateText = jQuery(templateArr.docTemplate).text();
+				  $('#summernote').summernote('code', templateArr.docTemplate);
+				 //Set document template description
+				 document.getElementById('input-description').value = templateArr.description;
 		
 			  }
 		};
@@ -224,13 +225,14 @@
 		xmlhttp.send();
 	}
 	
+	/*
 	function html2text(html) {
 	    var tag = document.createElement('div');
 	    tag.innerHTML = html;
 	    $('#summernote').summernote('insertText', tag.innerText);
 
 	}
-
+	*/
 </script>
 
   <script>
