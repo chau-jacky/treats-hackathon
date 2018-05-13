@@ -108,6 +108,9 @@
             <a href="#">Create Template</a>
           </li>
           <li>
+            <a href="#">Modify Workflow</a>
+          </li>
+          <li>
             <a href="#">Create Workflow</a>
           </li>
         </ul>
@@ -118,6 +121,10 @@
   	<div class="col-lg-4 col-lg-push-8">
     	<!-- List of fields -->
     	<div class="form-group">
+    		<label class="required-pf" for="input-description">
+    			Template Description
+    		</label>
+    		<input type="text" class="form-control" id="input-description" required/>
     		<label for="system-list">Select Source System:</label>
     		<select class = "form-control" id="system-list">
     			<option>TREATS</option>
@@ -136,7 +143,7 @@
     			<option>counterparty</option>
     			<option>amount_pay</option>
     		</select>
-    		 <button type="button" class="btn btn-primary" id="Assign">Assign</button>
+    		 <button type="button" class="btn btn-primary" id="Assign" onclick="assign()">Assign</button>
     		
     	</div>
       
@@ -159,10 +166,54 @@
 			tooptip: 'Save template',
 			click: function(){
 				//save template logic
+				saveTemplate();
 			}
 		});
 		return button.render();
 	}
+
+	var assign = function() {
+		var fieldName = $('#field-list option:selected').text();
+		$('#summernote').summernote('insertText', '@' + fieldName + '@');
+	}
+
+	var saveTemplate = function() {
+	    var form = document.createElement('form');
+	    form.setAttribute('method', 'post');
+	    form.setAttribute('action', '/treats-euc/doctemplate/create');
+	    form.style.display = 'hidden';
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "description");
+	    input.setAttribute("value", $('#input-description').val());
+	    form.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "template");
+	    input.setAttribute("value", $('#summernote').summernote('code'));
+	    form.appendChild(input);
+	    
+	    document.body.appendChild(form)
+	    form.submit();
+	}
+	
+	// Send HTTP request
+	function sendRequest(method, url){
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			 if (this.readyState == 4 && this.status == 200) {
+				 var templateArr = JSON.parse(this.responseText);
+				 $('#summernote').summernote('insertText', templateArr.docTemplate);
+		
+			  }
+		};
+		xmlhttp.open(method, url, true);
+		xmlhttp.send();
+	}
+	
+
 </script>
 
   <script>
@@ -171,29 +222,30 @@
 	// Summernote editor
 	 $('#summernote').summernote({
 		 height: 500,
-		 minHeight: null,
+		 minHeight: 500,
 		 maxHeight: null,
 		 focus: true,
 		 placeholder: 'Prepare your template here',
 		 toolbar:[
-			 ['style', ['style']],
+			    ['style', ['style']],
 			    ['font', ['bold', 'italic', 'underline', 'clear']],
-			    ['fontname', ['fontname']],
 			    ['color', ['color']],
 			    ['para', ['ul', 'ol', 'paragraph']],
 			    ['height', ['height']],
 			    ['table', ['table']],
-			    ['insert', ['link', 'picture', 'hr']],
-			    ['view', ['fullscreen', 'codeview']],
-			    ['help', ['help']],
-			 ['save-button',['save']]
+			    ['view', ['fullscreen']],
+			    ['save-button',['save']]
 		 ],
 		 buttons: {
 			 save: SaveButton
 		 }
 	 
 	 });
-
+	
+	//Get template from input id
+	var templateReq = new sendRequest('GET', '/treats-euc/doctemplate/getdoctemplate/${templateId}');
+	
+	 
     // toggle dropdown menu
     $("#pf-list-simple-expansion .list-view-pf-actions").on('show.bs.dropdown', function () {
       var $this = $(this);
@@ -201,7 +253,6 @@
       var space = $(window).height() - $dropdown[0].getBoundingClientRect().top - $this.find('.dropdown-menu').outerHeight(true);
       $dropdown.toggleClass('dropup', space < 10);
     });
-
 
 
   });

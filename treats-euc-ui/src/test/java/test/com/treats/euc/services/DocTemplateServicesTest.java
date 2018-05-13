@@ -1,5 +1,6 @@
 package test.com.treats.euc.services;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.concurrent.TimeoutException;
@@ -16,6 +17,8 @@ import com.google.cloud.datastore.testing.LocalDatastoreHelper;
 import com.treats.euc.model.DataSource;
 import com.treats.euc.model.DocumentTemplate;
 import com.treats.euc.services.DocTemplateServices;
+import com.treats.euc.services.DocTemplateServicesDataStore;
+
 import org.threeten.bp.Duration;
 
 public class DocTemplateServicesTest {
@@ -38,34 +41,33 @@ public class DocTemplateServicesTest {
 
 	@AfterClass
 	public static void afterClass() throws IOException, InterruptedException, TimeoutException {
-		HELPER.stop(Duration.ofMinutes(1));
+		//HELPER.stop(Duration.ofMinutes(1));
 	}
 
 	@Test
-	public void testAdd() {
-		DocTemplateServices docTemplateServices = new DocTemplateServices();
+	public void testAdd() throws FileNotFoundException, IOException {
+		DocTemplateServicesDataStore docTemplateServices = new DocTemplateServicesDataStore();
 
-		DataSource ds1 = new DataSource();
-		ds1.setSourceSystem("TREATS");
-		ds1.setDbTable("MPESPTP");
-		ds1.setDbField("TADLNO");
-
-		DataSource ds2 = new DataSource();
-		ds2.setSourceSystem("TREATS");
-		ds2.setDbTable("MPEFWDP");
-		ds2.setDbField("TCDLNO");
-
-		ArrayList<DataSource> listDataSource = new ArrayList<DataSource>();
-		listDataSource.add(ds1);
-		listDataSource.add(ds2);
-
+		ArrayList<String> fields2 = new ArrayList<String>();
+		fields2.add("tradeid");
+		fields2.add("country");
+		
 		DocumentTemplate dt1 = new DocumentTemplate();
 		dt1.setDescription("Document Template 001");
 		dt1.setDocTemplate("template details");
-		dt1.setDataSource(listDataSource);
+		dt1.setDataSystem("hk_treats");
+		dt1.setDataTable("trade_info");
+		dt1.setDataFields(fields2);
 
-//		docTemplateServices.addDocTemplate(dt1);
+		docTemplateServices.addDocTemplate(dt1);
+		System.out.println("id created : " + dt1.getIdString());
 
+		docTemplateServices.deleteDocTemplate(dt1.getIdString());
+		System.out.println("id deteled: " + dt1.getIdString());
+		
+		System.out.println(docTemplateServices.getDocumentTemplate("613bb7d9-ff7b-4245-a8fc-6a78b0d8d1f6").getIdString());
+		
+		
 	}
 
 }

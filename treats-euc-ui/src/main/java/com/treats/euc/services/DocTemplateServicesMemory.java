@@ -21,7 +21,7 @@ import com.treats.euc.model.DocumentTemplate;
 
 public class DocTemplateServicesMemory implements DocTemplateServicesInterface {
 
-	private ArrayList<DocumentTemplate> listDocumentTemplate;
+	private static ArrayList<DocumentTemplate> listDocumentTemplate;
 	
 	public DocTemplateServicesMemory(){
 		
@@ -31,51 +31,42 @@ public class DocTemplateServicesMemory implements DocTemplateServicesInterface {
 		ArrayList<DataSource> arrayds1 = new ArrayList<DataSource>();
 		dt1.setDescription("Document Template 001");
 		dt1.setDocTemplate("Hello World 001");
-		DataSource ds1 = new DataSource();
-		ds1.setSourceSystem("TREATS");
-		ds1.setDbTable("MPESPTP");
-		ds1.setDbField("TADLNO");
-		arrayds1.add(ds1);
-		DataSource ds2 = new DataSource();
-		ds2.setSourceSystem("TREATS");
-		ds2.setDbTable("MPEFWDP");
-		ds2.setDbField("TCDLNO");
-		arrayds1.add(ds2);
-		dt1.setDataSource(arrayds1);
+		dt1.setDataSystem("hk_treats");
+		dt1.setDataTable("trade_info");
+
+		ArrayList<String> fields1 = new ArrayList<String>();
+		fields1.add("tradeid");
+		fields1.add("country");
+		dt1.setDataFields(fields1);
+		
 		listDocumentTemplate.add(dt1);
 		
 		DocumentTemplate dt2 = new DocumentTemplate();
 		ArrayList<DataSource> arrayds2 = new ArrayList<DataSource>();
 		dt2.setDescription("Document Template 002");
 		dt2.setDocTemplate("Hello World 002");
-		DataSource ds3 = new DataSource();
-		ds3.setSourceSystem("TREATS");
-		ds3.setDbTable("MPESPTP");
-		ds3.setDbField("TADLNO");
-		arrayds2.add(ds3);
-		DataSource ds4 = new DataSource();
-		ds4.setSourceSystem("TREATS");
-		ds4.setDbTable("MPEFWDP");
-		ds4.setDbField("TCDLNO");
-		arrayds2.add(ds4);
-		dt2.setDataSource(arrayds2);
+		dt2.setDataSystem("hk_treats");
+		dt2.setDataTable("trade_info");
+
+		ArrayList<String> fields2 = new ArrayList<String>();
+		fields2.add("tradeid");
+		fields2.add("country");
+		dt2.setDataFields(fields2);
+		
 		listDocumentTemplate.add(dt2);
 		
 		DocumentTemplate dt3 = new DocumentTemplate();
 		ArrayList<DataSource> arrayds3 = new ArrayList<DataSource>();
 		dt3.setDescription("Document Template 003");
 		dt3.setDocTemplate("Hello World 003");
-		DataSource ds5 = new DataSource();
-		ds5.setSourceSystem("TREATS");
-		ds5.setDbTable("MPESPTP");
-		ds5.setDbField("TADLNO");
-		arrayds3.add(ds5);
-		DataSource ds6 = new DataSource();
-		ds6.setSourceSystem("TREATS");
-		ds6.setDbTable("MPEFWDP");
-		ds6.setDbField("TCDLNO");
-		arrayds3.add(ds6);
-		dt3.setDataSource(arrayds3);	
+		dt3.setDataSystem("hk_treats");
+		dt3.setDataTable("trade_info");
+
+		ArrayList<String> fields3 = new ArrayList<String>();
+		fields3.add("tradeid");
+		fields3.add("country");
+		dt3.setDataFields(fields3);
+		
 		listDocumentTemplate.add(dt3);
 	}
 
