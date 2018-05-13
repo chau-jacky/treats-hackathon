@@ -785,7 +785,7 @@ function loadEucList(arr, tar) {
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-plane"></span>';
-    out += arr[i].output + '';
+    out += arr[i].outputMedium + '/' + arr[i].outputFormat + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-calendar"></span>';

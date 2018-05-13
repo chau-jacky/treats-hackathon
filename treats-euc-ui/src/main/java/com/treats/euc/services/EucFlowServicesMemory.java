@@ -17,8 +17,9 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		EucFlow eucFlow = new EucFlow();
 		eucFlow.setDescription("EUC Workflow 001");
 		eucFlow.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow.setSql("SELECT TradeID, TradeType, Country, GroupMember, BranchNumber, TradeDate FROM [techfest-hackathon-4:hk_treats.trade_info] LIMIT 1000");
-		eucFlow.setOutput("EMAIL");
+		eucFlow.setFiler("WHERE TradeID = '11111'");
+		eucFlow.setOutputFormat("EXCEL");
+		eucFlow.setOutputMedium("EMAIL");
 		EucSchedule eucSchedule = new EucSchedule();
 		LocalTime executeTime = LocalTime.of(11, 58, 59);
 		eucSchedule.setExectueTime(executeTime);
@@ -29,8 +30,9 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		EucFlow eucFlow2 = new EucFlow();
 		eucFlow2.setDescription("EUC Workflow 002");
 		eucFlow2.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow2.setSql("SELECT TradeID, TradeType, Country, GroupMember, BranchNumber, TradeDate, ValueDate, BuyCcy, SellCcy, BuyAmount, SellAmount FROM hk_treats.trade_info");
-		eucFlow2.setOutput("EMAIL");
+		eucFlow2.setFiler("WHERE TradeID = '11111'");
+		eucFlow2.setOutputFormat("PDF");
+		eucFlow2.setOutputMedium("EMAIL");
 		EucSchedule eucSchedule2 = new EucSchedule();
 		LocalTime executeTime2 = LocalTime.of(11, 58, 59);
 		eucSchedule2.setExectueTime(executeTime2);
@@ -41,8 +43,9 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		EucFlow eucFlow3 = new EucFlow();
 		eucFlow3.setDescription("EUC Workflow 003");
 		eucFlow3.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow3.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
-		eucFlow3.setOutput("EMAIL");
+		eucFlow3.setFiler("WHERE TradeID = '11111'");
+		eucFlow3.setOutputFormat("EXCEL");
+		eucFlow3.setOutputMedium("SERVER");
 		EucSchedule eucSchedule3 = new EucSchedule();
 		LocalTime executeTime3 = LocalTime.of(11, 58, 59);
 		eucSchedule3.setExectueTime(executeTime3);
