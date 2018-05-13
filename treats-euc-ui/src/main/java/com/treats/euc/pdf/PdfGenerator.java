@@ -157,10 +157,13 @@ public class PdfGenerator {
 		return baos;
 	}
 	
-	public void generatePdf(ArrayList<String> PdfHtmlList) {
-		
+	public void generatePdf(ArrayList<String> PdfHtmlList) throws DocumentException, IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		for (int i = 0; i < PdfHtmlList.size(); i++) {
-						
+			pdfContent = PdfHtmlList.get(i);
+			baos = generatePdf();
+			
+			//send email statement?
 		}
 	}
 

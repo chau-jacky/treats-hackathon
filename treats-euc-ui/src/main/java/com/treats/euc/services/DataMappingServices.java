@@ -1,6 +1,11 @@
 package com.treats.euc.services;
 
 import java.util.regex.Pattern;
+
+import com.google.cloud.bigquery.FieldValueList;
+import com.google.cloud.bigquery.TableResult;
+import com.google.cloud.bigquery.Schema;
+
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
@@ -52,6 +57,40 @@ public class DataMappingServices {
 			pdfContentAfterMatchingList.add(pdfContentAfterMatching);
 		}
 
+		return pdfContentAfterMatchingList;
+	}
+	
+	public ArrayList<String> matchPattern(String templateDetails, TableResult result) {
+		String matchedString = "";
+		String fieldName = "";
+		String fieldValue = "";
+		String pdfContentAfterMatching = templateDetails;
+		ArrayList<String> pdfContentAfterMatchingList = new ArrayList<String>();
+
+		// Create a Pattern object
+		Pattern pattern = Pattern.compile(pdfPattern);
+
+		// Now create matcher object.
+		Matcher matcher = null;
+
+		
+		for (FieldValueList row : result.iterateAll()) {
+			pdfContentAfterMatching = templateDetails;
+			matcher = pattern.matcher(pdfContentAfterMatching);
+			
+			while (matcher.find()) {
+
+				matchedString = matcher.group(0);
+				fieldName = matcher.group(1);
+				fieldValue = row.get(fieldName).getStringValue();
+
+				pdfContentAfterMatching = pdfContentAfterMatching.replaceAll(matchedString, fieldValue);
+				matcher = pattern.matcher(pdfContentAfterMatching);
+			}
+//			System.out.println(pdfContentAfterMatching);
+			pdfContentAfterMatchingList.add(pdfContentAfterMatching);
+		}
+		
 		return pdfContentAfterMatchingList;
 	}
 
