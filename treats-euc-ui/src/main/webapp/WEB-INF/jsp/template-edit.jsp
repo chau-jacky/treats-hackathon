@@ -1,3 +1,4 @@
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <!--[if IE 9]><html lang="en-us" class="ie9"><![endif]-->
 <!--[if gt IE 9]><!-->
@@ -108,7 +109,7 @@
             <a href="#">Create Template</a>
           </li>
           <li>
-            <a href="#">Modify Workflow</a>
+            <a href="#">Modify Template</a>
           </li>
           <li>
             <a href="#">Create Workflow</a>
@@ -133,15 +134,23 @@
     		</select>
     		<label for="table-list">Select Table:</label>
     		<select class = "form-control" id="table-list">
-    			<option>MPESPTP</option>
+    			<option>trade_info</option>
     			<option>MPEFWDP</option>
     			<option>TTCPIPP</option>
     		</select>
     		<label for="field-list">Select Source System:</label>
     		<select class = "form-control" id="field-list">
-    			<option>deal_number</option>
-    			<option>counterparty</option>
-    			<option>amount_pay</option>
+    			<option>TradeID</option>
+    			<option>TradeType</option>
+    			<option>Country</option>
+    			<option>TradeDate</option>
+    			<option>ValueDate</option>
+    			<option>BuyCcy</option>
+    			<option>SellCcy</option>
+    			<option>BuyAmount</option>
+    			<option>SellAmount</option>
+    			<option>CounterpartyAcronym</option>
+
     		</select>
     		 <button type="button" class="btn btn-primary" id="Assign" onclick="assign()">Assign</button>
     		
@@ -205,7 +214,9 @@
 		xmlhttp.onreadystatechange = function() {
 			 if (this.readyState == 4 && this.status == 200) {
 				 var templateArr = JSON.parse(this.responseText);
-				 $('#summernote').summernote('insertText', templateArr.docTemplate);
+				 //html2text(templateArr.docTemplate);
+				 var templateText = jQuery(templateArr.docTemplate).text();
+				  $('#summernote').summernote('insertText', templateText);
 		
 			  }
 		};
@@ -213,6 +224,12 @@
 		xmlhttp.send();
 	}
 	
+	function html2text(html) {
+	    var tag = document.createElement('div');
+	    tag.innerHTML = html;
+	    $('#summernote').summernote('insertText', tag.innerText);
+
+	}
 
 </script>
 
