@@ -29,7 +29,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		EucFlow eucFlow2 = new EucFlow();
 		eucFlow2.setDescription("EUC Workflow 002");
 		eucFlow2.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow2.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
+		eucFlow2.setSql("SELECT TradeID, TradeType, Country, GroupMember, BranchNumber, TradeDate, ValueDate, BuyCcy, SellCcy, BuyAmount, SellAmount FROM hk_treats.trade_info");
 		eucFlow2.setOutput("EMAIL");
 		EucSchedule eucSchedule2 = new EucSchedule();
 		LocalTime executeTime2 = LocalTime.of(11, 58, 59);
