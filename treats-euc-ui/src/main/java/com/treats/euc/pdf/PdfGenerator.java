@@ -6,6 +6,9 @@ package com.treats.euc.pdf;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
+
+import javax.mail.MessagingException;
+
 import java.io.ByteArrayInputStream;
 //import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
@@ -29,6 +32,7 @@ import com.itextpdf.text.Section;
 import com.itextpdf.text.Element;
 import com.itextpdf.text.Image;
 import com.itextpdf.tool.xml.XMLWorkerHelper;
+import com.treats.euc.services.EmailDeliveryServices;
 
 public class PdfGenerator {
 
@@ -157,13 +161,15 @@ public class PdfGenerator {
 		return baos;
 	}
 	
-	public void generatePdf(ArrayList<String> PdfHtmlList) throws DocumentException, IOException {
+	public void generatePdf(ArrayList<String> PdfHtmlList) throws DocumentException, IOException, MessagingException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		for (int i = 0; i < PdfHtmlList.size(); i++) {
 			pdfContent = PdfHtmlList.get(i);
 			baos = generatePdf();
 			
-			//send email statement?
+			//send email statement
+			EmailDeliveryServices sender = new EmailDeliveryServices();
+			sender.sendEmailWithPdfAndDefaultSetup(baos);
 		}
 	}
 
