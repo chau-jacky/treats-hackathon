@@ -16,8 +16,8 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		
 		EucFlow eucFlow = new EucFlow();
 		eucFlow.setDescription("EUC Workflow 001");
-		eucFlow.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow.setFiler("WHERE TradeID = '11111'");
+		eucFlow.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+		eucFlow.setFiler("WHERE TradeID = 'SPT181230003'");
 		eucFlow.setOutputFormat("EXCEL");
 		eucFlow.setOutputMedium("EMAIL");
 		EucSchedule eucSchedule = new EucSchedule();
@@ -29,8 +29,8 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		
 		EucFlow eucFlow2 = new EucFlow();
 		eucFlow2.setDescription("EUC Workflow 002");
-		eucFlow2.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow2.setFiler("WHERE TradeID = '11111'");
+		eucFlow2.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+		eucFlow2.setFiler("WHERE TradeID = 'SPT181230003'");
 		eucFlow2.setOutputFormat("PDF");
 		eucFlow2.setOutputMedium("EMAIL");
 		EucSchedule eucSchedule2 = new EucSchedule();
@@ -42,8 +42,8 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		
 		EucFlow eucFlow3 = new EucFlow();
 		eucFlow3.setDescription("EUC Workflow 003");
-		eucFlow3.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow3.setFiler("WHERE TradeID = '11111'");
+		eucFlow3.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+		eucFlow3.setFiler("WHERE TradeID = 'SPT181230003'");
 		eucFlow3.setOutputFormat("EXCEL");
 		eucFlow3.setOutputMedium("SERVER");
 		EucSchedule eucSchedule3 = new EucSchedule();
