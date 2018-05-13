@@ -23,8 +23,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../img/apple-touch-icon-precomposed-114.png">
     <!-- iPhone non-retina icon (iOS < 7) -->
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../img/apple-touch-icon-precomposed-57.png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.45.3/css/patternfly.min.css" >
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/patternfly/3.45.3/css/patternfly-additions.min.css" >
+    <link rel="stylesheet" href="/css/patternfly.min.css" >
+    <link rel="stylesheet" href="/css/patternfly-additions.min.css" >
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>
@@ -33,7 +33,8 @@
   </head>
   
   <body>
-
+  
+<!-- Wizard code here -->
 <div class="modal" id="wizard1" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg wizard-pf">
     <div class="modal-content">
@@ -41,7 +42,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-hidden="true" aria-label="Close">
           <span class="pficon pficon-close"></span>
         </button>
-        <h4 class="modal-title">Wizard Title</h4>
+        <h4 class="modal-title">Workflow</h4>
       </div>
       <div class="modal-body wizard-pf-body clearfix">
         <div class="wizard-pf-steps hidden">
@@ -240,9 +241,9 @@
             <div class="wizard-pf-loading blank-slate-pf">
               <div class="spinner spinner-lg blank-slate-pf-icon"></div>
               <h3 class="blank-slate-pf-main-action">Loading Wizard</h3>
-              <p class="blank-slate-pf-secondary-action">Lorem ipsum dolor sit amet, porta at suspendisse ac, ut wisi
-                vivamus, lorem sociosqu eget nunc amet. </p>
+              <p class="blank-slate-pf-secondary-action">Workflow template wizard is now preparing the data.</p>
             </div>
+     
             <div class="wizard-pf-contents hidden">
             	<H1><B>Template Selection</B></H1>
               <form class="form-horizontal">
@@ -400,10 +401,6 @@
                 </div>
                 <Br>
                 
-               
-                
-                
-                               
                 <!-- StanleyE -->
             </div>
             
@@ -592,10 +589,12 @@
             
             <!--StanleyO-->
             <div class="wizard-pf-contents hidden">
-            	<H1><B>Summary</B></H1>          
-                <P ALIGN=Left><B>Workflow Name:</B>
+            	<h1><n>Summary</n></h1>          
+                <p align=Left><b>Workflow Name:</b>
  			    <input id="Workflow_Name" class="form-control"></input>      	
-          
+          		
+          		<input id="summary_email_address" class="form-control"></input>
+				</p>
             </div>
             <!--StanleyE-->
             
@@ -623,7 +622,6 @@
     </div><!-- /.modal-content -->
   </div><!-- /.modal-dialog -->
 </div><!-- /.modal -->
-
 
 
     <nav class="navbar navbar-default navbar-pf" role="navigation">
@@ -660,7 +658,7 @@
                 <a href="#0">View Profile</a>
               </li>
               <li>
-                <a href="#0">Logout</a>
+                <a href="/logout">Logout</a>
               </li>
               <li class="divider"></li>
               <li class="dropdown-submenu">
@@ -697,6 +695,10 @@
           <li>
             <a href="/treats-euc/template-edit">Create Template</a>
           </li>
+          <li class="dropdown">
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">Modify Template <span class="fa fa-caret-down"></span></a>
+            <ul id="full-doc-template" class="dropdown-menu"></ul>
+          
           <li>
             <a href="#" class="display-wizard" data-target="#wizard1">Create Workflow</a>
           </li>
@@ -706,27 +708,47 @@
 
 <div class="container-fluid">
 
-
   <!-- List of workflows -->
-<div id="pf-list-standard" class="list-group list-view-pf list-view-pf-view"></div>
+<div id="full-euc-list" class="list-group list-view-pf list-view-pf-view"></div>
 	
 </div><!-- /.container_fluid -->	
 
-<!-- Parse Full list of EUC flow -->
+
 <script>
-var xmlhttp = new XMLHttpRequest();
 
-xmlhttp.onreadystatechange = function() {
- if (this.readyState == 4 && this.status == 200) {
-     var myArr = JSON.parse(this.responseText);
-     myFunction(myArr);
-  }
-};
 
-xmlhttp.open("GET", "/treats-euc/eucflow/getalleucflows", true);
-xmlhttp.send();
+// Send HTTP request
+function sendRequest(method, url, targetid){
+	var xmlhttp = new XMLHttpRequest();
+	xmlhttp.onreadystatechange = function() {
+		 if (this.readyState == 4 && this.status == 200) {
+			 if (targetid == 'full-euc-list') {
+				 var eucArr = JSON.parse(this.responseText);
+			     loadEucList(eucArr, targetid);
+			 };
+			 if (targetid == 'full-doc-template') {
+				 var docArr = JSON.parse(this.responseText);
+			     loadDocList(docArr, targetid);
+			 };
+		  }
+		};
+	xmlhttp.open(method, url, true);
+	xmlhttp.send();
+}
 
-function myFunction(arr) {
+// Load full Doc template list
+function loadDocList(arr, tar) {
+	var out = "";
+	var i;
+	for(i = 0; i < arr.length; i++) {
+		out += '<li><a href="' + '/treats-euc/template-edit/' + arr[i].id + '">' + arr[i].description + '</a></li>';
+		
+	}
+	document.getElementById(tar).innerHTML = out;
+}
+
+// Load full EUC list
+function loadEucList(arr, tar) {
   var out = "";
   var i;
   var idName = "";
@@ -734,14 +756,14 @@ function myFunction(arr) {
 	idName = 'modify' + i;
     out += '<div class="list-group-item">';
     out += '<div class="list-view-pf-actions">';
-	out += '<button class="btn btn-default">Execute</button>';
-	out += '<button id="' + idName + '" class="btn btn-default" data-toggle="modal" data-target="#wizard1">Modify</button>';
+	out += '<button type="button" class="btn btn-default">Execute</button>';
+	out += '<button class="btn btn-default wizard-pf-open wizard-pf-complete" data-target="#wizard1">Modify</button>';
 	out += '<div class="dropdown pull-right dropdown-kebab-pf">';
 	out += '</div>';
 	out += '</div>';
     out += '<div class="list-view-pf-main-info">';
     out += '<div class="list-view-pf-left">';
-    out += '<span class="fa fa-plane list-view-pf-icon-sm"></span>';
+    out += '<span class="fa fa-tasks list-view-pf-icon-sm"></span>';
     out += '</div>';
     out += '<div class="list-view-pf-body">';
     out += '<div class="list-view-pf-description">';
@@ -754,19 +776,19 @@ function myFunction(arr) {
     out += '</div>';
     out += '<div class="list-view-pf-additional-info">';
     out += '<div class="list-view-pf-additional-info-item">';
-    out += '<span class="pficon pficon-screen"></span>';
+    out += '<span class="fa fa-database"></span>';
     out += 'Source_System' + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
-    out += '<span class="pficon pficon-cluster"></span>';
+    out += '<span class="fa fa-file"></span>';
     out += 'Template_name' + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
-    out += '<span class="pficon pficon-container-node"></span>';
+    out += '<span class="fa fa-plane"></span>';
     out += arr[i].output + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
-    out += '<span class="pficon pficon-image"></span>';
+    out += '<span class="fa fa-calendar"></span>';
     out += arr[i].eucSchedule + '';
     out += '</div>';
     out += '</div>';
@@ -774,8 +796,10 @@ function myFunction(arr) {
     out += '</div>';
     out += '</div>';
   }
-  document.getElementById("pf-list-standard").innerHTML = out;
+  document.getElementById(tar).innerHTML = out;
+  var modifyWizard = new wizard(".btn.wizard-pf-complete");
 }
+
 
 </script>
 
@@ -790,13 +814,14 @@ function myFunction(arr) {
     });
 
     var completeWizard = new wizard(".display-wizard");
+    var fullEucFlow = new sendRequest('GET','/treats-euc/eucflow/getalleucflows','full-euc-list');
+    var fullDocTemplate = new sendRequest('GET','/treats-euc/doctemplate/getalldoctemplates','full-doc-template');
     
   });
 </script>
 
 <script>
-
-
+  
   var wizard = function(id) {
     var self = this, modal, tabs, tabCount, tabLast, currentGroup, currentTab, contents;
     self.id = id;
@@ -804,7 +829,7 @@ function myFunction(arr) {
     $(self.id).click(function() {
         self.init(this)
     });
-
+   
     this.init = function(button){
       // get id of open modal
       self.modal = $(button).data("target");
@@ -881,7 +906,7 @@ function myFunction(arr) {
         <!--Stanley $(self.modal + " .wizard-pf-sidebar .list-group-item.active").removeClass("active"); -->
 
         self.updateToCurrentPage();
-      }, 3);
+      }, 300);
 
       //initialize click listeners
       self.tabGroupSelect();
@@ -934,6 +959,11 @@ function myFunction(arr) {
       setTimeout (function() {
         $(".wizard-pf-contents:not(.hidden) form input, .wizard-pf-contents:not(.hidden) form textarea, .wizard-pf-contents:not(.hidden) form select").first().focus(); // this does not account for disabled or read-only inputs
       }, 100);
+
+      // call when wizard page changes
+      var emailaddress = $('#Email_Address').val();
+      $('#summary_email_address').val(emailaddress);
+
     };
 
     // update display state of Back button
