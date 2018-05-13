@@ -13,9 +13,12 @@ import com.google.cloud.bigquery.TableDefinition;
 import com.google.cloud.bigquery.TableDefinition.Builder;
 import com.google.cloud.bigquery.TableId;
 import com.google.cloud.bigquery.TableResult;
+import com.treats.euc.excel.ExcelGenerator;
 import com.treats.euc.model.DocumentTemplate;
 import com.treats.euc.model.EucFlow;
 import com.treats.euc.pdf.PdfGenerator;
+import com.treats.euc.services.BigQueryServices;
+import com.treats.euc.services.DataMappingServices;
 import com.treats.euc.services.DocTemplateServicesDataStore;
 import com.treats.euc.services.DocTemplateServicesInterface;
 import com.treats.euc.services.DocTemplateServicesMemory;
@@ -42,54 +45,75 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WorkFlowController {
 
 	@RequestMapping(value = "/execute/{workflowId}")
-	public String getDataSets(@PathVariable String workflowId) throws Exception{
+	public String getDataSets(@PathVariable String workflowId) throws Exception {
+		System.out.println("execute workflow " + workflowId);
+
+		BigQueryServices bigQueryServices = new BigQueryServices();
 
 		EucFlowServicesInterface flowService = new EucFlowServicesMemory();
 		DocTemplateServicesInterface docTemplateService = new DocTemplateServicesDataStore();
-		
+
 		EucFlow flowObject = flowService.getEucFlow(workflowId);
-		DocumentTemplate docTemplate = docTemplateService.getDocumentTemplate(flowObject.getDocumentTemplateID().toString()); 
-		
-		
-		PdfGenerator pdf = new PdfGenerator();
-     	pdf.setPdfContent(docTemplate.getDocTemplate());
-     	ByteArrayOutputStream baos = pdf.generatePdf();
-		EmailDeliveryServices sender = new EmailDeliveryServices();
-		sender.sendEmailWithPdfAndDefaultSetup(baos);	
+		DocumentTemplate docTemplate = docTemplateService.getDocumentTemplate(flowObject.getDocumentTemplateID().toString());
 
 		
+		if (flowObject.getOutputFormat().equals("EXCEL")) {
+			System.out.println("Excel output");
+			
+			ArrayList<ArrayList<String>> tableArray = bigQueryServices.getTableArrayByWorkflow(flowObject);
+
+			ExcelGenerator excelGenerator = new ExcelGenerator();
+			if (flowObject.getOutputMedium().equals("EMAIL")) {
+				System.out.println("Excel-Email output");
+				// TODO : add email address
+				// excelGenerator.excelEmailSend(tableArray, flowObject.getEmailAddress());
+				excelGenerator.excelEmailSend(tableArray);
+			} else if (flowObject.getOutputMedium().equals("SERVER")) {
+				System.out.println("Excel-Server output");
+				// TODO : save excel to server
+				excelGenerator.excelDownload(tableArray);
+			}
+
+		} else if (flowObject.getOutputFormat().equals("PDF")) {
+			System.out.println("PDF output");
+
+			TableResult tableResult = bigQueryServices.getTableResultByWorkflow(flowObject);
+			
+			DataMappingServices dataMappingServices = new DataMappingServices();
+			ArrayList<String> listResultPDF = dataMappingServices.matchPattern(docTemplate.getDocTemplate(), tableResult);
+			
+			PdfGenerator pdf = new PdfGenerator();
+			pdf.generatePdf(listResultPDF, flowObject.getEmailAddress());
+			
+		}
+
+
 		// workflowobject = getworkflow(workflowId)
-		
-		
+
 		// Simon
 		// connection to BigQuery
 		// BigQueryController.bigquery.xxxxxx
 		// dataset = bigquery.executesql(workflowobject.sql)
-		
-		
+
 		// @Henry
 		// if workflow.output = excel
-		//      pass to Excel generator
-				
+		// pass to Excel generator
+
 		// @Darwin
-		//     templateobject = gettemplate (workflowobject.templateid)
-		//     templatedetail = templateobject.gettemplate
-		
-		
+		// templateobject = gettemplate (workflowobject.templateid)
+		// templatedetail = templateobject.gettemplate
+
 		// ArrayList<html> = datamapping (templatedetail, dataset)
-		
-		
+
 		// pdfgenerator(ArrayList<html>)
-		
-		
+
 		Boolean success;
-		
-		
+
 		success = true;
-		if (! success) {
+		if (!success) {
 			return "fail";
-		}	
-		
+		}
+
 		return "treats-euc";
 	}
 

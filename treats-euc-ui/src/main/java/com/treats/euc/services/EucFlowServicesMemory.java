@@ -9,49 +9,81 @@ import com.treats.euc.model.EucSchedule;
 
 public class EucFlowServicesMemory implements EucFlowServicesInterface {
 
-	private static ArrayList<EucFlow> listEucFlow;
-	
-	public EucFlowServicesMemory(){
-		listEucFlow = new ArrayList<EucFlow>();
-		
-		EucFlow eucFlow = new EucFlow();
-		eucFlow.setDescription("EUC Workflow 001");
-		eucFlow.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow.setSql("SELECT TradeID, TradeType, Country, GroupMember, BranchNumber, TradeDate FROM [techfest-hackathon-4:hk_treats.trade_info] LIMIT 1000");
-		eucFlow.setOutput("EMAIL");
-		EucSchedule eucSchedule = new EucSchedule();
-		LocalTime executeTime = LocalTime.of(11, 58, 59);
-		eucSchedule.setExectueTime(executeTime);
-		eucSchedule.setExecuteFrequency("Once a Week");
-		eucSchedule.setExecuteDayOfWeek("Friday");		
-		listEucFlow.add(eucFlow);
-		
-		EucFlow eucFlow2 = new EucFlow();
-		eucFlow2.setDescription("EUC Workflow 002");
-		eucFlow2.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow2.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
-		eucFlow2.setOutput("EMAIL");
-		EucSchedule eucSchedule2 = new EucSchedule();
-		LocalTime executeTime2 = LocalTime.of(11, 58, 59);
-		eucSchedule2.setExectueTime(executeTime2);
-		eucSchedule2.setExecuteFrequency("Once a Week");
-		eucSchedule2.setExecuteDayOfWeek("Friday");
-		listEucFlow.add(eucFlow2);
-		
-		EucFlow eucFlow3 = new EucFlow();
-		eucFlow3.setDescription("EUC Workflow 003");
-		eucFlow3.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow3.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
-		eucFlow3.setOutput("EMAIL");
-		EucSchedule eucSchedule3 = new EucSchedule();
-		LocalTime executeTime3 = LocalTime.of(11, 58, 59);
-		eucSchedule3.setExectueTime(executeTime3);
-		eucSchedule3.setExecuteFrequency("Once a Week");
-		eucSchedule3.setExecuteDayOfWeek("Friday");
-		listEucFlow.add(eucFlow3);
+	private static ArrayList<EucFlow> listEucFlow = new ArrayList<EucFlow>();;
+
+	public EucFlowServicesMemory() {
+		if (listEucFlow.size() == 0) {
+			
+			EucFlow eucFlow5 = new EucFlow();
+			eucFlow5.setDescription("Daily Customer Report - PDF");
+			eucFlow5.setDocumentTemplateID(UUID.fromString("75b7f099-bea4-4414-89d9-a176506d6482"));
+			eucFlow5.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
+			eucFlow5.setOutputFormat("PDF");
+			eucFlow5.setOutputMedium("EMAIL");
+			eucFlow5.setEmailAddress("chau.jacky@gmail.com");
+			EucSchedule eucSchedule5 = new EucSchedule();
+			LocalTime executeTime5 = LocalTime.of(11, 58, 59);
+			eucSchedule5.setExectueTime(executeTime5);
+			eucSchedule5.setExecuteFrequency("Daily");
+			eucSchedule5.setExecuteDayOfWeek("Daily");
+			listEucFlow.add(eucFlow5);
+			
+			
+			EucFlow eucFlow = new EucFlow();
+			eucFlow.setDescription("Excel output to Email");
+			eucFlow.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+			eucFlow.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
+			eucFlow.setOutputFormat("EXCEL");
+			eucFlow.setOutputMedium("EMAIL");
+			EucSchedule eucSchedule = new EucSchedule();
+			LocalTime executeTime = LocalTime.of(11, 58, 59);
+			eucSchedule.setExectueTime(executeTime);
+			eucSchedule.setExecuteFrequency("Once a Week");
+			eucSchedule.setExecuteDayOfWeek("Friday");
+			listEucFlow.add(eucFlow);
+
+			EucFlow eucFlow4 = new EucFlow();
+			eucFlow4.setDescription("PDF output to Email");
+			eucFlow4.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+			eucFlow4.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
+			eucFlow4.setOutputFormat("PDF");
+			eucFlow4.setOutputMedium("EMAIL");
+			EucSchedule eucSchedule4 = new EucSchedule();
+			LocalTime executeTime4 = LocalTime.of(11, 58, 59);
+			eucSchedule4.setExectueTime(executeTime4);
+			eucSchedule4.setExecuteFrequency("Once a Week");
+			eucSchedule4.setExecuteDayOfWeek("Friday");
+			listEucFlow.add(eucFlow4);
+
+			EucFlow eucFlow2 = new EucFlow();
+			eucFlow2.setDescription("EUC Workflow 002");
+			eucFlow2.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+			eucFlow2.setFiler("WHERE TradeID = 'SPT181230003'");
+			eucFlow2.setOutputFormat("PDF");
+			eucFlow2.setOutputMedium("EMAIL");
+			EucSchedule eucSchedule2 = new EucSchedule();
+			LocalTime executeTime2 = LocalTime.of(11, 58, 59);
+			eucSchedule2.setExectueTime(executeTime2);
+			eucSchedule2.setExecuteFrequency("Once a Week");
+			eucSchedule2.setExecuteDayOfWeek("Friday");
+			listEucFlow.add(eucFlow2);
+
+			EucFlow eucFlow3 = new EucFlow();
+			eucFlow3.setDescription("EUC Workflow 003");
+			eucFlow3.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+			eucFlow3.setFiler("WHERE TradeID = 'SPT181230003'");
+			eucFlow3.setOutputFormat("EXCEL");
+			eucFlow3.setOutputMedium("SERVER");
+			EucSchedule eucSchedule3 = new EucSchedule();
+			LocalTime executeTime3 = LocalTime.of(11, 58, 59);
+			eucSchedule3.setExectueTime(executeTime3);
+			eucSchedule3.setExecuteFrequency("Once a Week");
+			eucSchedule3.setExecuteDayOfWeek("Friday");
+			listEucFlow.add(eucFlow3);
+		}
 
 	}
-	
+
 	@Override
 	public ArrayList<EucFlow> getListEucFlow() {
 		return listEucFlow;
@@ -71,16 +103,17 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 	@Override
 	public void addEucFlow(EucFlow eucFlow) {
 		listEucFlow.add(eucFlow);
-		
+
 	}
 
 	@Override
 	public void deleteEucFlow(String id) {
 		for (Iterator<EucFlow> iterator = listEucFlow.iterator(); iterator.hasNext();) {
-			EucFlow eucFlow = (EucFlow) iterator.next();			
-			if (id.equals(eucFlow.getIdString())){
+			EucFlow eucFlow = (EucFlow) iterator.next();
+			if (id.equals(eucFlow.getIdString())) {
 				iterator.remove();
 			}
 		}
 	}
+
 }

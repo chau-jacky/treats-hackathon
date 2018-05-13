@@ -815,7 +815,7 @@ function loadEucList(arr, tar) {
 	idName = 'modify' + i;
     out += '<div class="list-group-item">';
     out += '<div class="list-view-pf-actions">';
-	out += '<button type="button" class="btn btn-default">Execute</button>';
+	out += '<button type="button" class="btn btn-default" onclick="execute(\'' + arr[i].id + '\')">Execute</button>';
 	out += '<button class="btn btn-default wizard-pf-open wizard-pf-complete" data-target="#wizard1">Modify</button>';
 	out += '<div class="dropdown pull-right dropdown-kebab-pf">';
 	out += '</div>';
@@ -844,7 +844,7 @@ function loadEucList(arr, tar) {
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-plane"></span>';
-    out += arr[i].output + '';
+    out += arr[i].outputMedium + '/' + arr[i].outputFormat + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-calendar"></span>';
@@ -1281,6 +1281,18 @@ function loadEucList(arr, tar) {
     };
 
   };
+
+</script>
+
+
+<script>
+
+	var execute = function(id){
+		window.alert(id);
+
+		$.get( "/treats-euc/workflow/execute/" + id);
+		
+	}
 
 </script>
 

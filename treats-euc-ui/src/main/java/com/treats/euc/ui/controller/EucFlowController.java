@@ -30,7 +30,6 @@ public class EucFlowController {
     public EucFlow getTemplatesById(@PathVariable String id) {
     	return eucFlowService.getEucFlow(id);
     }
-    
-    
+        
     
 }
