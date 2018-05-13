@@ -9,17 +9,17 @@ import com.treats.euc.model.EucSchedule;
 
 public class EucFlowServicesMemory implements EucFlowServicesInterface {
 
-	private ArrayList<EucFlow> listEucFlow;
+	private static ArrayList<EucFlow> listEucFlow;
 	
 	public EucFlowServicesMemory(){
 		listEucFlow = new ArrayList<EucFlow>();
 		
 		EucFlow eucFlow = new EucFlow();
 		eucFlow.setDescription("EUC Workflow 001");
-		eucFlow.setDocumentTemplateID(UUID.randomUUID());
-		// eucFlow.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
-		eucFlow.setSql("SELECT TradeID, TradeType, Country, GroupMember, BranchNumber FROM hk_treats.trade_info");
-		eucFlow.setOutput("EMAIL");
+		eucFlow.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+		eucFlow.setFiler("WHERE TradeID = 'SPT181230003'");
+		eucFlow.setOutputFormat("EXCEL");
+		eucFlow.setOutputMedium("EMAIL");
 		EucSchedule eucSchedule = new EucSchedule();
 		LocalTime executeTime = LocalTime.of(11, 58, 59);
 		eucSchedule.setExectueTime(executeTime);
@@ -29,9 +29,10 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		
 		EucFlow eucFlow2 = new EucFlow();
 		eucFlow2.setDescription("EUC Workflow 002");
-		eucFlow2.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow2.setSql("SELECT TradeID, TradeType, Country, GroupMember, BranchNumber, TradeDate, ValueDate, BuyCcy, SellCcy, BuyAmount, SellAmount FROM hk_treats.trade_info");
-		eucFlow2.setOutput("EMAIL");
+		eucFlow2.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+		eucFlow2.setFiler("WHERE TradeID = 'SPT181230003'");
+		eucFlow2.setOutputFormat("PDF");
+		eucFlow2.setOutputMedium("EMAIL");
 		EucSchedule eucSchedule2 = new EucSchedule();
 		LocalTime executeTime2 = LocalTime.of(11, 58, 59);
 		eucSchedule2.setExectueTime(executeTime2);
@@ -41,9 +42,10 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		
 		EucFlow eucFlow3 = new EucFlow();
 		eucFlow3.setDescription("EUC Workflow 003");
-		eucFlow3.setDocumentTemplateID(UUID.randomUUID());
-		eucFlow3.setSql("SELETC TAGMAB, TABRNO, TADLNO FROM ANUTTSFP/MPESPTP");
-		eucFlow3.setOutput("EMAIL");
+		eucFlow3.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
+		eucFlow3.setFiler("WHERE TradeID = 'SPT181230003'");
+		eucFlow3.setOutputFormat("EXCEL");
+		eucFlow3.setOutputMedium("SERVER");
 		EucSchedule eucSchedule3 = new EucSchedule();
 		LocalTime executeTime3 = LocalTime.of(11, 58, 59);
 		eucSchedule3.setExectueTime(executeTime3);
@@ -84,4 +86,5 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 			}
 		}
 	}
+	
 }

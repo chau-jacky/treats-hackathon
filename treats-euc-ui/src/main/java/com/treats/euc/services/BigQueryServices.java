@@ -43,7 +43,25 @@ public class BigQueryServices {
 	
 	public TableResult getTableResultByWorkflow(EucFlow eucFlow) throws JobException, InterruptedException {
 		
-		String dataSql = eucFlow.getSql();
+				DocTemplateServicesInterface docService = new DocTemplateServicesDataStore();
+		DocumentTemplate docTemplate = docService.getDocumentTemplate(eucFlow.getDocumentTemplateID().toString());
+		
+		String dataSql;
+		dataSql = "SELECT ";
+		for (Iterator<String> iterator = docTemplate.getDataFields().iterator(); iterator.hasNext();) {
+			String field = iterator.next();
+			dataSql.concat(field);
+			dataSql.concat(", ");
+		}
+		dataSql.substring(0, dataSql.length()-2);
+		
+		dataSql.concat(" FROM ");
+		dataSql.concat(docTemplate.getDataSystem());
+		dataSql.concat(".");
+		dataSql.concat(docTemplate.getDataTable());
+		dataSql.concat(" ");
+		
+		dataSql.concat(eucFlow.getFiler());
 		
 		QueryJobConfiguration queryConfig =
 		        /* QueryJobConfiguration.newBuilder(

@@ -19,7 +19,7 @@ import com.treats.euc.model.DataSource;
 import com.treats.euc.model.DocumentTemplate;
 
 public class DocTemplateServices {
-
+/*
 	
 	private static String docTemplateKind = "DocTemplate";
 	private static String dataSoureKind = "DataSource";
@@ -49,9 +49,13 @@ public class DocTemplateServices {
 				.set("datasource", dataSourceList.build()).set("created", Timestamp.now()).build();
 		datastore.put(docTemplate);
 	}
+	
+	// Kelvin - Not yet study how to update
+	public void updateDocTemplate(UUID id, String templateDetails) {
+		
+		
+	}
 
-
-/*
 	private Entity getDocTemplate(UUID uuid) {
 		Key dataSourceKey = datastore.newKeyFactory().setKind(dataSoureKind).newKey(uuid.toString());
 		Entity docTemplate = datastore.get(dataSourceKey);

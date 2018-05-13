@@ -5,6 +5,7 @@ package com.treats.euc.pdf;
 //import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.io.ByteArrayInputStream;
 //import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
@@ -33,16 +34,16 @@ public class PdfGenerator {
 
 	private static final Boolean False = null;
 	private static Font catFont = new Font(Font.FontFamily.HELVETICA, 28, Font.BOLD);
-/*	private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.NORMAL, BaseColor.RED);
-	private static Font greemFont = new Font(Font.FontFamily.HELVETICA, 28, Font.NORMAL, BaseColor.GREEN);
+//	private static Font redFont = new Font(Font.FontFamily.TIMES_ROMAN, 28, Font.NORMAL, BaseColor.RED);
+//	private static Font greemFont = new Font(Font.FontFamily.HELVETICA, 28, Font.NORMAL, BaseColor.GREEN);
 
 	private static Font time_Font = new Font(Font.FontFamily.HELVETICA, 12, Font.ITALIC);
 	private static Font chaptor_Pass_Font = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD);
-	private static Font chaptor_Fail_Font = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.RED);
+//	private static Font chaptor_Fail_Font = new Font(Font.FontFamily.HELVETICA, 14, Font.BOLD, BaseColor.RED);
 
 	private static Font normal_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL);
-	private static Font normal_Red_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
-	private static Font normal_Bold_Red_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);*/
+//	private static Font normal_Red_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.NORMAL, BaseColor.RED);
+//	private static Font normal_Bold_Red_Font = new Font(Font.FontFamily.HELVETICA, 10, Font.BOLD, BaseColor.RED);
 
 	private String outputMethod;
 	private String fullFileName;
@@ -155,6 +156,16 @@ public class PdfGenerator {
 		
 		return baos;
 	}
+	
+	public void generatePdf(ArrayList<String> PdfHtmlList) throws DocumentException, IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		for (int i = 0; i < PdfHtmlList.size(); i++) {
+			pdfContent = PdfHtmlList.get(i);
+			baos = generatePdf();
+			
+			//send email statement?
+		}
+	}
 
 /*	public Metadata generatePdfMetadata() throws IOException, TikaException, SAXException, DocumentException {
 		Metadata metadata = new Metadata();
@@ -185,7 +196,7 @@ public class PdfGenerator {
 
 	static void addEmptyLIne(Document doc, int number) throws DocumentException {
 		for (int i = 0; i < number; i++) {
-			doc.add(new Paragraph(" ", catFont));
+			doc.add(new Paragraph(" ", chaptor_Pass_Font));
 		}
 	}
 
