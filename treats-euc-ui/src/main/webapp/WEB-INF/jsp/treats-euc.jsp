@@ -404,9 +404,16 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                   	
                   	<div class="col-sm-3">
       			  	<select class = "form-control" id="data_field_1">
-    				<option>deal_number</option>
-    				<option>counterparty</option>
-    				<option>amount_pay</option>
+    				<option>TradeID</option>
+    				<option>TradeType</option>
+    				<option>Country</option>
+    				<option>TradeDate</option>
+    				<option>ValueDate</option>
+    				<option>BuyCcy</option>
+    				<option>SellCcy</option>
+    				<option>BuyAmount</option>
+    				<option>SellAmount</option>
+    				<option>CounterpartyAcronym</option>
     				</select>
       			 	</div>
             	  	
@@ -437,9 +444,16 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                   	
                   	<div class="col-sm-3">
       			  	<select class = "form-control" id="data_field_2">
-    				<option>deal_number</option>
-    				<option>counterparty</option>
-    				<option>amount_pay</option>
+    				<option>TradeID</option>
+    				<option>TradeType</option>
+    				<option>Country</option>
+    				<option>TradeDate</option>
+    				<option>ValueDate</option>
+    				<option>BuyCcy</option>
+    				<option>SellCcy</option>
+    				<option>BuyAmount</option>
+    				<option>SellAmount</option>
+    				<option>CounterpartyAcronym</option>
     				</select>
       			 	</div>
             	  	
@@ -471,9 +485,16 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                   	
                   	<div class="col-sm-3">
       			  	<select class = "form-control" id="data_field_3">
-    				<option>deal_number</option>
-    				<option>counterparty</option>
-    				<option>amount_pay</option>
+    				<option>TradeID</option>
+    				<option>TradeType</option>
+    				<option>Country</option>
+    				<option>TradeDate</option>
+    				<option>ValueDate</option>
+    				<option>BuyCcy</option>
+    				<option>SellCcy</option>
+    				<option>BuyAmount</option>
+    				<option>SellAmount</option>
+    				<option>CounterpartyAcronym</option>
     				</select>
       			 	</div>
             	  	

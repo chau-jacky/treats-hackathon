@@ -17,8 +17,8 @@ public class DataMappingServiceTest {
 		PdfGenerator pdfGen = new PdfGenerator();
 		
 		dataList.add("SPT18000999920180101");
-		dataList.add("SPT18000999820180102");
-		dataList.add("SPT18000999720180103");
+		//dataList.add("SPT18000999820180102");
+		//dataList.add("SPT18000999720180103");
 		
 		// testArray[0] = "DealNumber";
 		// testArray[1] = "DealDate";
