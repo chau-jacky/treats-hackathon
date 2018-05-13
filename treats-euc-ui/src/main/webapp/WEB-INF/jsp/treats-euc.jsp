@@ -23,8 +23,8 @@
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="../img/apple-touch-icon-precomposed-114.png">
     <!-- iPhone non-retina icon (iOS < 7) -->
     <link rel="apple-touch-icon-precomposed" sizes="57x57" href="../img/apple-touch-icon-precomposed-57.png">
-    <link rel="stylesheet" href="../css/patternfly.min.css" >
-    <link rel="stylesheet" href="../css/patternfly-additions.min.css" >
+    <link rel="stylesheet" href="/css/patternfly.min.css" >
+    <link rel="stylesheet" href="/css/patternfly-additions.min.css" >
     <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/c3/0.4.11/c3.min.js"></script>

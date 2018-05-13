@@ -121,6 +121,10 @@
   	<div class="col-lg-4 col-lg-push-8">
     	<!-- List of fields -->
     	<div class="form-group">
+    		<label class="required-pf" for="input-description">
+    			Template Description
+    		</label>
+    		<input type="text" class="form-control" id="input-description" required/>
     		<label for="system-list">Select Source System:</label>
     		<select class = "form-control" id="system-list">
     			<option>TREATS</option>
@@ -181,6 +185,12 @@
 
 	    var input = document.createElement("input");
 	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "description");
+	    input.setAttribute("value", $('#input-description').val());
+	    form.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
 	    input.setAttribute("name", "template");
 	    input.setAttribute("value", $('#summernote').summernote('code'));
 	    form.appendChild(input);
@@ -233,7 +243,7 @@
 	 });
 	
 	//Get template from input id
-		var templateReq = new sendRequest('GET', '/treats-euc/doctemplate/getdoctemplate/${templateId}');
+	var templateReq = new sendRequest('GET', '/treats-euc/doctemplate/getdoctemplate/${templateId}');
 	
 	 
     // toggle dropdown menu

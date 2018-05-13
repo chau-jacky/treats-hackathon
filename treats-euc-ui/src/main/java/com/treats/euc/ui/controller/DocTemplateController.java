@@ -21,10 +21,11 @@ public class DocTemplateController {
 	}
         
     @RequestMapping(value = "/create", method = RequestMethod.POST)
-    public String someMethod(@RequestParam("template") String templateDetails) {
+    public String someMethod(@RequestParam("template") String templateDetails, @RequestParam("description") String description) {
     	DocumentTemplate docTemplate = new DocumentTemplate();
     	docTemplate.setDescription("New Doc Template");
     	docTemplate.setDocTemplate(templateDetails.replace("<br>","<br/>"));
+    	docTemplate.setDescription(description);
     	
     	docTemplateService.addDocTemplate(docTemplate);
     	
