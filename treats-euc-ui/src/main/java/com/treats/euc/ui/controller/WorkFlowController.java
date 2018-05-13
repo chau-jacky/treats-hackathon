@@ -14,10 +14,17 @@ import com.google.cloud.bigquery.TableDefinition.Builder;
 import com.google.cloud.bigquery.TableId;
 import com.google.cloud.bigquery.TableResult;
 import com.treats.euc.model.DocumentTemplate;
+import com.treats.euc.model.EucFlow;
+import com.treats.euc.pdf.PdfGenerator;
+import com.treats.euc.services.DocTemplateServicesDataStore;
+import com.treats.euc.services.DocTemplateServicesInterface;
+import com.treats.euc.services.DocTemplateServicesMemory;
+import com.treats.euc.services.EmailDeliveryServices;
 import com.treats.euc.services.EucFlowServicesInterface;
 import com.treats.euc.services.EucFlowServicesMemory;
 import com.treats.euc.ui.TreatsConstants;
 
+import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -35,9 +42,21 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class WorkFlowController {
 
 	@RequestMapping(value = "/execute/{workflowId}")
-	public String getDataSets(@PathVariable String workflowId) {
+	public String getDataSets(@PathVariable String workflowId) throws Exception{
 
-		Boolean success;
+		EucFlowServicesInterface flowService = new EucFlowServicesMemory();
+		DocTemplateServicesInterface docTemplateService = new DocTemplateServicesDataStore();
+		
+		EucFlow flowObject = flowService.getEucFlow(workflowId);
+		DocumentTemplate docTemplate = docTemplateService.getDocumentTemplate(flowObject.getDocumentTemplateID().toString()); 
+		
+		
+		PdfGenerator pdf = new PdfGenerator();
+     	pdf.setPdfContent(docTemplate.getDocTemplate());
+     	ByteArrayOutputStream baos = pdf.generatePdf();
+		EmailDeliveryServices sender = new EmailDeliveryServices();
+		sender.sendEmailWithPdfAndDefaultSetup(baos);	
+
 		
 		// workflowobject = getworkflow(workflowId)
 		
@@ -51,11 +70,7 @@ public class WorkFlowController {
 		// @Henry
 		// if workflow.output = excel
 		//      pass to Excel generator
-		
-		
-		EucFlowServicesInterface eucflow = new EucFlowServicesMemory();
-		eucflow.getListEucFlow();
-		
+				
 		// @Darwin
 		//     templateobject = gettemplate (workflowobject.templateid)
 		//     templatedetail = templateobject.gettemplate
@@ -67,13 +82,15 @@ public class WorkFlowController {
 		// pdfgenerator(ArrayList<html>)
 		
 		
+		Boolean success;
 		
-		success = false;
+		
+		success = true;
 		if (! success) {
 			return "fail";
 		}	
 		
-		return "success";
+		return "treats-euc";
 	}
 
 }

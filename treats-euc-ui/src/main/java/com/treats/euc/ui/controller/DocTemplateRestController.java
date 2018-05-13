@@ -3,9 +3,12 @@ package com.treats.euc.ui.controller;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.treats.euc.model.DocumentTemplate;
+import com.treats.euc.services.DocTemplateServicesDataStore;
 import com.treats.euc.services.DocTemplateServicesInterface;
 import com.treats.euc.services.DocTemplateServicesMemory;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +22,8 @@ public class DocTemplateRestController {
 	
 	private static DocTemplateServicesInterface docTemplateService;
 	
-	DocTemplateRestController(){
-		docTemplateService = new DocTemplateServicesMemory();
+	DocTemplateRestController() throws FileNotFoundException, IOException{
+		docTemplateService = new DocTemplateServicesDataStore();
 	}
     
     @RequestMapping("/getalldoctemplates")

@@ -1,8 +1,13 @@
 package com.treats.euc.ui.controller;
 
 import com.treats.euc.model.DocumentTemplate;
+import com.treats.euc.services.DocTemplateServicesDataStore;
 import com.treats.euc.services.DocTemplateServicesInterface;
 import com.treats.euc.services.DocTemplateServicesMemory;
+
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,8 +21,8 @@ public class DocTemplateController {
 	
 	private static DocTemplateServicesInterface docTemplateService;
 	
-	DocTemplateController(){
-		docTemplateService = new DocTemplateServicesMemory();
+	DocTemplateController() throws FileNotFoundException, IOException{
+		docTemplateService = new DocTemplateServicesDataStore();
 	}
         
     @RequestMapping(value = "/create", method = RequestMethod.POST)
@@ -26,6 +31,16 @@ public class DocTemplateController {
     	docTemplate.setDescription("New Doc Template");
     	docTemplate.setDocTemplate(templateDetails.replace("<br>","<br/>"));
     	docTemplate.setDescription(description);
+    	
+    	// TODO : remove hardcoding
+    	// ===================================
+    	docTemplate.setDataSystem("hk_treats");
+    	docTemplate.setDataTable("trade_info");
+    	ArrayList<String> fields = new ArrayList<String>();
+    	fields.add("tradeId");
+    	fields.add("country");
+    	docTemplate.setDataFields(fields);
+    	// ===================================
     	
     	docTemplateService.addDocTemplate(docTemplate);
     	

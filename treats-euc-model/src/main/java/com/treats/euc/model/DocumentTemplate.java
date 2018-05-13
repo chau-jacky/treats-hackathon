@@ -1,7 +1,7 @@
 package com.treats.euc.model;
 
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.UUID;
 
 public class DocumentTemplate implements Serializable {
@@ -11,8 +11,28 @@ public class DocumentTemplate implements Serializable {
 	private UUID id;
 	private String description;
 	private String docTemplate;
-	private List<DataSource> dataSource;
+	private String dataSystem;
+	private String dataTable;
+	private ArrayList<String> dataFields;
 	
+	public void setDataFields(ArrayList<String> dataFields) {
+		this.dataFields = dataFields;
+	}
+	public String getDataSystem() {
+		return dataSystem;
+	}
+	public void setDataSystem(String dataSystem) {
+		this.dataSystem = dataSystem;
+	}
+	public String getDataTable() {
+		return dataTable;
+	}
+	public void setDataTable(String dataTable) {
+		this.dataTable = dataTable;
+	}
+	public ArrayList<String> getDataFields() {
+		return dataFields;
+	}
 	public DocumentTemplate() {
 		id = UUID.randomUUID();
 	}
@@ -25,17 +45,14 @@ public class DocumentTemplate implements Serializable {
 	public void setId(UUID id) {
 		this.id = id;
 	}
+	public void setId(String id) {
+		this.id = UUID.fromString(id);
+	}
 	public String getDocTemplate() {
 		return docTemplate;
 	}
 	public void setDocTemplate(String docTemplate) {
 		this.docTemplate = docTemplate;
-	}
-	public List<DataSource> getDataSource() {
-		return dataSource;
-	}
-	public void setDataSource(List<DataSource> dataSource) {
-		this.dataSource = dataSource;
 	}
 	public String getDescription() {
 		return description;
@@ -43,6 +60,5 @@ public class DocumentTemplate implements Serializable {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
 
 }
