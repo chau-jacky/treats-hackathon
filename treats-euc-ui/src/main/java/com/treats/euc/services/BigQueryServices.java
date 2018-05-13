@@ -44,25 +44,34 @@ public class BigQueryServices {
 	
 	public TableResult getTableResultByWorkflow(EucFlow eucFlow) throws JobException, InterruptedException, FileNotFoundException, IOException {
 		
+		//System.out.println("in getTableArrayByWorkflow");
+		
 		DocTemplateServicesInterface docService = new DocTemplateServicesDataStore();
 		DocumentTemplate docTemplate = docService.getDocumentTemplate(eucFlow.getDocumentTemplateID().toString());
 		
+		//System.out.println("start prepare dataSql");
+
 		String dataSql;
-		dataSql = "SELECT ";
+		dataSql = new String("SELECT ");
 		for (Iterator<String> iterator = docTemplate.getDataFields().iterator(); iterator.hasNext();) {
 			String field = iterator.next();
-			dataSql.concat(field);
-			dataSql.concat(", ");
+			dataSql = dataSql.concat(field);
+			dataSql = dataSql.concat(", ");
 		}
-		dataSql.substring(0, dataSql.length()-2);
+		//System.out.println(dataSql);
+		dataSql = dataSql.substring(0, dataSql.length()-2);
+		//System.out.println(dataSql);
 		
-		dataSql.concat(" FROM ");
-		dataSql.concat(docTemplate.getDataSystem());
-		dataSql.concat(".");
-		dataSql.concat(docTemplate.getDataTable());
-		dataSql.concat(" ");
+		dataSql = dataSql.concat(" FROM ");
+		dataSql = dataSql.concat(docTemplate.getDataSystem());
+		//System.out.println(dataSql);
+		dataSql = dataSql.concat(".");
+		dataSql = dataSql.concat(docTemplate.getDataTable());
+		dataSql = dataSql.concat(" ");
+		//System.out.println(dataSql);
 		
-		dataSql.concat(eucFlow.getFiler());
+		dataSql = dataSql.concat(eucFlow.getFiler());
+		//System.out.println(dataSql);
 		
 		QueryJobConfiguration queryConfig =
 		        /* QueryJobConfiguration.newBuilder(
@@ -110,28 +119,37 @@ public class BigQueryServices {
 	}
 	
 	public ArrayList<ArrayList<String>> getTableArrayByWorkflow(EucFlow eucFlow) throws InterruptedException, FileNotFoundException, IOException {
+		//System.out.println("in getTableArrayByWorkflow");
+		
 		ArrayList<String> fieldArray = new ArrayList<String>();
 		ArrayList<ArrayList<String>> tableArray = new ArrayList<ArrayList<String>>();
 		
 		DocTemplateServicesInterface docService = new DocTemplateServicesDataStore();
 		DocumentTemplate docTemplate = docService.getDocumentTemplate(eucFlow.getDocumentTemplateID().toString());
 		
+		//System.out.println("start prepare dataSql");
+
 		String dataSql;
-		dataSql = "SELECT ";
+		dataSql = new String("SELECT ");
 		for (Iterator<String> iterator = docTemplate.getDataFields().iterator(); iterator.hasNext();) {
 			String field = iterator.next();
-			dataSql.concat(field);
-			dataSql.concat(", ");
+			dataSql = dataSql.concat(field);
+			dataSql = dataSql.concat(", ");
 		}
-		dataSql.substring(0, dataSql.length()-2);
+		//System.out.println(dataSql);
+		dataSql = dataSql.substring(0, dataSql.length()-2);
+		//System.out.println(dataSql);
 		
-		dataSql.concat(" FROM ");
-		dataSql.concat(docTemplate.getDataSystem());
-		dataSql.concat(".");
-		dataSql.concat(docTemplate.getDataTable());
-		dataSql.concat(" ");
+		dataSql = dataSql.concat(" FROM ");
+		dataSql = dataSql.concat(docTemplate.getDataSystem());
+		//System.out.println(dataSql);
+		dataSql = dataSql.concat(".");
+		dataSql = dataSql.concat(docTemplate.getDataTable());
+		dataSql = dataSql.concat(" ");
+		//System.out.println(dataSql);
 		
-		dataSql.concat(eucFlow.getFiler());
+		dataSql = dataSql.concat(eucFlow.getFiler());
+		//System.out.println(dataSql);
 		
 		QueryJobConfiguration queryConfig =
 				QueryJobConfiguration.newBuilder(dataSql)
