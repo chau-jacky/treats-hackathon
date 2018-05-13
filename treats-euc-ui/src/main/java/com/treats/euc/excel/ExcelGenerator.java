@@ -1,6 +1,6 @@
 package com.treats.euc.excel;
 
-import java.io.FileNotFoundException;
+
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ByteArrayOutputStream;
@@ -8,7 +8,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import javax.mail.MessagingException;
+
 
 import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
@@ -19,7 +19,7 @@ import com.treats.euc.services.EmailDeliveryServices;
 
 public class ExcelGenerator {
 
-	public ArrayList<ArrayList<String>> getTableData(){
+	public ArrayList<ArrayList<String>> genTableData(){
         
 		/*test*/
 		ArrayList<String> header = new ArrayList<String>();
@@ -49,16 +49,13 @@ public class ExcelGenerator {
         return tableDataList;
     }
 	
-	public HSSFWorkbook getWorkBook(){
+	public HSSFWorkbook arrayToWorkBook(ArrayList<ArrayList<String>> dataList){
 		
 		
         HSSFWorkbook workBook = new HSSFWorkbook();
         HSSFSheet sheet = workBook.createSheet();
         
-        System.out.println("Getting Table Data...");
-        ArrayList<ArrayList<String>> dataList = this.getTableData();
-        
-        System.out.println("Generating Excel Workbook...");
+        System.out.println("Converting Array to Workbook...");
         
         short rowNo = 0;
         
@@ -83,13 +80,15 @@ public class ExcelGenerator {
 			rowNo++;
 		}
         
-        
+        System.out.println("Workbook created...");
             
         return workBook;
     }
 	
-	public void excelDownload(HSSFWorkbook workBook){
-
+	public void excelDownload(ArrayList<ArrayList<String>> tableArray){
+		
+		HSSFWorkbook workBook = this.arrayToWorkBook(tableArray);
+				
 		System.out.println("Downloadeding Excel...");
         String file = "D:/Hackathon/test.xls";
         try{
@@ -107,8 +106,12 @@ public class ExcelGenerator {
     
 }
 	
-	public void excelEmailSend(HSSFWorkbook workBook) throws Exception{
 
+
+	public void excelEmailSend(ArrayList<ArrayList<String>> tableArray) throws Exception{
+		
+		HSSFWorkbook workBook = this.arrayToWorkBook(tableArray);
+		
         try{
             
         	System.out.println("Converting Excel Workbook to Byte Array...");
@@ -138,9 +141,9 @@ public class ExcelGenerator {
 		ExcelGenerator excelGenerator = new ExcelGenerator();
 		
 		
-		excelGenerator.excelDownload(excelGenerator.getWorkBook());
+		excelGenerator.excelDownload(excelGenerator.genTableData());
 		
-		excelGenerator.excelEmailSend(excelGenerator.getWorkBook());
+		excelGenerator.excelEmailSend(excelGenerator.genTableData());
 		
         
     }
