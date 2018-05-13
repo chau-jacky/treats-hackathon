@@ -300,61 +300,13 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
               <p class="blank-slate-pf-secondary-action">Workflow template wizard is now preparing the data.</p>
             </div>
      
+     <!-- Kelvin: Change to dynamic template list -->
             <div class="wizard-pf-contents hidden">
             	<h1><b>Template Selection</b></h1>
-              <form class="form-horizontal">
-                <!-- replacing id with data-id to pass build errors -->
-                <!-- StanleyO -->
-                <div class="list-group-item">
-    				<div class="list-view-pf-checkbox">
-      					<input type="checkbox" id="template_checkbox_1" name="template_checkbox_1">
-    						</div>
- 				    			<div class="list-view-pf-main-info">
-				      			<div class="list-view-pf-left">
-				        			<span class="fa fa-table list-view-pf-icon-sm"></span>
-				      			</div>
-				      			<div class="list-view-pf-body">
-				        			<div class="list-view-pf-description">
-				          			<div class="list-group-item-heading">
-				            			Excel (Default)
-				          			</div>
-				          			&nbsp;&nbsp;&nbsp;&nbsp;
-				          			<div class="list-group-item-text">
-				            			Output to Excel
-				          			</div>
-				        			</div>
-				        		
-				      			</div>
-				    			</div>
- 			        	</div>	 
- 			          <!--StanleyE-->
- 			          <!-- StanleyO-->
- 			          <div class="list-group-item">
-    							<div class="list-view-pf-checkbox">
-      							<input type="checkbox" id="template_checkbox_2" name="template_checkbox_2">
-    							</div>
- 				    			<div class="list-view-pf-main-info">
-				      			<div class="list-view-pf-left">
-				        			<span class="pficon pficon-template list-view-pf-icon-sm"></span>
-				      			</div>
-				      			<div class="list-view-pf-body">
-				        			<div class="list-view-pf-description">
-				          			<div class="list-group-item-heading">
-				            		Template 1
-				          			</div>
-				                    &nbsp;&nbsp;&nbsp;&nbsp;
-				           			<div class="list-group-item-text">
-				            		This Template is for generation of FX FWD Confirmation
-				          			</div>
-				        			</div>
-				        			
-				      			</div>
-				    			</div>
- 			        	</div>	 
- 			        	<!--StanleyO-->         
-              </form>
+              <form class="form-horizontal" id="wizard-template-list"></form>
             </div>
-            <div class="wizard-pf-contents hidden">
+            <!-- 
+                        <div class="wizard-pf-contents hidden">
               <form class="form-horizontal">
                 <div class="form-group required">
                   <label class="col-sm-2 control-label" for="lorem">Lorem ipsum</label>
@@ -370,6 +322,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                 </div>
               </form>
             </div>
+            -->
             <div class="wizard-pf-contents hidden">
                 <H1><B>Data Filtering</B></H1>
               	<!--StanleyO-->
@@ -629,7 +582,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
 				       			<div class="list-view-pf-body">
 				        			<div class="list-view-pf-description">
 				          			<div class="list-group-item-heading">
-				            			Select the checkbox if scheduling is required. Otherwise, the workflow has to be trigerred manually.
+				            			Select the checkbox if scheduling is required. Otherwise, the workflow has to be triggered manually.
 				          			</div>
 				          			
 				        			</div>
@@ -875,12 +828,39 @@ function sendRequest(method, url, targetid){
 // Load full Doc template list
 function loadDocList(arr, tar) {
 	var out = "";
+	var out1 = "";
+	var templatelistid = "";
 	var i;
 	for(i = 0; i < arr.length; i++) {
+		//for modify template
 		out += '<li><a href="' + '/treats-euc/template-edit/' + arr[i].id + '">' + arr[i].description + '</a></li>';
+		//for wizard
+		templatelistid = 'template_checkbox_' + i;
 		
+		out1 += '<div class="list-group-item">';
+		out1 += '<div class="list-view-pf-checkbox">';
+		out1 += '<input type="checkbox" id="' + templatelistid +'" name="' + templatelistid + '">';
+		out1 += '</div>';
+		out1 += '<div class="list-view-pf-main-info">';
+		out1 += '<div class="list-view-pf-left">';
+		out1 += '<span class="fa fa-file list-view-pf-icon-sm"></span>';
+		out1 += '</div>';
+		out1 += '<div class="list-view-pf-body">';
+		out1 += '<div class="list-view-pf-description">';
+		out1 += '<div class="list-group-item-heading">';
+		out1 += arr[i].description;
+		out1 += '</div>';
+		//out1 += '<div class="list-group-item-text">';
+		//out1 += arr[i].description;
+		//out1 += '</div>';
+		out1 += '</div>';
+		out1 += '</div>';
+		out1 += '</div>';
+		out1 += '</div>';
 	}
 	document.getElementById(tar).innerHTML = out;
+	//load document list for wizard also
+	document.getElementById('wizard-template-list').innerHTML = out1;
 }
 
 // Load full EUC list
@@ -952,7 +932,7 @@ function loadEucList(arr, tar) {
     var completeWizard = new wizard(".display-wizard");
     var fullEucFlow = new sendRequest('GET','/treats-euc/eucflow/getalleucflowsdisplay','full-euc-list');
     var fullDocTemplate = new sendRequest('GET','/treats-euc/doctemplate/getalldoctemplates','full-doc-template');
-    
+  
   });
 </script>
 
