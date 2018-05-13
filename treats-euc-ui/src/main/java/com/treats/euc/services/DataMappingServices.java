@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 import com.google.cloud.bigquery.FieldValueList;
 import com.google.cloud.bigquery.TableResult;
+import com.treats.euc.model.DocumentTemplate;
 import com.google.cloud.bigquery.Schema;
 
 import java.util.ArrayList;
