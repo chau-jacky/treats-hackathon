@@ -190,7 +190,7 @@ public class PdfGenerator {
 		}
 	}
 
-	public void generatePdf(ArrayList<String> PdfHtmlList, String email)
+	public void generatePdf(ArrayList<String> PdfHtmlList, String DestinationEmail)
 			throws DocumentException, IOException, MessagingException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		for (int i = 0; i < PdfHtmlList.size(); i++) {
@@ -199,7 +199,7 @@ public class PdfGenerator {
 
 			// send email statement
 			EmailDeliveryServices sender = new EmailDeliveryServices();
-			// TODO: sender.sendEmailWithPdfAndDefaultSetup(baos, email);
+			sender.sendEmailWithPdfAndDefaultSetup(baos, DestinationEmail);
 		}
 	}
 
