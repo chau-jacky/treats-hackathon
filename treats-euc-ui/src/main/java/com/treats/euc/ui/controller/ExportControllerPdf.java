@@ -17,7 +17,7 @@ import com.treats.euc.pdf.PdfGenerator;
 @RequestMapping("/treats-euc/Export")
 public class ExportControllerPdf {
 
-	@RequestMapping("/Pdf")
+	@RequestMapping("/ExportPdf")
 	public HttpServletResponse sendPDFEmail() throws DocumentException, IOException, MessagingException {
 
 		PdfGenerator pdf = new PdfGenerator();
