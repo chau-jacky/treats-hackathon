@@ -64,6 +64,10 @@ public class PdfGenerator {
 	private String pdfHeader;
 	private String pdfFooter;
 	private Boolean isEncryted = False;
+	private String filePath = "/";
+	private static String USER_PASSWORD = "2018";
+	private static String OWNER_PASSWORD = "hackathon";
+	
 
 	public static final String headerImage = "src/main/resources/img/hackathon_img.jpg";
 	public static final String barcodeImage = "src/main/resources/img/Barcode.jpg";
@@ -136,18 +140,20 @@ public class PdfGenerator {
 		//OutputStream file = null;
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PdfWriter writer = PdfWriter.getInstance(doc, baos);
+		writer.setEncryption(USER_PASSWORD.getBytes(),OWNER_PASSWORD.getBytes(), PdfWriter.ALLOW_PRINTING,PdfWriter.ENCRYPTION_AES_128);
 		
 		//if (outputMethod.equals("EMAIL")) {
-		is = new ByteArrayInputStream(pdfContent.getBytes());
-		baos = new ByteArrayOutputStream();
-		writer = PdfWriter.getInstance(doc, baos);
+		//is = new ByteArrayInputStream(pdfContent.getBytes());
+		//baos = new ByteArrayOutputStream();
+		//writer = PdfWriter.getInstance(doc, baos);
+		
 		//} else if (outputMethod.equals("SERVER")) {
 		//	file = new FileOutputStream(new File(fullFileName));
 	    //	writer = PdfWriter.getInstance(doc, file);
 		//}
 		
-		Paragraph p = new Paragraph("Monthly Statement", catFont);
-		p.setAlignment(Element.ALIGN_CENTER);
+		//Paragraph p = new Paragraph("Monthly Statement", catFont);
+		//p.setAlignment(Element.ALIGN_CENTER);
 
 		doc.open();
 
@@ -224,12 +230,13 @@ public class PdfGenerator {
 			// the contentlength
 			response.setContentLength(baos.size());
 			// write ByteArrayOutputStream to the ServletOutputStream
-			os = response.getOutputStream();
-			baos.writeTo(os);
-			os.flush();
-			os.close();
+
 		}
 
+		os = response.getOutputStream();
+		baos.writeTo(os);
+		os.flush();
+		os.close();
 	}
 
 	/*
@@ -270,7 +277,7 @@ public class PdfGenerator {
 		System.out.println("Generating report...");
 
 		Document doc = new Document(PageSize.A4);
-		InputStream is = new ByteArrayInputStream(pdfContent.getBytes());
+//		InputStream is = new ByteArrayInputStream(pdfContent.getBytes());
 		OutputStream file = new FileOutputStream(new File(fullFileName));
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		PdfWriter writer = PdfWriter.getInstance(doc, file);
