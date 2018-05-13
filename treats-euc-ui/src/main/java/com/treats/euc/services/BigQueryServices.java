@@ -3,6 +3,7 @@ package com.treats.euc.services;
 import com.google.auth.oauth2.GoogleCredentials;
 import com.google.auth.oauth2.ServiceAccountCredentials;
 import com.google.cloud.bigquery.BigQuery;
+import com.treats.euc.model.DocumentTemplate;
 import com.treats.euc.model.EucFlow;
 import com.treats.euc.ui.TreatsConstants;
 import com.treats.euc.ui.controller.BigQueryController;
@@ -41,9 +42,28 @@ public class BigQueryServices {
 		bigQuery = BigQueryOptions.newBuilder().setProjectId(TreatsConstants.CLOUD_PROJECT_ID).setCredentials(credentials).build().getService();
 	}
 	
-	public TableResult getDataSetByWorkflow(EucFlow eucFlow) throws JobException, InterruptedException {
+	public TableResult getDataSetByWorkflow(EucFlow eucFlow) throws JobException, InterruptedException, FileNotFoundException, IOException {
 		
-		String dataSql = eucFlow.getSql();
+		DocTemplateServicesInterface docService = new DocTemplateServicesDataStore();
+		DocumentTemplate docTemplate = docService.getDocumentTemplate(eucFlow.getDocumentTemplateID().toString());
+		
+		String dataSql;
+		dataSql = "SELECT ";
+		for (Iterator<String> iterator = docTemplate.getDataFields().iterator(); iterator.hasNext();) {
+			String field = iterator.next();
+			dataSql.concat(field);
+			dataSql.concat(", ");
+		}
+		dataSql.substring(0, dataSql.length()-2);
+		
+		dataSql.concat(" FROM ");
+		dataSql.concat(docTemplate.getDataSystem());
+		dataSql.concat(".");
+		dataSql.concat(docTemplate.getDataTable());
+		dataSql.concat(" ");
+		
+		dataSql.concat(eucFlow.getFiler());
+		
 		
 		QueryJobConfiguration queryConfig =
 		        /* QueryJobConfiguration.newBuilder(
