@@ -30,6 +30,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 			listEucFlow.add(eucFlow5);
 			
 			EucFlow eucFlow6 = new EucFlow();
+			eucFlow6.setName("Daily Workflow");
 			eucFlow6.setDescription("Daily Customer Report - EXCEL");
 			eucFlow6.setDocumentTemplateID(UUID.fromString("75b7f099-bea4-4414-89d9-a176506d6482"));
 			eucFlow6.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
@@ -45,6 +46,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 			
 			
 			EucFlow eucFlow = new EucFlow();
+			eucFlow.setName("Sample Workflow");
 			eucFlow.setDescription("Excel output to Email");
 			eucFlow.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
 			eucFlow.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
@@ -58,6 +60,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 			listEucFlow.add(eucFlow);
 
 			EucFlow eucFlow4 = new EucFlow();
+			eucFlow4.setName("Sample Workflow");
 			eucFlow4.setDescription("PDF output to Email");
 			eucFlow4.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
 			eucFlow4.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
@@ -71,6 +74,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 			listEucFlow.add(eucFlow4);
 
 			EucFlow eucFlow2 = new EucFlow();
+			eucFlow2.setName("Sample Workflow");
 			eucFlow2.setDescription("EUC Workflow 002");
 			eucFlow2.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
 			eucFlow2.setFiler("WHERE TradeID = 'SPT181230003'");
@@ -84,6 +88,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 			listEucFlow.add(eucFlow2);
 
 			EucFlow eucFlow3 = new EucFlow();
+			eucFlow3.setName("Sample Workflow");
 			eucFlow3.setDescription("EUC Workflow 003");
 			eucFlow3.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
 			eucFlow3.setFiler("WHERE TradeID = 'SPT181230003'");
