@@ -35,7 +35,6 @@ public class DocTemplateController {
     	String templateString = templateDetails.replace("<br>","<br/>");
     	
     	DocumentTemplate docTemplate = new DocumentTemplate();
-    	docTemplate.setDescription("New Doc Template");
     	docTemplate.setDocTemplate(templateString);
     	docTemplate.setDescription(description);
     	

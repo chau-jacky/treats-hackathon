@@ -241,8 +241,7 @@
             <div class="wizard-pf-loading blank-slate-pf">
               <div class="spinner spinner-lg blank-slate-pf-icon"></div>
               <h3 class="blank-slate-pf-main-action">Loading Wizard</h3>
-              <p class="blank-slate-pf-secondary-action">Lorem ipsum dolor sit amet, porta at suspendisse ac, ut wisi
-                vivamus, lorem sociosqu eget nunc amet. </p>
+              <p class="blank-slate-pf-secondary-action">Workflow template wizard is now preparing the data.</p>
             </div>
      
             <div class="wizard-pf-contents hidden">
@@ -590,10 +589,12 @@
             
             <!--StanleyO-->
             <div class="wizard-pf-contents hidden">
-            	<H1><B>Summary</B></H1>          
-                <P ALIGN=Left><B>Workflow Name:</B>
+            	<h1><n>Summary</n></h1>          
+                <p align=Left><b>Workflow Name:</b>
  			    <input id="Workflow_Name" class="form-control"></input>      	
-          
+          		
+          		<input id="summary_email_address" class="form-control"></input>
+				</p>
             </div>
             <!--StanleyE-->
             
@@ -657,7 +658,7 @@
                 <a href="#0">View Profile</a>
               </li>
               <li>
-                <a href="#0">Logout</a>
+                <a href="/logout">Logout</a>
               </li>
               <li class="divider"></li>
               <li class="dropdown-submenu">
@@ -905,7 +906,7 @@ function loadEucList(arr, tar) {
         <!--Stanley $(self.modal + " .wizard-pf-sidebar .list-group-item.active").removeClass("active"); -->
 
         self.updateToCurrentPage();
-      }, 3);
+      }, 300);
 
       //initialize click listeners
       self.tabGroupSelect();
@@ -958,6 +959,11 @@ function loadEucList(arr, tar) {
       setTimeout (function() {
         $(".wizard-pf-contents:not(.hidden) form input, .wizard-pf-contents:not(.hidden) form textarea, .wizard-pf-contents:not(.hidden) form select").first().focus(); // this does not account for disabled or read-only inputs
       }, 100);
+
+      // call when wizard page changes
+      var emailaddress = $('#Email_Address').val();
+      $('#summary_email_address').val(emailaddress);
+
     };
 
     // update display state of Back button
