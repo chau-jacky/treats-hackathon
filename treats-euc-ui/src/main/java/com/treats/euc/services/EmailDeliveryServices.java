@@ -172,10 +172,59 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 		this.send();
 	}
 	
+	public void sendEmailWithPdfAndDefaultSetup(ByteArrayOutputStream baos, String destinationEmail) throws MessagingException, IOException, DocumentException {
+		this.setSender("treats.hackathon@gmail.com", "hackathon2018");
+		this.setSenderName("LION Securities - 獅子證券");
+		this.addRecipient(destinationEmail);
+		this.setSubject("LION Securities - Trading Services eStatement 獅子交易服務電子結單 14May2018");
+		ArrayList<String> emailBodyText = new ArrayList<String>();
+		emailBodyText.add("Dear Customer, \n\n");
+		emailBodyText.add("Thank you for using LION trading services. ");
+		emailBodyText.add("The lastest eStatement containing information on your recent transaction with us ");
+		emailBodyText.add("has been attached in this email. \n\n ");
+		emailBodyText.add("Please check the statement and report to us if there is any error or discrepancy. \n\n");
+		emailBodyText.add("For more information: \n");
+		emailBodyText.add("Should you have any question or require further information, ");
+		emailBodyText.add("please contact our customer service hotline at (852) 2345 5678 ");
+		emailBodyText.add("(press 1,6,0 for Cantonese, 2,6,0 for Englsh and 3,6,0 for Mandarin). \n\n");
+		emailBodyText.add("*** Please do not reply to this email *** \n\n");
+		this.setBody(emailBodyText);
+		String mimeType = "application/pdf";
+		String fileDescription = "14May2018 eStatement.pdf";
+		ByteArrayInputStream fileInputStream = new ByteArrayInputStream(baos.toByteArray()); 
+		this.addAttachmentFromFileObject(fileInputStream, mimeType, fileDescription);
+		this.send();
+	}
+	
 	public void sendEmailWithExcelAndDefaultSetup(ByteArrayOutputStream baos) throws MessagingException, IOException {
 		this.setSender("treats.hackathon@gmail.com", "hackathon2018");
 		this.setSenderName("LION Securities - 獅子證券");
 		this.addRecipient("treats.hackathon@gmail.com");
+		this.setSubject("LION Securities - Data Extraction Services 獅子證券資料擷取服務 14May2018");
+		ArrayList<String> emailBodyText = new ArrayList<String>();
+		emailBodyText.add("Dear Customer, \n\n");
+		emailBodyText.add("Thank you for using LION trading services. ");
+		emailBodyText.add("The lastest Excel containing transaction data that you request ");
+		emailBodyText.add("has been attached in this email. \n\n ");
+		emailBodyText.add("Please check the statement and report to us if there is any error or discrepancy. \n\n");
+		emailBodyText.add("For more information: \n");
+		emailBodyText.add("Should you have any question or require further information, ");
+		emailBodyText.add("please contact our customer service hotline at (852) 2345 5678 ");
+		emailBodyText.add("(press 1,6,0 for Cantonese, 2,6,0 for Englsh and 3,6,0 for Mandarin). \n\n");
+		emailBodyText.add("*** Please do not reply to this email *** \n\n");
+		this.setBody(emailBodyText);
+		String mimeType = "application/vnd.ms-excel";
+		String fileDescription = "14May2018 Transaction Data.xls";
+		ByteArrayInputStream fileInputStream = new ByteArrayInputStream(baos.toByteArray()); 
+		this.addAttachmentFromFileObject(fileInputStream, mimeType, fileDescription);
+		this.send();
+	}
+	
+	public void sendEmailWithExcelAndDefaultSetup(ByteArrayOutputStream baos, String destinationEmail) throws MessagingException, IOException {
+		this.setSender("treats.hackathon@gmail.com", "hackathon2018");
+		this.setSenderName("LION Securities - 獅子證券");
+		this.addRecipient(destinationEmail);
+		//System.out.println(destinationEmail);
 		this.setSubject("LION Securities - Data Extraction Services 獅子證券資料擷取服務 14May2018");
 		ArrayList<String> emailBodyText = new ArrayList<String>();
 		emailBodyText.add("Dear Customer, \n\n");
