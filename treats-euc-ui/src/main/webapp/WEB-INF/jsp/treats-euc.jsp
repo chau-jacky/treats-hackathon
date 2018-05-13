@@ -245,14 +245,14 @@
             </div>
      
             <div class="wizard-pf-contents hidden">
-            	<H1><B>Template Selection</B></H1>
+            	<h1><b>Template Selection</b></h1>
               <form class="form-horizontal">
                 <!-- replacing id with data-id to pass build errors -->
                 <!-- StanleyO -->
                 <div class="list-group-item">
-    							<div class="list-view-pf-checkbox">
-      							<input type="checkbox">
-    							</div>
+    				<div class="list-view-pf-checkbox">
+      					<input type="checkbox" id="template_checkbox_1" name="template_checkbox_1">
+    						</div>
  				    			<div class="list-view-pf-main-info">
 				      			<div class="list-view-pf-left">
 				        			<span class="fa fa-table list-view-pf-icon-sm"></span>
@@ -275,7 +275,7 @@
  			          <!-- StanleyO-->
  			          <div class="list-group-item">
     							<div class="list-view-pf-checkbox">
-      							<input type="checkbox">
+      							<input type="checkbox" id="template_checkbox_2" name="template_checkbox_2">
     							</div>
  				    			<div class="list-view-pf-main-info">
 				      			<div class="list-view-pf-left">
@@ -330,76 +330,121 @@
                     </div>
                 	<div class="col-md-3" align="right">
                 	<button class="btn btn-md btn-primary" type="button" custom-button-width><i class="glyphicon glyphicon-plus"></i> ADD</button>
+                	</div>
+                	<br> 
                 	
-                  
-                </div>
-                	<br>
+                	
                    	<label class="col-sm-3 control-label" for="aliquam"> </label>
                   	<label class="col-sm-3 control-label" for="aliquam"><B>FIELD</B></label>
                   	<label class="col-sm-3 control-label" for="aliquam"><B>RELATION</B></label>
                   	<label class="col-sm-3 control-label" for="aliquam"><B>VALUE</B></label>
                   	<br>
-                		<div class="col-sm-3">
-      			  				<div class="form-group" id="single-select-field_1">
-        								<div class="btn-group bootstrap-select form-control">
-        									<button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Relish" aria-expanded="false">
-        										<span class="filter-option pull-left">AND</span>&nbsp; 
-        										<span class="bs-caret"><span class="caret"></span></span>
-        									</button>
-        								<div class="dropdown-menu open" role="combobox" style="max-height: 456px; overflow: hidden; min-height: 83px;">
-        									<ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 444px; overflow-y: auto; min-height: 71px;">
-        									<option>&nbsp;AND</option>
-		          						<option>&nbsp;OR</option>
-		        							</select>
-		        						</div>
-      									</div>
-      								</div>
-      			 				</div>
+                  	
+                  	
+                  	<!-- row1 -->
+                  	<div class="col-sm-3">
+                  	<label class="col-sm-3 control-label" for="aliquam"> </label>
+                  	</div>
+                  	
+                  	<div class="col-sm-3">
+      			  	<select class = "form-control" id="data_field_1">
+    				<option>deal_number</option>
+    				<option>counterparty</option>
+    				<option>amount_pay</option>
+    				</select>
+      			 	</div>
             	  	
               	   	<div class="col-sm-3">
-      			  				<div class="form-group" id="single-select-field_2">
-        								<div class="btn-group bootstrap-select form-control">
-        								<button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Relish" aria-expanded="false">
-        								<span class="filter-option pull-left">Deal Number</span>&nbsp; 
-        								<span class="bs-caret"><span class="caret"></span></span>
-        								</button>
-        								<div class="dropdown-menu open" role="combobox" style="max-height: 456px; overflow: hidden; min-height: 83px;">
-        										<ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 444px; overflow-y: auto; min-height: 71px;">
-        										<option>&nbsp;Deal Number</option>
-		          							<option>&nbsp;Counterparty</option>
-		          							<option>&nbsp;Value Date</option>
-		          							<option>&nbsp;Dealer Id</option>
-		        								</select>
-		        						</div>
-      									</div>
-      								</div>
-      			 				</div>
+      			  	<select class = "form-control" id="data_relation_1">
+    				<option>AND</option>
+		          	<option>OR</option>
+		          	<option>EQUAL</option>
+		          	<option>NOT EQUAL</option>
+    				</select>
+      			 	</div>
               	 
-                   	<div class="col-sm-3">
-      			  				<div class="form-group" id="single-select-field_3">
-        								<div class="btn-group bootstrap-select form-control">
-        								<button type="button" class="btn dropdown-toggle btn-default" data-toggle="dropdown" role="button" title="Relish" aria-expanded="false">
-        									<span class="filter-option pull-left">AND</span>&nbsp; 
-        									<span class="bs-caret"><span class="caret"></span></span>
-        								</button>
-        								<div class="dropdown-menu open" role="combobox" style="max-height: 456px; overflow: hidden; min-height: 83px;">
-        									<ul class="dropdown-menu inner" role="listbox" aria-expanded="false" style="max-height: 444px; overflow-y: auto; min-height: 71px;">
-        									<option>&nbsp;AND</option>
-		          						<option>&nbsp;OR</option>
-		          						<option>&nbsp;EQUAL</option>
-		          						<option>&nbsp;NOT EQUAL</option>
-		        							</select>
-		        						</div>
-      									</div>
-      								</div>
-      			 				</div>
-              	  
+                             	  
               	  	<div class="col-sm-3">
-                    	<textarea id="textarea_1" class="form-control" rows="1"></textarea>
+                    	<textarea id="data_value_1" class="form-control" rows="1"></textarea>
                     </div>
+                  	
+                  	<br>
+                  	<br>
+                  	
+                  	<!-- row 2 -->
+                  	<div class="col-sm-3">
+      			  	<select class = "form-control" id="data_and_or_2">
+    				<option>AND</option>
+		          	<option>OR</option>
+		          	</select>
+      			 	</div>
+                  	
+                  	<div class="col-sm-3">
+      			  	<select class = "form-control" id="data_field_2">
+    				<option>deal_number</option>
+    				<option>counterparty</option>
+    				<option>amount_pay</option>
+    				</select>
+      			 	</div>
+            	  	
+              	   	<div class="col-sm-3">
+      			  	<select class = "form-control" id="data_relation_2">
+    				<option>AND</option>
+		          	<option>OR</option>
+		          	<option>EQUAL</option>
+		          	<option>NOT EQUAL</option>
+    				</select>
+      			 	</div>
+              	 
+                             	  
+              	  	<div class="col-sm-3">
+                    	<textarea id="data_value_2" class="form-control" rows="1"></textarea>
+                    </div>
+                  	
+                  	<br>
+                  	
+                  	
+                  	
+                  	<!-- row 3 -->
+                  	<div class="col-sm-3">
+      			  	<select class = "form-control" id="data_and_or_3">
+    				<option>AND</option>
+		          	<option>OR</option>
+		          	</select>
+      			 	</div>
+                  	
+                  	<div class="col-sm-3">
+      			  	<select class = "form-control" id="data_field_3">
+    				<option>deal_number</option>
+    				<option>counterparty</option>
+    				<option>amount_pay</option>
+    				</select>
+      			 	</div>
+            	  	
+              	   	<div class="col-sm-3">
+      			  	<select class = "form-control" id="data_relation_3">
+    				<option>AND</option>
+		          	<option>OR</option>
+		          	<option>EQUAL</option>
+		          	<option>NOT EQUAL</option>
+    				</select>
+      			 	</div>
+              	 
+                             	  
+              	  	<div class="col-sm-3">
+                    	<textarea id="data_value_3" class="form-control" rows="1"></textarea>
+                    </div>
+                  	
+                	<br>
+                	<br>
+                	
+              	 
+                   	
+              	  
+              	  	
                  
                 </div>
-                <Br>
+                <br>
                 
                 <!-- StanleyE -->
             </div>
@@ -426,7 +471,7 @@
                <!--Save in PC-->
                   <H1><B>Target Location</B></H1>
     				 			<div class="list-view-pf-checkbox">
-      							<input type="checkbox">
+      							<input type="checkbox" id="pc_checkbox" name="pc_checkbox">
     				 			</div>
  				     			<div class="list-view-pf-main-info">
 				       			<div class="list-view-pf-left">
@@ -443,14 +488,13 @@
 				    				</div>
  			        		</div>	 
  			        		<BR>
- 			        		<P ALIGN=Left><B>PC Path:</B>
- 			        		<input id="PC_Location" class="form-control"></input>
+ 			        		
                  
                  
                 <!-- Send by email-->
                
     				 			<div class="list-view-pf-checkbox">
-      							<input type="checkbox">
+      							<input type="checkbox" id="email_checkbox" name="email_checkbox">
     				 			</div>
  				     			<div class="list-view-pf-main-info">
 				       			<div class="list-view-pf-left">
@@ -466,8 +510,8 @@
 				    				</div>
  			          	</div>	 
  			          	<BR>
-                  <P ALIGN=Left><B>Email Address:</B>
- 			        		<input id="Email_Address" class="form-control"></input>
+                  <P ALIGN=Left><B>Email Address:</B></P>
+ 			      <input id="email_address" class="form-control"></input>
  			        		
             </div>
             <!--StanleyE-->
@@ -499,7 +543,7 @@
                <!--Save in PC-->
                 <div class="list-group-item">
     				 			<div class="list-view-pf-checkbox">
-      							<input type="checkbox">
+      							<input type="checkbox" id="schedule_checkbox">
     				 			</div>
  				     			<div class="list-view-pf-main-info">
 				       			<div class="list-view-pf-left">
@@ -508,7 +552,7 @@
 				       			<div class="list-view-pf-body">
 				        			<div class="list-view-pf-description">
 				          			<div class="list-group-item-heading">
-				            			Select the checkbok if scheduling is required. Otherwise, the workflow has to be trigerred manually.
+				            			Select the checkbox if scheduling is required. Otherwise, the workflow has to be trigerred manually.
 				          			</div>
 				          			
 				        			</div>
@@ -590,11 +634,26 @@
             <!--StanleyO-->
             <div class="wizard-pf-contents hidden">
             	<h1><n>Summary</n></h1>          
-                <p align=Left><b>Workflow Name:</b>
- 			    <input id="Workflow_Name" class="form-control"></input>      	
+                <p align=Left><b>Workflow Name:</b></p>
+ 			    <input id="workflow_name" class="form-control"></input>      	
           		
-          		<input id="summary_email_address" class="form-control"></input>
-				</p>
+          		<!-- Stanley<input id="summary_email_address" class="form-control"></input>-->
+          		<br>
+          		<br>
+          		<!-- Stanley<output class="form-control" id="summary_form")></output>-->
+          		<b>Template Selection:</b>
+				<div class="summary_1" id="summary_1"></div>
+				<br>
+				<b>Data Filtering:</b>
+				<div class="summary_2" id="summary_2"></div>
+				<br>
+				<b>Target Location:</b>
+				<div class="summary_3" id="summary_3"></div>
+				<div class="summary_5" id="summary_5"></div>
+				<br>
+				<b>Scheduling/Manual:</b>
+				<div class="summary_4" id="summary_4"></div>
+				<br>
             </div>
             <!--StanleyE-->
             
@@ -960,11 +1019,53 @@ function loadEucList(arr, tar) {
         $(".wizard-pf-contents:not(.hidden) form input, .wizard-pf-contents:not(.hidden) form textarea, .wizard-pf-contents:not(.hidden) form select").first().focus(); // this does not account for disabled or read-only inputs
       }, 100);
 
-      // call when wizard page changes
-      var emailaddress = $('#Email_Address').val();
-      $('#summary_email_address').val(emailaddress);
+      
+     
+     //template selected
+     if ($('#template_checkbox_2').is(":checked")) {
+    	 var template_id_sel = $('#template_checkbox_2').attr("id");
+    	
+     }  
+         
+     //data_filtering
+     var data_filtering= "'" + $('#data_field_1').val() + " " + $('#data_relation_1').val() + " "+ $('#data_value_1').val() + "'"+ " " + $('#data_and_or_2').val() + " " + "'"+ $('#data_field_2').val() + " " + $('#data_relation_2').val() + " "+ $('#data_value_2').val() + "' "+ $('#data_and_or_3').val() + "'" + " " + $('#data_field_3').val() + " " + $('#data_relation_3').val() + " "+ $('#data_value_3').val() +"'"
+     
+     //target location
+     if ($('#pc_checkbox').is(":checked")) {
+    	 //var target_location = $('#pc_checkbox').attr("id");
+    	 var target_location = "Saved in PC"
+    	 $('#summary_5').addClass("hidden");
+    	 
+     }  else {
+    if ($('#email_checkbox').is(":checked")) {
+    	//var target_location = $('#email_checkbox').attr("id");
+    	var target_location = "Email"
+    	$('#summary_5').removeClass("hidden");
+    	  
+    }}
+     
+     // email_address
+     var emailaddress = $('#email_address').val();
+     $('#summary_form').val(emailaddress); 
 
+     //scheduling or manual
+     if ($('#schedule_checkbox').is(":checked")) {
+    	 var sch_or_manual = "Schedule";
+    	 $('#summary_form').val('<h1>'); 
+    	
+     }  else {
+    	 var sch_or_manual = "Manual";
+    	 $('#summary_form').val(sch_or_manual); 
+    }
+     
+     $('#summary_1').text(template_id_sel) ;
+     $('#summary_2').text(data_filtering) ;
+     $('#summary_3').text(target_location) ; 
+     $('#summary_5').text(emailaddress) ;
+     $('#summary_4').text(sch_or_manual) ;
+     
     };
+    
 
     // update display state of Back button
     this.updateBackBtnDisplay = function() {
