@@ -166,7 +166,7 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 		emailBodyText.add("*** Please do not reply to this email *** \n\n");
 		this.setBody(emailBodyText);
 		String mimeType = "application/pdf";
-		String fileDescription = "14May2018 eStatement";
+		String fileDescription = "14May2018 eStatement.pdf";
 		ByteArrayInputStream fileInputStream = new ByteArrayInputStream(baos.toByteArray()); 
 		this.addAttachmentFromFileObject(fileInputStream, mimeType, fileDescription);
 		this.send();
@@ -190,7 +190,7 @@ public class EmailDeliveryServices implements EmailDeliveryServicesInterface {
 		emailBodyText.add("*** Please do not reply to this email *** \n\n");
 		this.setBody(emailBodyText);
 		String mimeType = "application/vnd.ms-excel";
-		String fileDescription = "14May2018 Transaction Data";
+		String fileDescription = "14May2018 Transaction Data.xls";
 		ByteArrayInputStream fileInputStream = new ByteArrayInputStream(baos.toByteArray()); 
 		this.addAttachmentFromFileObject(fileInputStream, mimeType, fileDescription);
 		this.send();
