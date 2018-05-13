@@ -42,7 +42,7 @@ public class BigQueryServices {
 		bigQuery = BigQueryOptions.newBuilder().setProjectId(TreatsConstants.CLOUD_PROJECT_ID).setCredentials(credentials).build().getService();
 	}
 	
-	public TableResult getDataSetByWorkflow(EucFlow eucFlow) throws JobException, InterruptedException, FileNotFoundException, IOException {
+	public TableResult getTableResultByWorkflow(EucFlow eucFlow) throws JobException, InterruptedException, FileNotFoundException, IOException {
 		
 		DocTemplateServicesInterface docService = new DocTemplateServicesDataStore();
 		DocumentTemplate docTemplate = docService.getDocumentTemplate(eucFlow.getDocumentTemplateID().toString());
@@ -63,7 +63,6 @@ public class BigQueryServices {
 		dataSql.concat(" ");
 		
 		dataSql.concat(eucFlow.getFiler());
-		
 		
 		QueryJobConfiguration queryConfig =
 		        /* QueryJobConfiguration.newBuilder(
@@ -99,16 +98,78 @@ public class BigQueryServices {
 
 	    TableResult result = queryJob.getQueryResults();
 	    
-	    int tradeCount = 1;
+	    /* int tradeCount = 1;
 	    // Print all pages of the results.
 	    for (FieldValueList row : result.iterateAll()) {
 	      String tradeId = row.get("TradeID").getStringValue();
 	      String tradeType = row.get("TradeType").getStringValue();
 	      System.out.println("Trade " + tradeCount + ": " + tradeId + " TradeType: " + tradeType);
 	      ++tradeCount;
-	    }
+	    }*/
 	    return result;
+	}
+	
+	public ArrayList<ArrayList<String>> getTableArrayByWorkflow(EucFlow eucFlow) throws InterruptedException, FileNotFoundException, IOException {
+		ArrayList<String> fieldArray = new ArrayList<String>();
+		ArrayList<ArrayList<String>> tableArray = new ArrayList<ArrayList<String>>();
+		
+		DocTemplateServicesInterface docService = new DocTemplateServicesDataStore();
+		DocumentTemplate docTemplate = docService.getDocumentTemplate(eucFlow.getDocumentTemplateID().toString());
+		
+		String dataSql;
+		dataSql = "SELECT ";
+		for (Iterator<String> iterator = docTemplate.getDataFields().iterator(); iterator.hasNext();) {
+			String field = iterator.next();
+			dataSql.concat(field);
+			dataSql.concat(", ");
+		}
+		dataSql.substring(0, dataSql.length()-2);
+		
+		dataSql.concat(" FROM ");
+		dataSql.concat(docTemplate.getDataSystem());
+		dataSql.concat(".");
+		dataSql.concat(docTemplate.getDataTable());
+		dataSql.concat(" ");
+		
+		dataSql.concat(eucFlow.getFiler());
+		
+		QueryJobConfiguration queryConfig =
+				QueryJobConfiguration.newBuilder(dataSql)
+		            .setUseLegacySql(false)
+		            .build();
+
+	    JobId jobId = JobId.of(UUID.randomUUID().toString());
+	    Job queryJob = bigQuery.create(JobInfo.newBuilder(queryConfig).setJobId(jobId).build());
+
+	    // Wait for the query to complete.
+	    queryJob = queryJob.waitFor();
+
+	    // Check for errors
+	    if (queryJob == null) {
+	      throw new RuntimeException("Job no longer exists");
+	    } else if (queryJob.getStatus().getError() != null) {
+	      // You can also look at queryJob.getStatus().getExecutionErrors() for all
+	      // errors, not just the latest one.
+	      throw new RuntimeException(queryJob.getStatus().getError().toString());
+	    }
+
+	    // Get the results.
+	    QueryResponse response = bigQuery.getQueryResults(jobId);
+
+	    TableResult result = queryJob.getQueryResults();
 	    
+	    fieldArray = BigQueryServices.getDataSchemaFromTableResult(result);
+	    
+	    tableArray.add(fieldArray);
+	    
+	    for (FieldValueList row : result.iterateAll()) {
+	    	ArrayList<String> tableRecord = new ArrayList<String>();
+	    	for (Iterator<String> iterator = fieldArray.iterator(); iterator.hasNext();)  {
+	    		tableRecord.add(row.get(iterator.next()).getStringValue());
+	    	}
+	    	tableArray.add(tableRecord);
+	    }
+	    return tableArray;
 	}
 	
 	public static ArrayList<String> getDataSchemaFromTableResult(TableResult result) {
@@ -120,6 +181,12 @@ public class BigQueryServices {
 			fieldListString.add(field.getName());
 		}
 		return fieldListString;
+	}
+	
+	public static int getColumnSizeFromTableResult(TableResult result) {
+		Schema schema = result.getSchema();
+		FieldList fieldList = schema.getFields();
+		return fieldList.size();
 	}
 	
 }
