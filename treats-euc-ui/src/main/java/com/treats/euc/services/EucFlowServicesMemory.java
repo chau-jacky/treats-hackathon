@@ -15,9 +15,10 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		listEucFlow = new ArrayList<EucFlow>();
 		
 		EucFlow eucFlow = new EucFlow();
+		eucFlow.setId(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6a"));
 		eucFlow.setDescription("EUC Workflow 001");
 		eucFlow.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
-		eucFlow.setFiler("WHERE TradeID = 'SPT181230003'");
+		eucFlow.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
 		eucFlow.setOutputFormat("EXCEL");
 		eucFlow.setOutputMedium("EMAIL");
 		EucSchedule eucSchedule = new EucSchedule();
@@ -28,6 +29,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		listEucFlow.add(eucFlow);
 		
 		EucFlow eucFlow2 = new EucFlow();
+		eucFlow2.setId(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
 		eucFlow2.setDescription("EUC Workflow 002");
 		eucFlow2.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
 		eucFlow2.setFiler("WHERE TradeID = 'SPT181230003'");
@@ -41,6 +43,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		listEucFlow.add(eucFlow2);
 		
 		EucFlow eucFlow3 = new EucFlow();
+		eucFlow3.setId(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6c"));
 		eucFlow3.setDescription("EUC Workflow 003");
 		eucFlow3.setDocumentTemplateID(UUID.fromString("eb9cac36-d4d2-47ff-9060-cc2131df1c6b"));
 		eucFlow3.setFiler("WHERE TradeID = 'SPT181230003'");
