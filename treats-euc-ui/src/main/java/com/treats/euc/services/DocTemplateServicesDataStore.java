@@ -86,7 +86,7 @@ public class DocTemplateServicesDataStore implements DocTemplateServicesInterfac
 	
 	public DocumentTemplate entityToTemplate(Entity entity) {
 		
-		System.out.println("entityToTemplate");
+//		System.out.println("entityToTemplate");
 		DocumentTemplate docTemplate = new DocumentTemplate();
 		
 //		System.out.println("entity : " + entity.toString());

@@ -4,10 +4,13 @@ import com.treats.euc.model.DocumentTemplate;
 import com.treats.euc.services.DocTemplateServicesDataStore;
 import com.treats.euc.services.DocTemplateServicesInterface;
 import com.treats.euc.services.DocTemplateServicesMemory;
+import com.treats.euc.ui.TreatsConstants;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -27,20 +30,28 @@ public class DocTemplateController {
         
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String someMethod(@RequestParam("template") String templateDetails, @RequestParam("description") String description) {
+    	
+    	ArrayList<String> fields = new ArrayList<String>();
+    	String templateString = templateDetails.replace("<br>","<br/>");
+    	
     	DocumentTemplate docTemplate = new DocumentTemplate();
     	docTemplate.setDescription("New Doc Template");
-    	docTemplate.setDocTemplate(templateDetails.replace("<br>","<br/>"));
+    	docTemplate.setDocTemplate(templateString);
     	docTemplate.setDescription(description);
+    	
+		Pattern fieldPattern = Pattern.compile(TreatsConstants.PATTERN_FIELD);
+		Matcher matcher = fieldPattern.matcher(templateString);
+		while (matcher.find()) {
+		    fields.add(matcher.group(1));
+		}
+    	docTemplate.setDataFields(fields);
     	
     	// TODO : remove hardcoding
     	// ===================================
     	docTemplate.setDataSystem("hk_treats");
     	docTemplate.setDataTable("trade_info");
-    	ArrayList<String> fields = new ArrayList<String>();
-    	fields.add("tradeId");
-    	fields.add("country");
-    	docTemplate.setDataFields(fields);
     	// ===================================
+    	
     	
     	docTemplateService.addDocTemplate(docTemplate);
     	
