@@ -305,7 +305,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
             	<h1><b>Template Selection</b></h1>
               <form class="form-horizontal" id="wizard-template-list"></form>
             </div>
-            <!-- 
+            
                         <div class="wizard-pf-contents hidden">
               <form class="form-horizontal">
                 <div class="form-group required">
@@ -322,7 +322,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                 </div>
               </form>
             </div>
-            -->
+            
             <div class="wizard-pf-contents hidden">
                 <H1><B>Data Filtering</B></H1>
               	<!--StanleyO-->
