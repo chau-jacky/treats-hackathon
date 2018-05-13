@@ -108,6 +108,9 @@
             <a href="#">Create Template</a>
           </li>
           <li>
+            <a href="#">Modify Workflow</a>
+          </li>
+          <li>
             <a href="#">Create Workflow</a>
           </li>
         </ul>
@@ -186,6 +189,21 @@
 	    form.submit();
 	}
 	
+	// Send HTTP request
+	function sendRequest(method, url){
+		var xmlhttp = new XMLHttpRequest();
+		xmlhttp.onreadystatechange = function() {
+			 if (this.readyState == 4 && this.status == 200) {
+				 var templateArr = JSON.parse(this.responseText);
+				 $('#summernote').summernote('insertText', templateArr.docTemplate);
+		
+			  }
+		};
+		xmlhttp.open(method, url, true);
+		xmlhttp.send();
+	}
+	
+
 </script>
 
   <script>
@@ -213,7 +231,11 @@
 		 }
 	 
 	 });
-
+	
+	//Get template from input id
+		var templateReq = new sendRequest('GET', '/treats-euc/doctemplate/getdoctemplate/${templateId}');
+	
+	 
     // toggle dropdown menu
     $("#pf-list-simple-expansion .list-view-pf-actions").on('show.bs.dropdown', function () {
       var $this = $(this);

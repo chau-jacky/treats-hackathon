@@ -49,6 +49,12 @@ public class DocTemplateServices {
 				.set("datasource", dataSourceList.build()).set("created", Timestamp.now()).build();
 		datastore.put(docTemplate);
 	}
+	
+	// Kelvin - Not yet study how to update
+	public void updateDocTemplate(UUID id, String templateDetails) {
+		
+		
+	}
 
 
 /*

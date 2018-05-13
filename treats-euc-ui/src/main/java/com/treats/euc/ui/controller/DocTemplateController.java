@@ -5,6 +5,7 @@ import com.treats.euc.services.DocTemplateServicesInterface;
 import com.treats.euc.services.DocTemplateServicesMemory;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,5 +31,11 @@ public class DocTemplateController {
 		return "treats-euc";
     }
     
-    
+    /* draft only, pending update function
+    @RequestMapping(value = "/update/{id}", method = RequestMethod.POST)
+    public String update(@RequestParam("template") String templateDetails, @PathVariable String id) {
+    	docTemplateService.updateDocTemplate(id, templateDetails);
+    	return "treats-euc";
+    }
+    */
 }
