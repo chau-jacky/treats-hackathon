@@ -40,7 +40,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller
+@RestController
 @RequestMapping("/treats-euc/workflow")
 public class WorkFlowController {
 
@@ -87,34 +87,7 @@ public class WorkFlowController {
 			
 		}
 
-
-		// workflowobject = getworkflow(workflowId)
-
-		// Simon
-		// connection to BigQuery
-		// BigQueryController.bigquery.xxxxxx
-		// dataset = bigquery.executesql(workflowobject.sql)
-
-		// @Henry
-		// if workflow.output = excel
-		// pass to Excel generator
-
-		// @Darwin
-		// templateobject = gettemplate (workflowobject.templateid)
-		// templatedetail = templateobject.gettemplate
-
-		// ArrayList<html> = datamapping (templatedetail, dataset)
-
-		// pdfgenerator(ArrayList<html>)
-
-		Boolean success;
-
-		success = true;
-		if (!success) {
-			return "fail";
-		}
-
-		return "treats-euc";
+		return "success";
 	}
 
 }

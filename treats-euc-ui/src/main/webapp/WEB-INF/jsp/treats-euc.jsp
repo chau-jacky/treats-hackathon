@@ -34,6 +34,62 @@
   
   <body>
   
+  
+<div class="modal fade" id="ModalExecute" tabindex="-1" role="dialog" aria-labelledby="ModalExecuteCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="ModalExecuteCenterTitle">Workflow Execute</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      	<div id="executeSpinner">
+	      <h1>
+	        <div class="spinner spinner-lg spinner-inline"></div>
+	        Loading
+	      </h1>
+	    </div>
+	    
+	   	<div id="executeStatus"></div>
+		
+		<div id="executeWorkflowId" class="hidden"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  
+<script>
+$('#ModalExecute').on('show.bs.modal', function (event) {
+	  var button = $(event.relatedTarget); // Button that triggered the modal
+	  var workflowId = button.data('whatever'); // Extract info from data-* attributes
+	  // If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+	  // Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+	  var modal = $(this);
+	  modal.find('#executeWorkflowId').text(workflowId);
+
+	  $.ajax({
+		  async: true,
+		  url: "/treats-euc/workflow/execute/" + workflowId,
+		  type: "GET",
+		  success: function (msg) 
+		  {
+			  $('#executeSpinner').addClass('hidden');
+
+			  $('#executeStatus').html(msg);
+			  
+		  }
+		  });
+	  
+	  
+	})
+</script>
+  
+  
 <!-- Wizard code here -->
 <div class="modal" id="wizard1" tabindex="-1" role="dialog">
   <div class="modal-dialog modal-lg wizard-pf">
@@ -815,7 +871,7 @@ function loadEucList(arr, tar) {
 	idName = 'modify' + i;
     out += '<div class="list-group-item">';
     out += '<div class="list-view-pf-actions">';
-	out += '<button type="button" class="btn btn-default" onclick="execute(\'' + arr[i].id + '\')">Execute</button>';
+	out += '<button type="button" class="btn btn-default" data-toggle="modal" data-target="#ModalExecute" data-whatever="' + arr[i].id + '">Execute</button>';
 	out += '<button class="btn btn-default wizard-pf-open wizard-pf-complete" data-target="#wizard1">Modify</button>';
 	out += '<div class="dropdown pull-right dropdown-kebab-pf">';
 	out += '</div>';
@@ -827,20 +883,20 @@ function loadEucList(arr, tar) {
     out += '<div class="list-view-pf-body">';
     out += '<div class="list-view-pf-description">';
     out += '<div class="list-group-item-heading">';
-	out += 'Workflow_Name' + '';
+	out += arr[i].name;
 	out += '</div>';
     out += '<div class="list-group-item-text">';
-    out += arr[i].description + '';
+    out += arr[i].description;
     out += '</div>';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info">';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-database"></span>';
-    out += 'Source_System' + '';
+    out += arr[i].dataSource + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-file"></span>';
-    out += 'Template_name' + '';
+    out += arr[i].templateName + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-plane"></span>';
@@ -848,7 +904,7 @@ function loadEucList(arr, tar) {
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-calendar"></span>';
-    out += arr[i].eucSchedule + '';
+    out += arr[i].schedule + '';
     out += '</div>';
     out += '</div>';
     out += '</div>';
@@ -873,7 +929,7 @@ function loadEucList(arr, tar) {
     });
 
     var completeWizard = new wizard(".display-wizard");
-    var fullEucFlow = new sendRequest('GET','/treats-euc/eucflow/getalleucflows','full-euc-list');
+    var fullEucFlow = new sendRequest('GET','/treats-euc/eucflow/getalleucflowsdisplay','full-euc-list');
     var fullDocTemplate = new sendRequest('GET','/treats-euc/doctemplate/getalldoctemplates','full-doc-template');
     
   });
@@ -1284,17 +1340,6 @@ function loadEucList(arr, tar) {
 
 </script>
 
-
-<script>
-
-	var execute = function(id){
-		window.alert(id);
-
-		$.get( "/treats-euc/workflow/execute/" + id);
-		
-	}
-
-</script>
 
   </body>
 </html>
