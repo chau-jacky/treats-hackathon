@@ -883,20 +883,20 @@ function loadEucList(arr, tar) {
     out += '<div class="list-view-pf-body">';
     out += '<div class="list-view-pf-description">';
     out += '<div class="list-group-item-heading">';
-	out += 'Workflow_Name' + '';
+	out += arr[i].name;
 	out += '</div>';
     out += '<div class="list-group-item-text">';
-    out += arr[i].description + '';
+    out += arr[i].description;
     out += '</div>';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info">';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-database"></span>';
-    out += 'Source_System' + '';
+    out += arr[i].dataSource + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-file"></span>';
-    out += 'Template_name' + '';
+    out += arr[i].templateName + '';
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-plane"></span>';
@@ -904,7 +904,7 @@ function loadEucList(arr, tar) {
     out += '</div>';
     out += '<div class="list-view-pf-additional-info-item">';
     out += '<span class="fa fa-calendar"></span>';
-    out += arr[i].eucSchedule + '';
+    out += arr[i].schedule + '';
     out += '</div>';
     out += '</div>';
     out += '</div>';
@@ -929,7 +929,7 @@ function loadEucList(arr, tar) {
     });
 
     var completeWizard = new wizard(".display-wizard");
-    var fullEucFlow = new sendRequest('GET','/treats-euc/eucflow/getalleucflows','full-euc-list');
+    var fullEucFlow = new sendRequest('GET','/treats-euc/eucflow/getalleucflowsdisplay','full-euc-list');
     var fullDocTemplate = new sendRequest('GET','/treats-euc/doctemplate/getalldoctemplates','full-doc-template');
     
   });
