@@ -15,6 +15,7 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 		if (listEucFlow.size() == 0) {
 			
 			EucFlow eucFlow5 = new EucFlow();
+			eucFlow5.setName("Daily Workflow");
 			eucFlow5.setDescription("Daily Customer Report - PDF");
 			eucFlow5.setDocumentTemplateID(UUID.fromString("75b7f099-bea4-4414-89d9-a176506d6482"));
 			eucFlow5.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
