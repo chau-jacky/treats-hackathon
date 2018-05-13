@@ -68,6 +68,9 @@ public class DocTemplateServicesDataStore implements DocTemplateServicesInterfac
 
 	@Override
 	public DocumentTemplate getDocumentTemplate(String id) {
+		
+		System.out.println("Get Doc Template by ID : " + id);
+		
 		Key docKey = datastore.newKeyFactory().setKind(docTemplateKind).newKey(id);
 		
 		return entityToTemplate(datastore.get(docKey));
