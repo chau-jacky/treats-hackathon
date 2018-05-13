@@ -5,6 +5,7 @@ package com.treats.euc.pdf;
 //import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.io.ByteArrayInputStream;
 //import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
@@ -154,6 +155,13 @@ public class PdfGenerator {
 		System.out.println("Report generation completed!");
 		
 		return baos;
+	}
+	
+	public void generatePdf(ArrayList<String> PdfHtmlList) {
+		
+		for (int i = 0; i < PdfHtmlList.size(); i++) {
+						
+		}
 	}
 
 /*	public Metadata generatePdfMetadata() throws IOException, TikaException, SAXException, DocumentException {
