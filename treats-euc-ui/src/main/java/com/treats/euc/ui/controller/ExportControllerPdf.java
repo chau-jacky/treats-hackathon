@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.OutputStream;
 
 import javax.mail.MessagingException;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,11 +12,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.itextpdf.text.DocumentException;
 import com.treats.euc.pdf.PdfGenerator;
-import com.treats.euc.services.EmailDeliveryServices;
 
 @RestController
 @RequestMapping("/treats-euc/Export")
-public class ExportController {
+public class ExportControllerPdf {
 
 	@RequestMapping("/Pdf")
 	public HttpServletResponse sendPDFEmail() throws DocumentException, IOException, MessagingException {
@@ -49,3 +47,4 @@ public class ExportController {
 	}
 
 }
+
