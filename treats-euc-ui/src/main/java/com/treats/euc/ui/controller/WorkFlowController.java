@@ -65,11 +65,11 @@ public class WorkFlowController {
 			ExcelGenerator excelGenerator = new ExcelGenerator();
 			if (flowObject.getOutputMedium().equals("EMAIL")) {
 				System.out.println("Excel-Email output");
-				excelGenerator.excelEmailSend(excelGenerator.getWorkBook());
+				excelGenerator.excelEmailSend(tableArray);
 			} else if (flowObject.getOutputMedium().equals("SERVER")) {
 				System.out.println("Excel-Server output");
 				// TODO : save excel to server
-				excelGenerator.excelDownload(excelGenerator.getWorkBook());
+				excelGenerator.excelDownload(tableArray);
 			}
 
 		} else if (flowObject.getOutputFormat().equals("PDF")) {
