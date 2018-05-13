@@ -66,8 +66,8 @@ public class WorkFlowController {
 			if (flowObject.getOutputMedium().equals("EMAIL")) {
 				System.out.println("Excel-Email output");
 				// TODO : add email address
-				// excelGenerator.excelEmailSend(tableArray, flowObject.getEmailAddress());
-				excelGenerator.excelEmailSend(tableArray);
+				excelGenerator.excelEmailSend(tableArray, flowObject.getEmailAddress());
+				// excelGenerator.excelEmailSend(tableArray);
 			} else if (flowObject.getOutputMedium().equals("SERVER")) {
 				System.out.println("Excel-Server output");
 				// TODO : save excel to server

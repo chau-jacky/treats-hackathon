@@ -28,6 +28,20 @@ public class EucFlowServicesMemory implements EucFlowServicesInterface {
 			eucSchedule5.setExecuteDayOfWeek("Daily");
 			listEucFlow.add(eucFlow5);
 			
+			EucFlow eucFlow6 = new EucFlow();
+			eucFlow6.setDescription("Daily Customer Report - EXCEL");
+			eucFlow6.setDocumentTemplateID(UUID.fromString("75b7f099-bea4-4414-89d9-a176506d6482"));
+			eucFlow6.setFiler("WHERE TradeID IN ('SPT181230003', 'SPT181230001')");
+			eucFlow6.setOutputFormat("EXCEL");
+			eucFlow6.setOutputMedium("EMAIL");
+			eucFlow6.setEmailAddress("chau.jacky@gmail.com");
+			EucSchedule eucSchedule6 = new EucSchedule();
+			LocalTime executeTime6 = LocalTime.of(11, 58, 59);
+			eucSchedule6.setExectueTime(executeTime6);
+			eucSchedule6.setExecuteFrequency("Daily");
+			eucSchedule6.setExecuteDayOfWeek("Daily");
+			listEucFlow.add(eucFlow6);
+			
 			
 			EucFlow eucFlow = new EucFlow();
 			eucFlow.setDescription("Excel output to Email");
