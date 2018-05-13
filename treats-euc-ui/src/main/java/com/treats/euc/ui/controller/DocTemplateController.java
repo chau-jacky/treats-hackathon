@@ -27,7 +27,7 @@ public class DocTemplateController {
 	DocTemplateController() throws FileNotFoundException, IOException{
 		docTemplateService = new DocTemplateServicesDataStore();
 	}
-        
+
     @RequestMapping(value = "/create", method = RequestMethod.POST)
     public String someMethod(@RequestParam("template") String templateDetails, @RequestParam("description") String description) {
     	
