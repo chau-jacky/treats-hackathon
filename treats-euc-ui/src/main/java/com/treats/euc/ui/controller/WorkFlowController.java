@@ -65,7 +65,9 @@ public class WorkFlowController {
 			ExcelGenerator excelGenerator = new ExcelGenerator();
 			if (flowObject.getOutputMedium().equals("EMAIL")) {
 				System.out.println("Excel-Email output");
-				excelGenerator.excelEmailSend(tableArray);
+				// TODO : add email address
+				excelGenerator.excelEmailSend(tableArray, flowObject.getEmailAddress());
+				// excelGenerator.excelEmailSend(tableArray);
 			} else if (flowObject.getOutputMedium().equals("SERVER")) {
 				System.out.println("Excel-Server output");
 				// TODO : save excel to server
@@ -81,9 +83,7 @@ public class WorkFlowController {
 			ArrayList<String> listResultPDF = dataMappingServices.matchPattern(docTemplate.getDocTemplate(), tableResult);
 			
 			PdfGenerator pdf = new PdfGenerator();
-			// TODO : replace with email address method
-			// pdf.generatePdf(listResultPDF, flowObject.getEmailAddress());
-			pdf.generatePdf(listResultPDF);
+			pdf.generatePdf(listResultPDF, flowObject.getEmailAddress());
 			
 		}
 
