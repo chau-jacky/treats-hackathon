@@ -65,9 +65,6 @@
 									<button type="submit" class="btn btn-primary btn-block btn-lg">Log
 										In</button>
 								</form>
-								<p class="login-pf-signup">
-									Need an account?<a href="#">Sign up</a>
-								</p>
 							</div>
 							<!-- card -->
 							<footer class="login-pf-page-footer">
