@@ -126,31 +126,11 @@
     		</label>
     		<input type="text" class="form-control" id="input-description" required/>
     		<label for="system-list">Select Source System:</label>
-    		<select class = "form-control" id="system-list">
-    			<option>TREATS</option>
-    			<option>NFOS</option>
-    			<option>SUMMIT</option>
-    		</select>
+    		<select class = "form-control" id="system-list"></select>
     		<label for="table-list">Select Table:</label>
-    		<select class = "form-control" id="table-list">
-    			<option>trade_info</option>
-    			<option>MPEFWDP</option>
-    			<option>TTCPIPP</option>
-    		</select>
-    		<label for="field-list">Select Source System:</label>
-    		<select class = "form-control" id="field-list">
-    			<option>TradeID</option>
-    			<option>TradeType</option>
-    			<option>Country</option>
-    			<option>TradeDate</option>
-    			<option>ValueDate</option>
-    			<option>BuyCcy</option>
-    			<option>SellCcy</option>
-    			<option>BuyAmount</option>
-    			<option>SellAmount</option>
-    			<option>CounterpartyAcronym</option>
-
-    		</select>
+    		<select class = "form-control" id="table-list"></select>
+    		<label for="field-list">Select field:</label>
+    		<select class = "form-control" id="field-list"></select>
     		 <button type="button" class="btn btn-primary" id="Assign" onclick="assign()">Assign</button>
     		
     	</div>
@@ -208,23 +188,56 @@
 	}
 	
 	// Send HTTP request
-	function sendRequest(method, url){
+	function sendRequest(method, url, func){
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			 if (this.readyState == 4 && this.status == 200) {
-				 var templateArr = JSON.parse(this.responseText);
+				 var Arr = JSON.parse(this.responseText);
 				 //html2text(templateArr.docTemplate);
 				 //var templateText = jQuery(templateArr.docTemplate).text();
-				  $('#summernote').summernote('code', templateArr.docTemplate);
-				 //Set document template description
-				 document.getElementById('input-description').value = templateArr.description;
-		
+				 
+				 if (func == "template") {
+					 //load existing template
+					 $('#summernote').summernote('code', Arr.docTemplate);
+					 //Set document template description
+					 document.getElementById('input-description').value = Arr.description;
+				 }
+				 // Else - handle drop down list
+				 if (func == "system-list") {
+					 var out = "";
+					 var i;
+					 out += '<option></option>';
+					 for (i = 0; i < Arr.length; i++) {
+					  out += '<option>' + Arr[i].dataset + '</option>'
+					 }
+					 document.getElementById(func).innerHTML = out;
+				 }
+				 if (func == "table-list") {
+					 out += '<option></option>';
+					 for (i = 0; i < Arr.length; i++) {
+						 out += '<option>' + Arr[i].table + '</option>';
+					 }
+					 document.getElementById(func).innerHTML = out;
+				 }
+				 if (func == "field-list") {
+					 getFieldlist(func, Arr.fields);
+				 }
 			  }
 		};
 		xmlhttp.open(method, url, true);
 		xmlhttp.send();
 	}
 	
+	
+	function getFieldlist(id, arr) {
+		var out = "";
+		var i;
+		out += '<option></option>';
+		for (i = 0; i < arr.length; i++) {
+		 out += '<option>' + arr[i].name + '</option>'
+		}
+		document.getElementById(id).innerHTML = out;
+	}
 	/*
 	function html2text(html) {
 	    var tag = document.createElement('div');
@@ -262,9 +275,11 @@
 	 });
 	
 	//Get template from input id
-	var templateReq = new sendRequest('GET', '/treats-euc/doctemplate/getdoctemplate/${templateId}');
+	var templateReq = new sendRequest('GET', '/treats-euc/doctemplate/getdoctemplate/${templateId}', 'template');
 	
-	 
+	//Get dataset list
+	var datasetReq = new sendRequest('GET', '/treats-euc/bigquery/getdatasets', 'system-list');
+	
     // toggle dropdown menu
     $("#pf-list-simple-expansion .list-view-pf-actions").on('show.bs.dropdown', function () {
       var $this = $(this);
@@ -272,7 +287,22 @@
       var space = $(window).height() - $dropdown[0].getBoundingClientRect().top - $this.find('.dropdown-menu').outerHeight(true);
       $dropdown.toggleClass('dropup', space < 10);
     });
-
+	
+    // System selected
+    $("#system-list").change(function(){
+       	var selectedDataset = $('#system-list option:selected').text();
+    	var tableReq = new sendRequest('GET', '/treats-euc/bigquery/' + selectedDataset + '/getdatatables', 'table-list');
+       	
+    });
+    
+    // tableset selected
+    $("#table-list").change(function(){
+    	var selectedDatatable = $('#table-list option:selected').text();
+    	var system = document.getElementById('system-list').value;
+    	var fieldReq = new sendRequest('GET', '/treats-euc/bigquery/' + system + '/' + selectedDatatable + '/getfieldlist', 'field-list');
+       	
+    });
+    
 
   });
 </script>
