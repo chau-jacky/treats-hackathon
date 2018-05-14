@@ -67,7 +67,7 @@ public class EucFlowController {
 			eucDisplay.setTemplateName(doc.getDescription());
 			eucDisplay.setOutputFormat(eucFlow2.getOutputFormat());
 			eucDisplay.setOutputMedium(eucFlow2.getOutputMedium());
-			eucDisplay.setSchedule("Daily Report @ 12:00");
+			eucDisplay.setSchedule("No Schedule");
 			
 			
 			eucFlowDisplay.add(eucDisplay);

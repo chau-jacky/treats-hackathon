@@ -4,7 +4,7 @@
 <html lang="en-us">
 <!--<![endif]-->
   <head>
-    <title>TREATS EUC</title>
+    <title>Global User Data (GUD) Platform</title>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=Edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -84,8 +84,6 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
 			  
 		  }
 		  });
-	  
-	  
 	})
 </script>
   
@@ -511,7 +509,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
             <div class="wizard-pf-contents hidden">
                <!-- StanleyO-->
                <!--Save in PC-->
-                  <H1><B>Target Location</B></H1>
+                  <h1><b>Target Location</b></h1>
     				 			<div class="list-view-pf-checkbox">
       							<input type="checkbox" id="pc_checkbox" name="pc_checkbox">
     				 			</div>
@@ -529,9 +527,9 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
 				        			</div>
 				    				</div>
  			        		</div>	 
- 			        		<BR>
-
-                <!-- Send by email-->    
+ 			        		<br/>
+                 
+                <!-- Send by email-->
     				 			<div class="list-view-pf-checkbox">
       							<input type="checkbox" id="email_checkbox" name="email_checkbox">
     				 			</div>
@@ -548,8 +546,8 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
 				      	  		</div>
 				    				</div>
  			          	</div>	 
- 			          	<BR>
-                  <P ALIGN=Left><B>Email Address:</B></P>
+ 			          	<br/>
+                  <p align=Left><B>Email Address:</b></p>
  			      <input id="email_address" class="form-control"></input>
  				<H2><B>Target Format</B></H2>
     				 			<div class="list-view-pf-checkbox">
@@ -639,7 +637,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                  	
                  	<P ALIGN=Left><B>Effective from:</B></P>
                   
-                  <BR>
+                  <br/>
 									
 				          <!-- Datepicker as text field -->         
 				          <div class="input-group date" data-date-format="dd.mm.yyyy hh:mm">
@@ -649,13 +647,13 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
 				            </div>
 				          </div>
 				         
-				          <BR>
-				          <BR>
+				          <br/>
+				          <br/>
 				          
 				          
 				          <P ALIGN=Left><B>Reoccurrence:</B></P>
                  
-                  <BR>
+                  <br/>
 									<div class="col-sm-12">
 				          	<div class="form-group" id="single-select-field_occur">
         								<div class="btn-group bootstrap-select form-control">
@@ -747,7 +745,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
           <span class="i fa fa-angle-right"></span>
         </button>
         
-        <button type="button" class="btn btn-primary hidden wizard-pf-close wizard-pf-dismiss wizard-pf-finish">Confirm</button>
+        <button type="button" class="btn btn-primary hidden wizard-pf-close wizard-pf-dismiss wizard-pf-finish" onclick="saveWorkflow()">Confirm</button>
 
       </div><!-- /.wizard-pf-footer -->
 
@@ -765,7 +763,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
           <span class="icon-bar"></span>
         </button>
         <a class="navbar-brand" href="/treats-euc">
-          TREATS EUC
+          GUD Home
         </a>
       </div>
       <div class="collapse navbar-collapse navbar-collapse-1">
@@ -1413,6 +1411,63 @@ function loadEucList(arr, tar) {
 
   };
 
+</script>
+
+<script>
+	var saveWorkflow = function(){
+		
+	    var form = document.createElement('form');
+	    form.setAttribute('method', 'post');
+	    form.setAttribute('action', '/treats-euc/workflow/create');
+	    form.style.display = 'hidden';
+		    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "name");
+	    input.setAttribute("value", $('#workflow_name').val());
+	    form.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "description");
+	    input.setAttribute("value", $('#workflow_name').val());
+	    form.appendChild(input);
+
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "templateId");
+	    input.setAttribute("value", "75b7f099-bea4-4414-89d9-a176506d6482");
+	    //input.setAttribute("value", $('#summary_1').val());
+	    form.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "filter");
+	    input.setAttribute("value", $('#summary_2').val());
+	    form.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "format");
+	    input.setAttribute("value", "PDF");
+	    form.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "medium");
+	    input.setAttribute("value", "EMAIL");
+	    //input.setAttribute("value", $('#summary_3').val());
+	    form.appendChild(input);
+	    
+	    var input = document.createElement("input");
+	    input.setAttribute("type", "hidden");
+	    input.setAttribute("name", "email");
+	    input.setAttribute("value", $('#summary_5').val());
+	    form.appendChild(input);
+	    
+	    document.body.appendChild(form)
+	    form.submit();
+	}
 </script>
 
 
