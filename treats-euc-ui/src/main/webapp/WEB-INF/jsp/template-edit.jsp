@@ -214,7 +214,9 @@
 				 }
 				 if (func == "table-list") {
 					 out += '<option></option>';
-					 out += '<option>' + Arr[0].table + '</option>';
+					 for (i = 0; i < Arr.length; i++) {
+						 out += '<option>' + Arr[i].table + '</option>';
+					 }
 					 document.getElementById(func).innerHTML = out;
 				 }
 				 if (func == "field-list") {
