@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html lang="en-us" class="login-pf">
 <head>
-<title>Login - TREAST EUC</title>
+<title>Global User Data (GUD) Platform</title>
 <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=Edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -31,7 +31,7 @@
 					<header class="login-pf-page-header">
 						<br/><br/>
 						<p> ** Hackathon DEMO ** <br/>
-						TREATS EUC Replacement</p>
+						Global User Data (GUD) Platform</p>
 					</header>
 					<div class="row">
 						<div
@@ -65,9 +65,6 @@
 									<button type="submit" class="btn btn-primary btn-block btn-lg">Log
 										In</button>
 								</form>
-								<p class="login-pf-signup">
-									Need an account?<a href="#">Sign up</a>
-								</p>
 							</div>
 							<!-- card -->
 							<footer class="login-pf-page-footer">
