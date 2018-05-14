@@ -8,6 +8,9 @@ import com.google.cloud.bigquery.BigQuery;
 import com.google.cloud.bigquery.BigQueryOptions;
 import com.google.cloud.bigquery.Dataset;
 import com.google.cloud.bigquery.DatasetId;
+import com.google.cloud.bigquery.Field;
+import com.google.cloud.bigquery.FieldList;
+import com.google.cloud.bigquery.Schema;
 import com.google.cloud.bigquery.Table;
 import com.google.cloud.bigquery.TableDefinition;
 import com.google.cloud.bigquery.TableDefinition.Builder;
@@ -60,6 +63,11 @@ public class BigQueryController {
 			listtable.add(table.getTableId());
 		}
 		return listtable;
+	}
+	
+	@RequestMapping("/{dataset}/{datatable}/getfieldlist")
+	public Schema getFieldList(@PathVariable String dataset, @PathVariable String datatable) {
+		return bigquery.getTable(dataset, datatable).getDefinition().getSchema();
 	}
 
 	@RequestMapping("/getdefinitions/{dataset}/{datatable}")
