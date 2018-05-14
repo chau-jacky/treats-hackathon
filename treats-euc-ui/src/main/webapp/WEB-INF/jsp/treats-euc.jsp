@@ -303,7 +303,10 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
      <!-- Kelvin: Change to dynamic template list -->
             <div class="wizard-pf-contents hidden">
             	<h1><b>Template Selection</b></h1>
-              <form class="form-horizontal" id="wizard-template-list"></form>
+            	
+              <!-- <form class="form-horizontal" id="wizard-template-list"></form> -->
+              <div class="list-group tree-list-view-pf" id="wizard-template-list">
+           	  </div>
             </div>
             
                         <div class="wizard-pf-contents hidden">
@@ -338,10 +341,9 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                 	
                     </div>
                 	<div class="col-md-3" align="right">
-                	<button class="btn btn-md btn-primary" type="button" custom-button-width><i class="glyphicon glyphicon-plus"></i> ADD</button>
+                	<button class="btn btn-md btn-primary" type="button" id="field-add-button" custom-button-width><i class="glyphicon glyphicon-plus"></i> ADD</button>
                 	</div>
                 	<br> 
-                	
                 	
                    	<label class="col-sm-3 control-label" for="aliquam"> </label>
                   	<label class="col-sm-3 control-label" for="aliquam"><B>FIELD</B></label>
@@ -372,10 +374,15 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
             	  	
               	   	<div class="col-sm-3">
       			  	<select class = "form-control" id="data_relation_1">
-    				<option>AND</option>
-		          	<option>OR</option>
+    				<option></option>
 		          	<option>EQUAL</option>
 		          	<option>NOT EQUAL</option>
+		          	<option>LIKE</option>
+		          	<option>NOT LIKE</option>
+		          	<option>GREATER THAN</option>
+		          	<option>GREATER THAN OR EQUAL</option>
+		          	<option>LESS THAN</option>
+		          	<option>LESS THAN OR EQUAL</option>
     				</select>
       			 	</div>
               	 
@@ -390,6 +397,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                   	<!-- row 2 -->
                   	<div class="col-sm-3">
       			  	<select class = "form-control" id="data_and_or_2">
+    				<option></option>
     				<option>AND</option>
 		          	<option>OR</option>
 		          	</select>
@@ -412,10 +420,15 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
             	  	
               	   	<div class="col-sm-3">
       			  	<select class = "form-control" id="data_relation_2">
-    				<option>AND</option>
-		          	<option>OR</option>
+    				<option></option>
 		          	<option>EQUAL</option>
 		          	<option>NOT EQUAL</option>
+		          	<option>LIKE</option>
+		          	<option>NOT LIKE</option>
+		          	<option>GREATER THAN</option>
+		          	<option>GREATER THAN OR EQUAL</option>
+		          	<option>LESS THAN</option>
+		          	<option>LESS THAN OR EQUAL</option>
     				</select>
       			 	</div>
               	 
@@ -426,11 +439,10 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                   	
                   	<br>
                   	
-                  	
-                  	
                   	<!-- row 3 -->
                   	<div class="col-sm-3">
       			  	<select class = "form-control" id="data_and_or_3">
+    				<option></option>
     				<option>AND</option>
 		          	<option>OR</option>
 		          	</select>
@@ -453,10 +465,15 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
             	  	
               	   	<div class="col-sm-3">
       			  	<select class = "form-control" id="data_relation_3">
-    				<option>AND</option>
-		          	<option>OR</option>
+    				<option></option>
 		          	<option>EQUAL</option>
 		          	<option>NOT EQUAL</option>
+		          	<option>LIKE</option>
+		          	<option>NOT LIKE</option>
+		          	<option>GREATER THAN</option>
+		          	<option>GREATER THAN OR EQUAL</option>
+		          	<option>LESS THAN</option>
+		          	<option>LESS THAN OR EQUAL</option>
     				</select>
       			 	</div>
               	 
@@ -467,12 +484,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
                   	
                 	<br>
                 	<br>
-                	
-              	 
-                   	
-              	  
-              	  	
-                 
+
                 </div>
                 <br>
                 
@@ -518,11 +530,8 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
 				    				</div>
  			        		</div>	 
  			        		<BR>
- 			        		
-                 
-                 
-                <!-- Send by email-->
-               
+
+                <!-- Send by email-->    
     				 			<div class="list-view-pf-checkbox">
       							<input type="checkbox" id="email_checkbox" name="email_checkbox">
     				 			</div>
@@ -542,7 +551,41 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
  			          	<BR>
                   <P ALIGN=Left><B>Email Address:</B></P>
  			      <input id="email_address" class="form-control"></input>
- 			        		
+ 				<H2><B>Target Format</B></H2>
+    				 			<div class="list-view-pf-checkbox">
+      							<input type="checkbox" id="xls_checkbox" name="xls_checkbox">
+    				 			</div>
+ 				     			<div class="list-view-pf-main-info">
+				       			<div class="list-view-pf-left">
+				         			<span class="fa fa-file"></span>
+				       			</div>
+				       			<div class="list-view-pf-body">
+				        			<div class="list-view-pf-description">
+				          			<div class="list-group-item-heading">
+				            			EXCEL
+				          			</div>
+				          	
+				        			</div>
+				    				</div>
+ 			        			</div>
+ 			        			<BR>
+ 			        			<div class="list-view-pf-checkbox">
+      							<input type="checkbox" id="pdf_checkbox" name="pdf_checkbox">
+    				 			</div>
+ 				     			<div class="list-view-pf-main-info">
+				       			<div class="list-view-pf-left">
+				         			<span class="fa fa-file"></span>
+				       			</div>
+				       			<div class="list-view-pf-body">
+				        			<div class="list-view-pf-description">
+				          			<div class="list-group-item-heading">
+				            			PDF
+				          			</div>
+				          	
+				        			</div>
+				    				</div>
+ 			        			</div>
+ 			        					
             </div>
             <!--StanleyE-->
             
@@ -819,12 +862,27 @@ function sendRequest(method, url, targetid){
 				 var docArr = JSON.parse(this.responseText);
 			     loadDocList(docArr, targetid);
 			 };
+			 if (targetid == 'data_field') {
+				 var tempfld = JSON.parse(this.responseText);
+				 loadfld(tempfld.fields, targetid);
+			 }
 		  }
 		};
 	xmlhttp.open(method, url, true);
 	xmlhttp.send();
 }
-
+// Load fields
+function loadfld(arr) {
+	var out = "";
+	var i;
+	out += '<option>' + "" + '</option>';
+	for (i = 0; i < arr.length; i++) {
+		out += '<option>' + arr[i].name + '</option>';
+	}
+	document.getElementById('data_field_1').innerHTML = out;
+	document.getElementById('data_field_2').innerHTML = out;
+	document.getElementById('data_field_3').innerHTML = out;
+}
 // Load full Doc template list
 function loadDocList(arr, tar) {
 	var out = "";
@@ -837,7 +895,8 @@ function loadDocList(arr, tar) {
 		//for wizard
 		templatelistid = 'template_checkbox_' + i;
 		
-		out1 += '<div class="list-group-item">';
+		out1 += '<div class="list-group-item" >';
+		out1 += '<div class="list-group-item-header">';
 		out1 += '<div class="list-view-pf-checkbox">';
 		out1 += '<input type="checkbox" id="' + templatelistid +'" name="' + templatelistid + '">';
 		out1 += '</div>';
@@ -853,6 +912,7 @@ function loadDocList(arr, tar) {
 		//out1 += '<div class="list-group-item-text">';
 		//out1 += arr[i].description;
 		//out1 += '</div>';
+		out1 += '</div>';
 		out1 += '</div>';
 		out1 += '</div>';
 		out1 += '</div>';
@@ -932,7 +992,7 @@ function loadEucList(arr, tar) {
     var completeWizard = new wizard(".display-wizard");
     var fullEucFlow = new sendRequest('GET','/treats-euc/eucflow/getalleucflowsdisplay','full-euc-list');
     var fullDocTemplate = new sendRequest('GET','/treats-euc/doctemplate/getalldoctemplates','full-doc-template');
-  
+    var test = new sendRequest('GET','/treats-euc/bigquery/hk_treats/trade_info/getfieldlist','data_field');
   });
 </script>
 
@@ -1079,10 +1139,17 @@ function loadEucList(arr, tar) {
       
      
      //template selected
-     if ($('#template_checkbox_2').is(":checked")) {
-    	 var template_id_sel = $('#template_checkbox_2').attr("id");
-    	
-     }  
+	 
+      $('.tree-list-view-pf').on('change', ':checkbox', function(e){
+    	// var template_id_sel = "";
+    	if($(this).is(':checked')) {
+    		$(this).closest('.list-group-item').addClass('active');
+    		//template_id_sel = $(this).find("list-group-item-heading").text();
+    	} else {
+    		$(this).closest('.list-group-item').removeClass('active');
+    	}
+    	 
+    }); 
          
      //data_filtering
      var data_filtering= "'" + $('#data_field_1').val() + " " + $('#data_relation_1').val() + " "+ $('#data_value_1').val() + "'"+ " " + $('#data_and_or_2').val() + " " + "'"+ $('#data_field_2').val() + " " + $('#data_relation_2').val() + " "+ $('#data_value_2').val() + "' "+ $('#data_and_or_3').val() + "'" + " " + $('#data_field_3').val() + " " + $('#data_relation_3').val() + " "+ $('#data_value_3').val() +"'"
