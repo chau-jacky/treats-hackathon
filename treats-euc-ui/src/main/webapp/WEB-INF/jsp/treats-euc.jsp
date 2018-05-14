@@ -837,7 +837,7 @@ $('#ModalExecute').on('show.bs.modal', function (event) {
     </nav>
 
 <div class="container-fluid">
-
+<h1><b>List of workflows</b></h1>
   <!-- List of workflows -->
 <div id="full-euc-list" class="list-group list-view-pf list-view-pf-view"></div>
 	
