@@ -1140,6 +1140,12 @@ function loadEucList(arr, tar) {
      
      //template selected
 	 
+     if ($('#template_checkbox_2').is(":checked")) {
+    	 var template_id_sel = $('#template_checkbox_2').attr("id");
+    	
+    }  
+     
+     <!--
       $('.tree-list-view-pf').on('change', ':checkbox', function(e){
     	// var template_id_sel = "";
     	if($(this).is(':checked')) {
@@ -1150,6 +1156,7 @@ function loadEucList(arr, tar) {
     	}
     	 
     }); 
+     -->
          
      //data_filtering
      var data_filtering= "'" + $('#data_field_1').val() + " " + $('#data_relation_1').val() + " "+ $('#data_value_1').val() + "'"+ " " + $('#data_and_or_2').val() + " " + "'"+ $('#data_field_2').val() + " " + $('#data_relation_2').val() + " "+ $('#data_value_2').val() + "' "+ $('#data_and_or_3').val() + "'" + " " + $('#data_field_3').val() + " " + $('#data_relation_3').val() + " "+ $('#data_value_3').val() +"'"
